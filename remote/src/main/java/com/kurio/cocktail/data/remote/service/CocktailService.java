@@ -1,6 +1,7 @@
 package com.kurio.cocktail.data.remote.service;
 
 import com.kurio.cocktail.data.remote.response.DrinkResponse;
+import com.kurio.cocktail.data.remote.response.IngredientResponse;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -14,5 +15,5 @@ public interface CocktailService {
     Single<DrinkResponse> getDrinkDetail(@Query("i") String id);
 
     @GET("api/json/v1/1/search.php")
-    Single<DrinkResponse> getIngredientByName(@Query("i") String name);
+    Single<IngredientResponse> getIngredientByName(@Query("i") String name);
 }
