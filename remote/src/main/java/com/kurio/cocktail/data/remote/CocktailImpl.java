@@ -4,8 +4,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kurio.cocktail.data.model.CocktailDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
-import com.kurio.cocktail.data.remote.mapper.DrinkDetailResponseMapper;
-import com.kurio.cocktail.data.remote.mapper.DrinkListResponseMapper;
+import com.kurio.cocktail.data.remote.mapper.CocktailListResponseMapper;
+import com.kurio.cocktail.data.remote.mapper.CocktailDetailResponseMapper;
 import com.kurio.cocktail.data.remote.response.ServerResponse;
 import com.kurio.cocktail.data.remote.service.CocktailService;
 import com.kurio.cocktail.data.repository.CocktailRemote;
@@ -21,14 +21,14 @@ import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 
 public class CocktailImpl implements CocktailRemote {
-    private DrinkListResponseMapper drinkResponseMapper;
-    private DrinkDetailResponseMapper drinkDetailResponseMapper;
+    private CocktailListResponseMapper drinkResponseMapper;
+    private CocktailDetailResponseMapper drinkDetailResponseMapper;
     private CocktailService drinkService;
 
     @Inject
     CocktailImpl(CocktailService drinkService,
-                 DrinkDetailResponseMapper drinkDetailResponseMapper,
-                 DrinkListResponseMapper drinkResponseMapper) {
+                 CocktailDetailResponseMapper drinkDetailResponseMapper,
+                 CocktailListResponseMapper drinkResponseMapper) {
         this.drinkResponseMapper = drinkResponseMapper;
         this.drinkDetailResponseMapper = drinkDetailResponseMapper;
         this.drinkService = drinkService;
@@ -69,7 +69,7 @@ public class CocktailImpl implements CocktailRemote {
     }
 
     @Override
-    public Single<List<CocktailDetailEntity>> getDrinkDetail(String id) {
+    public Single<CocktailDetailEntity> getDrinkDetail(String id) {
         return drinkService.getDrinkDetail(id)
                 .onErrorResumeNext(new Function<Throwable, SingleSource<? extends ServerResponse>>() {
                     @Override
@@ -94,9 +94,9 @@ public class CocktailImpl implements CocktailRemote {
                         }
                     }
                 })
-                .map(new Function<ServerResponse, List<CocktailDetailEntity>>() {
+                .map(new Function<ServerResponse, CocktailDetailEntity>() {
                     @Override
-                    public List<CocktailDetailEntity> apply(ServerResponse serverResponse) throws Exception {
+                    public CocktailDetailEntity apply(ServerResponse serverResponse) throws Exception {
                         return drinkDetailResponseMapper.mapFromResponse(serverResponse);
                     }
                 });

@@ -43,11 +43,11 @@ public class CocktailDataRepository implements CocktailRepository {
     }
 
     @Override
-    public Single<List<CocktailDetail>> getDrinkDetail(String id) {
-        return drinkListDataStoreFactory.getRemoteDataStore().getDrinkDetail(id).map(new Function<List<CocktailDetailEntity>, List<CocktailDetail>>() {
+    public Single<CocktailDetail> getDrinkDetail(String id) {
+        return drinkListDataStoreFactory.getRemoteDataStore().getDrinkDetail(id).map(new Function<CocktailDetailEntity, CocktailDetail>() {
             @Override
-            public List<CocktailDetail> apply(List<CocktailDetailEntity> cocktailDetailEntities) throws Exception {
-                return cocktailDetailMapper.mapFromEntity(cocktailDetailEntities);
+            public CocktailDetail apply(CocktailDetailEntity cocktailDetailEntity) throws Exception {
+                return cocktailDetailMapper.mapFromEntity(cocktailDetailEntity);
             }
         });
     }

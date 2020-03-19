@@ -26,7 +26,7 @@ public class CocktailRemoteDataStore implements CocktailDataStore {
     }
 
     @Override
-    public Single<List<CocktailDetailEntity>> getDrinkDetail(String id) {
+    public Single<CocktailDetailEntity> getDrinkDetail(String id) {
         return drinkRemote.getDrinkDetail(id);
     }
 }

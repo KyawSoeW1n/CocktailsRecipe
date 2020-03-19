@@ -10,6 +10,6 @@ import io.reactivex.Single;
 public interface CocktailDataStore {
     Single<List<CocktailEntity>> getDrinkList(String route);
 
-    Single<List<CocktailDetailEntity>> getDrinkDetail(String id);
+    Single<CocktailDetailEntity> getDrinkDetail(String id);
 
 }

@@ -11,10 +11,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class DrinkListResponseMapper implements ResponseMapper<ServerResponse, List<CocktailEntity>> {
+public class CocktailListResponseMapper implements ResponseMapper<ServerResponse, List<CocktailEntity>> {
 
     @Inject
-    public DrinkListResponseMapper() {
+    public CocktailListResponseMapper() {
 
     }
 
