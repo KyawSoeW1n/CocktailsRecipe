@@ -2,6 +2,7 @@ package com.kurio.cocktail.main;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
     DrinkIngredientListAdapter drinkIngredientListAdapter;
     RecyclerView rcIngredient;
     ImageView imgCocktail;
-    TextView tvAlcoholic;
+    TextView tvAlcoholic,tvDrinkTag,tvDrinkCategory,tvToolbarTitle,tvInstruction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,10 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
         rcIngredient = findViewById(R.id.rc_ingredient);
         imgCocktail = findViewById(R.id.img_cocktail);
         tvAlcoholic = findViewById(R.id.tv_alcoholic);
+        tvDrinkTag=findViewById(R.id.tv_tags);
+        tvDrinkCategory=findViewById(R.id.tv_str_Category);
+        tvToolbarTitle=findViewById(R.id.tv_toolbar_title);
+        tvInstruction=findViewById(R.id.tv_instruction);
         drinkIngredientListAdapter = new DrinkIngredientListAdapter(this, this);
         rcIngredient.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         rcIngredient.setAdapter(drinkIngredientListAdapter);
@@ -74,6 +79,17 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
                 .load(cocktailDetail.getStrDrinkThumb())
                 .into(imgCocktail);
 
+
+        if (cocktailDetail.getStrTag()!=null && !cocktailDetail.getStrTag().isEmpty()){
+            tvDrinkTag.setText(cocktailDetail.getStrTag());
+        }else{
+            tvDrinkTag.setVisibility(View.GONE);
+        }
+        tvToolbarTitle.setText(cocktailDetail.getStrDrink());
+        tvAlcoholic.setText(cocktailDetail.getStrAlcoholic());
+
+        tvDrinkCategory.setText(cocktailDetail.getStrCategory());
+        tvInstruction.setText(cocktailDetail.getStrInstructions());
         addIngredient(cocktailDetail);
     }
 

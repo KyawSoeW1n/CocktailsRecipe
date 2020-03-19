@@ -18,11 +18,13 @@ import com.kurio.cocktail.domain.model.Cocktail;
 public class DrinkDetailViewHolder extends BaseViewHolder<String> {
     private ClickIngredientItem clickIngredientItem;
     private ImageView imgIngredient;
+    private TextView tvIngredient;
 
     public DrinkDetailViewHolder(@NonNull View itemView, ClickIngredientItem clickIngredientItem) {
         super(itemView);
         this.clickIngredientItem = clickIngredientItem;
         imgIngredient = itemView.findViewById(R.id.img_ingredient);
+        tvIngredient = itemView.findViewById(R.id.tv_ingredient);
     }
 
     @Override
@@ -32,15 +34,15 @@ public class DrinkDetailViewHolder extends BaseViewHolder<String> {
             Glide.with(itemView.getContext())
                     .load(Constants.IMAGE_PATH + mData + Constants.PHOTO_EXTENSION)
                     .into(imgIngredient);
+            tvIngredient.setText(data);
         }
     }
 
     @Override
     public void onClick(View v) {
-        if (clickIngredientItem != null)
-            Toast.makeText(itemView.getContext(), "CLICk", Toast.LENGTH_SHORT).show();
-        else
-            Log.i("GGWP", "GG");
+
+        //TODO setListener
+
     }
 
 }

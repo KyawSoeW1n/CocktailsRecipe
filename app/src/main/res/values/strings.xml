@@ -4,4 +4,7 @@
     <string name="cocktail_detail">Cocktail Detail</string>
     <string name="ingredients">Ingredients</string>
     <string name="cateogry">Category</string>
+    <string name="description">Description</string>
+    <string name="tag">Tag</string>
+    <string name="cocktail_title">Cocktail Title</string>
 </resources>

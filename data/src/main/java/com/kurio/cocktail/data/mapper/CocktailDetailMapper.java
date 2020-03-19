@@ -36,7 +36,10 @@ public class CocktailDetailMapper implements EntityMapper<CocktailDetailEntity, 
                 cocktailDetailEntity.getStrIngredient12(),
                 cocktailDetailEntity.getStrIngredient13(),
                 cocktailDetailEntity.getStrIngredient14(),
-                cocktailDetailEntity.getStrIngredient15());
+                cocktailDetailEntity.getStrIngredient15(),
+                cocktailDetailEntity.getStrAlcoholic(),
+                cocktailDetailEntity.getStrCategory(),
+                cocktailDetailEntity.getStrTag());
     }
 
     @Override
@@ -59,7 +62,10 @@ public class CocktailDetailMapper implements EntityMapper<CocktailDetailEntity, 
                 cocktailDetail.getStrIngredient12(),
                 cocktailDetail.getStrIngredient13(),
                 cocktailDetail.getStrIngredient14(),
-                cocktailDetail.getStrIngredient15());
+                cocktailDetail.getStrIngredient15(),
+                cocktailDetail.getStrAlcoholic(),
+                cocktailDetail.getStrCategory(),
+                cocktailDetail.getStrTag());
     }
 
 }

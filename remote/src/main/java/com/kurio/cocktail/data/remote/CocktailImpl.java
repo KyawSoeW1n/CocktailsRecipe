@@ -6,7 +6,7 @@ import com.kurio.cocktail.data.model.CocktailDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
 import com.kurio.cocktail.data.remote.mapper.CocktailListResponseMapper;
 import com.kurio.cocktail.data.remote.mapper.CocktailDetailResponseMapper;
-import com.kurio.cocktail.data.remote.response.ServerResponse;
+import com.kurio.cocktail.data.remote.response.DrinkResponse;
 import com.kurio.cocktail.data.remote.service.CocktailService;
 import com.kurio.cocktail.data.repository.CocktailRemote;
 
@@ -37,9 +37,9 @@ public class CocktailImpl implements CocktailRemote {
     @Override
     public Single<List<CocktailEntity>> getAlcoholicDrinks(String route) {
         return drinkService.getNonAlcoholicDrinks(route)
-                .onErrorResumeNext(new Function<Throwable, SingleSource<? extends ServerResponse>>() {
+                .onErrorResumeNext(new Function<Throwable, SingleSource<? extends DrinkResponse>>() {
                     @Override
-                    public SingleSource<? extends ServerResponse> apply(Throwable throwable) throws Exception {
+                    public SingleSource<? extends DrinkResponse> apply(Throwable throwable) throws Exception {
                         HttpException exception = (HttpException) throwable;
                         ResponseBody responseBody = exception.response().errorBody();
                         if (responseBody != null) {
@@ -60,10 +60,10 @@ public class CocktailImpl implements CocktailRemote {
                         }
                     }
                 })
-                .map(new Function<ServerResponse, List<CocktailEntity>>() {
+                .map(new Function<DrinkResponse, List<CocktailEntity>>() {
                     @Override
-                    public List<CocktailEntity> apply(ServerResponse serverResponse) throws Exception {
-                        return drinkResponseMapper.mapFromResponse(serverResponse);
+                    public List<CocktailEntity> apply(DrinkResponse drinkResponse) throws Exception {
+                        return drinkResponseMapper.mapFromResponse(drinkResponse);
                     }
                 });
     }
@@ -71,9 +71,9 @@ public class CocktailImpl implements CocktailRemote {
     @Override
     public Single<CocktailDetailEntity> getDrinkDetail(String id) {
         return drinkService.getDrinkDetail(id)
-                .onErrorResumeNext(new Function<Throwable, SingleSource<? extends ServerResponse>>() {
+                .onErrorResumeNext(new Function<Throwable, SingleSource<? extends DrinkResponse>>() {
                     @Override
-                    public SingleSource<? extends ServerResponse> apply(Throwable throwable) throws Exception {
+                    public SingleSource<? extends DrinkResponse> apply(Throwable throwable) throws Exception {
                         HttpException exception = (HttpException) throwable;
                         ResponseBody responseBody = exception.response().errorBody();
                         if (responseBody != null) {
@@ -94,10 +94,10 @@ public class CocktailImpl implements CocktailRemote {
                         }
                     }
                 })
-                .map(new Function<ServerResponse, CocktailDetailEntity>() {
+                .map(new Function<DrinkResponse, CocktailDetailEntity>() {
                     @Override
-                    public CocktailDetailEntity apply(ServerResponse serverResponse) throws Exception {
-                        return drinkDetailResponseMapper.mapFromResponse(serverResponse);
+                    public CocktailDetailEntity apply(DrinkResponse drinkResponse) throws Exception {
+                        return drinkDetailResponseMapper.mapFromResponse(drinkResponse);
                     }
                 });
     }

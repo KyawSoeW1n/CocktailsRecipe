@@ -3,16 +3,14 @@ package com.kurio.cocktail.data.remote.mapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kurio.cocktail.data.model.CocktailDetailEntity;
-import com.kurio.cocktail.data.remote.response.CocktailListResponse;
 import com.kurio.cocktail.data.remote.response.CocktailDetailResponse;
-import com.kurio.cocktail.data.remote.response.ServerResponse;
+import com.kurio.cocktail.data.remote.response.DrinkResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class CocktailDetailResponseMapper implements ResponseMapper<ServerResponse, CocktailDetailEntity> {
+public class CocktailDetailResponseMapper implements ResponseMapper<DrinkResponse, CocktailDetailEntity> {
 
     @Inject
     public CocktailDetailResponseMapper() {
@@ -20,7 +18,7 @@ public class CocktailDetailResponseMapper implements ResponseMapper<ServerRespon
     }
 
     @Override
-    public CocktailDetailEntity mapFromResponse(ServerResponse response) {
+    public CocktailDetailEntity mapFromResponse(DrinkResponse response) {
         List<CocktailDetailResponse> cocktailDetailResponse = new Gson().fromJson(new Gson().toJson(response.data), new TypeToken<List<CocktailDetailResponse>>() {
         }.getType());
 
@@ -43,7 +41,10 @@ public class CocktailDetailResponseMapper implements ResponseMapper<ServerRespon
                     detailResponse.getStrIngredient12(),
                     detailResponse.getStrIngredient13(),
                     detailResponse.getStrIngredient14(),
-                    detailResponse.getStrIngredient15());
+                    detailResponse.getStrIngredient15(),
+                    detailResponse.getStrAlcoholic(),
+                    detailResponse.getStrCategory(),
+                    detailResponse.getStrTags());
         }
         return null;
     }

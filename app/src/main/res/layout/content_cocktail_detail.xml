@@ -17,16 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvCocktailTitle"
-                style="@style/TextViewNormal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Cocktail Title"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_alcoholic"
@@ -35,48 +25,71 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Alcoholic"
+                android:text="@string/sample"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
+                android:textSize="@dimen/textSizeLarge" />
 
             <TextView
-                android:id="@+id/tvTags"
+                android:id="@+id/tv_tags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCocktailTitle"
-                android:layout_alignStart="@+id/tvCocktailTitle"
-                android:layout_marginTop="8dp"
-                android:text="strTags"
-                android:textSize="16sp" />
+                android:layout_marginLeft="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginRight="@dimen/margin_medium"
+                android:text="@string/tag"
+                android:textSize="@dimen/textSizeLarge" />
 
             <TextView
-                android:id="@+id/tvCategory"
+                android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvTags"
-                android:layout_alignStart="@+id/tvTags"
-                android:layout_marginTop="8dp"
+                android:layout_below="@+id/tv_tags"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:text="@string/cateogry"
+                android:textSize="@dimen/textSizeLarge"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_str_Category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_category"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="@string/cateogry"
+                android:textSize="@dimen/textSizeLarge" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_str_Category"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/textSizeNormal"
+                android:text="@string/description"
+                android:textSize="@dimen/textSizeLarge"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tv_instruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv1"
+                android:layout_marginLeft="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginRight="@dimen/margin_medium"
+                android:text="@string/description"
                 android:textSize="@dimen/textSizeNormal" />
 
-            <TextView
-                android:id="@+id/tvInstructions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCategory"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                android:textSize="@dimen/textSizeLarge"
-                tools:text="Benefits 1\r\nLorem Ipsum" />
 
             <LinearLayout
                 android:id="@+id/layout_details"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvInstructions"
+                android:layout_below="@id/tv_instruction"
                 android:orientation="vertical">
 
                 <TextView
@@ -85,13 +98,15 @@
                     android:layout_marginLeft="@dimen/margin_medium"
                     android:layout_marginRight="@dimen/margin_medium"
                     android:text="@string/ingredients"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rc_ingredient"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp" />
+                    android:layout_margin="@dimen/margin_medium"
+                    tools:listitem="@layout/drink_ingredient" />
             </LinearLayout>
 
         </RelativeLayout>

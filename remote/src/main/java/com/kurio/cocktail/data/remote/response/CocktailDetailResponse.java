@@ -41,7 +41,13 @@ public class CocktailDetailResponse {
     private String strIngredient14;
     @SerializedName("strIngredient15")
     private String strIngredient15;
+    @SerializedName("strCategory")
+    private String strCategory;
+    @SerializedName("strAlcoholic")
+    private String strAlcoholic;
 
+    @SerializedName("strTags")
+    private String strTags;
 
     public String getStrInstructions() {
         return strInstructions;
@@ -117,5 +123,17 @@ public class CocktailDetailResponse {
 
     public String getStrIngredient15() {
         return strIngredient15;
+    }
+
+    public String getStrCategory() {
+        return strCategory;
+    }
+
+    public String getStrAlcoholic() {
+        return strAlcoholic;
+    }
+
+    public String getStrTags() {
+        return strTags;
     }
 }
