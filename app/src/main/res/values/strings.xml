@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Cocktail</string>
+    <string name="sample">Sample</string>
+    <string name="cocktail_detail">Cocktail Detail</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="cateogry">Category</string>
+</resources>
