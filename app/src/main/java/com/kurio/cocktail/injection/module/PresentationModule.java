@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.kurio.cocktail.data.presentation.CocktailDetailViewModel;
 import com.kurio.cocktail.data.presentation.CocktailViewModel;
+import com.kurio.cocktail.data.presentation.IngredientDetailViewModel;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
 import java.lang.annotation.Documented;
@@ -31,6 +32,11 @@ public abstract class PresentationModule {
     @IntoMap
     @ViewModelKey(CocktailDetailViewModel.class)
     public abstract ViewModel bindCocktailDetailViewModel(CocktailDetailViewModel cocktailDetailViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(IngredientDetailViewModel.class)
+    public abstract ViewModel bindIngredientDetailViewModel(IngredientDetailViewModel ingredientDetailViewModel);
 
     @Documented
     @Retention(RetentionPolicy.RUNTIME)

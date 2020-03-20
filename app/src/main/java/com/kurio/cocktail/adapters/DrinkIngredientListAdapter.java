@@ -7,26 +7,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.kurio.cocktail.R;
-import com.kurio.cocktail.callback.ClickCocktailItem;
 import com.kurio.cocktail.callback.ClickIngredientItem;
-import com.kurio.cocktail.domain.model.Cocktail;
-import com.kurio.cocktail.domain.model.CocktailDetail;
 import com.kurio.cocktail.viewholder.BaseViewHolder;
 import com.kurio.cocktail.viewholder.DrinkDetailViewHolder;
-import com.kurio.cocktail.viewholder.DrinkListViewHolder;
 
-public class DrinkIngredientListAdapter extends BaseRecyclerAdapter<DrinkListViewHolder, CocktailDetail> {
-    private ClickIngredientItem clickCocktailItem;
+public class DrinkIngredientListAdapter extends BaseRecyclerAdapter<DrinkDetailViewHolder, String> {
+    private ClickIngredientItem clickIngredientItem;
 
-    public DrinkIngredientListAdapter(Context context, ClickIngredientItem clickCocktailItem) {
+    public DrinkIngredientListAdapter(Context context, ClickIngredientItem clickIngredientItem) {
         super(context);
-        this.clickCocktailItem = clickCocktailItem;
+        this.clickIngredientItem = clickIngredientItem;
     }
 
     @NonNull
     @Override
-    public BaseViewHolder<CocktailDetail> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseViewHolder<String> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = layoutInflater.inflate(R.layout.drink_ingredient, parent, false);
-        return new DrinkDetailViewHolder(v, clickCocktailItem);
+        return new DrinkDetailViewHolder(v, clickIngredientItem);
     }
 }

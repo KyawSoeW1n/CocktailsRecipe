@@ -1,6 +1,5 @@
 package com.kurio.cocktail.viewholder;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,41 +7,37 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.kurio.cocktail.Constants;
 import com.kurio.cocktail.R;
-import com.kurio.cocktail.callback.ClickCocktailItem;
 import com.kurio.cocktail.callback.ClickIngredientItem;
-import com.kurio.cocktail.domain.model.Cocktail;
-import com.kurio.cocktail.domain.model.CocktailDetail;
 
-public class DrinkDetailViewHolder extends BaseViewHolder<CocktailDetail> {
-    private ClickIngredientItem clickCocktailItem;
-    private TextView tvIngredientName;
+public class DrinkDetailViewHolder extends BaseViewHolder<String> {
+    private ClickIngredientItem clickIngredientItem;
     private ImageView imgIngredient;
+    private TextView tvIngredient;
 
-    public DrinkDetailViewHolder(@NonNull View itemView, ClickIngredientItem clickCocktailItem) {
+    public DrinkDetailViewHolder(@NonNull View itemView, ClickIngredientItem clickIngredientItem) {
         super(itemView);
-        this.clickCocktailItem = clickCocktailItem;
-        tvIngredientName = itemView.findViewById(R.id.tv_ingredient);
-        imgIngredient= itemView.findViewById(R.id.img_ingredient);
+        this.clickIngredientItem = clickIngredientItem;
+        imgIngredient = itemView.findViewById(R.id.img_ingredient);
+        tvIngredient = itemView.findViewById(R.id.tv_ingredient);
     }
 
     @Override
-    public void setData(CocktailDetail data) {
+    public void setData(String data) {
         mData = data;
-//        if (mData != null) {
-//            tvIngredientName.setText(mData.getS());
-//            Glide.with(itemView.getContext())
-//                    .load(mData.getStrDrinkThumb())
-//                    .into(imgCocktail);
-//        }
+        if (mData != null) {
+            Glide.with(itemView.getContext())
+                    .load(Constants.IMAGE_PATH + mData + Constants.PHOTO_EXTENSION)
+                    .into(imgIngredient);
+            tvIngredient.setText(data);
+        }
     }
 
     @Override
     public void onClick(View v) {
-        if (clickCocktailItem != null)
-            clickCocktailItem.clickIngredientItem(mData);
-        else
-            Log.i("GGWP", "GG");
+        if (clickIngredientItem != null)
+            clickIngredientItem.clickIngredientItem(mData);
     }
 
 }

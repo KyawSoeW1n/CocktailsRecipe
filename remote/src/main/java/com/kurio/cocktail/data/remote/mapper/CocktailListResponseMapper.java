@@ -4,22 +4,22 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kurio.cocktail.data.model.CocktailEntity;
 import com.kurio.cocktail.data.remote.response.CocktailListResponse;
-import com.kurio.cocktail.data.remote.response.ServerResponse;
+import com.kurio.cocktail.data.remote.response.DrinkResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class DrinkListResponseMapper implements ResponseMapper<ServerResponse, List<CocktailEntity>> {
+public class CocktailListResponseMapper implements ResponseMapper<DrinkResponse, List<CocktailEntity>> {
 
     @Inject
-    public DrinkListResponseMapper() {
+    public CocktailListResponseMapper() {
 
     }
 
     @Override
-    public List<CocktailEntity> mapFromResponse(ServerResponse response) {
+    public List<CocktailEntity> mapFromResponse(DrinkResponse response) {
         List<CocktailEntity> actionHistoryList = new ArrayList<>();
         List<CocktailListResponse> sectionlist = new Gson().fromJson(new Gson().toJson(response.data), new TypeToken<List<CocktailListResponse>>() {
         }.getType());

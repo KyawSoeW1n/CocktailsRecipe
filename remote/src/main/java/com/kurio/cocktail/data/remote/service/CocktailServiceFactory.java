@@ -22,7 +22,10 @@ public class CocktailServiceFactory {
     }
 
     public CocktailService makeCurrencyExchangeService(boolean isDebug) {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(makeOkHttpClient(makeLoggingInterceptor(isDebug))).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
+                .client(makeOkHttpClient(makeLoggingInterceptor(isDebug)))
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build();
         return retrofit.create(CocktailService.class);
     }
 

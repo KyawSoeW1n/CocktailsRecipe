@@ -20,20 +20,15 @@ import io.reactivex.disposables.Disposable;
 
 public class CocktailDetailViewModel extends ViewModel {
     private GetDrinkDetail getDrinkDetail;
-    private MutableLiveData<Resource<List<CocktailDetail>>> drinkDetailLiveData = new MutableLiveData<>();
-    private MutableLiveData<List<String>> ingredientLiveData = new MutableLiveData<>();
-
-
-//    private MutableLiveData<List<String>> ingredientListLiveData = new MutableLiveData<>();
-    private Resource<List<CocktailDetail>> cocktailDetailResource = new Resource<>();
-//    private Resource<List<String>> ingredientResource = new Resource<>();
+    private MutableLiveData<Resource<CocktailDetail>> drinkDetailLiveData = new MutableLiveData<>();
+    private Resource<CocktailDetail> cocktailDetailResource = new Resource<>();
 
     @Inject
     CocktailDetailViewModel(GetDrinkDetail getDrinkDetail) {
         this.getDrinkDetail = getDrinkDetail;
     }
 
-    public MutableLiveData<Resource<List<CocktailDetail>>> getDrinkDetailLiveData() {
+    public MutableLiveData<Resource<CocktailDetail>> getDrinkDetailLiveData() {
         return drinkDetailLiveData;
     }
 
@@ -45,7 +40,7 @@ public class CocktailDetailViewModel extends ViewModel {
         getDrinkDetail.execute(new GetDrinkDetailSubscriber(), getDrinkDetail.new Params(id));
     }
 
-    class GetDrinkDetailSubscriber implements SingleObserver<List<CocktailDetail>> {
+    class GetDrinkDetailSubscriber implements SingleObserver<CocktailDetail> {
 
         @Override
         public void onSubscribe(Disposable d) {
@@ -54,14 +49,14 @@ public class CocktailDetailViewModel extends ViewModel {
         }
 
         @Override
-        public void onSuccess(List<CocktailDetail> cocktails) {
+        public void onSuccess(CocktailDetail cocktails) {
             Log.i("SUCCESS", "SUCCESS");
             drinkDetailLiveData.postValue(cocktailDetailResource.success(cocktails));
         }
 
         @Override
         public void onError(Throwable e) {
-            Log.i("ERROR", "ERROR" + e.getMessage());
+            Log.e("ERROR", "ERROR" + e.getMessage());
             drinkDetailLiveData.postValue(cocktailDetailResource.error(e));
         }
     }
