@@ -1,19 +1,15 @@
 package com.kurio.cocktail.viewholder;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.kurio.cocktail.Constants;
 import com.kurio.cocktail.R;
-import com.kurio.cocktail.callback.ClickCocktailItem;
 import com.kurio.cocktail.callback.ClickIngredientItem;
-import com.kurio.cocktail.domain.model.Cocktail;
 
 public class DrinkDetailViewHolder extends BaseViewHolder<String> {
     private ClickIngredientItem clickIngredientItem;
@@ -40,9 +36,8 @@ public class DrinkDetailViewHolder extends BaseViewHolder<String> {
 
     @Override
     public void onClick(View v) {
-
-        //TODO setListener
-
+        if (clickIngredientItem != null)
+            clickIngredientItem.clickIngredientItem(mData);
     }
 
 }

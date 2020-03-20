@@ -14,10 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.IngredientDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".main.CocktailDetailActivity"
+            android:name=".activity.CocktailDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

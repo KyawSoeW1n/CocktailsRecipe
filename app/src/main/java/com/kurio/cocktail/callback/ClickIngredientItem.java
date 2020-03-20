@@ -4,5 +4,5 @@ import com.kurio.cocktail.domain.model.Cocktail;
 import com.kurio.cocktail.domain.model.CocktailDetail;
 
 public interface ClickIngredientItem {
-    void clickIngredientItem(CocktailDetail cocktailDetail);
+    void clickIngredientItem(String ingredientName);
 }

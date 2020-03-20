@@ -21,12 +21,7 @@ import io.reactivex.disposables.Disposable;
 public class CocktailDetailViewModel extends ViewModel {
     private GetDrinkDetail getDrinkDetail;
     private MutableLiveData<Resource<CocktailDetail>> drinkDetailLiveData = new MutableLiveData<>();
-//    private MutableLiveData<List<String>> ingredientLiveData = new MutableLiveData<>();
-
-
-    //    private MutableLiveData<List<String>> ingredientListLiveData = new MutableLiveData<>();
     private Resource<CocktailDetail> cocktailDetailResource = new Resource<>();
-//    private Resource<List<String>> ingredientResource = new Resource<>();
 
     @Inject
     CocktailDetailViewModel(GetDrinkDetail getDrinkDetail) {
@@ -61,7 +56,7 @@ public class CocktailDetailViewModel extends ViewModel {
 
         @Override
         public void onError(Throwable e) {
-            Log.i("ERROR", "ERROR" + e.getMessage());
+            Log.e("ERROR", "ERROR" + e.getMessage());
             drinkDetailLiveData.postValue(cocktailDetailResource.error(e));
         }
     }

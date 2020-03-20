@@ -1,18 +1,19 @@
-package com.kurio.cocktail.main;
+package com.kurio.cocktail.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.AppBarLayout;
 import com.kurio.cocktail.Constants;
 import com.kurio.cocktail.R;
 import com.kurio.cocktail.adapters.DrinkIngredientListAdapter;
@@ -24,14 +25,13 @@ import com.kurio.cocktail.domain.model.CocktailDetail;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
 
-public class CocktailDetailActivity extends AppCompatActivity implements ClickIngredientItem {
+public class CocktailDetailActivity extends BaseActivity implements ClickIngredientItem {
     @Inject
     ViewModelFactory viewModelFactory;
     ArrayList<String> ingredientList;
@@ -39,26 +39,72 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
     DrinkIngredientListAdapter drinkIngredientListAdapter;
     RecyclerView rcIngredient;
     ImageView imgCocktail;
-    TextView tvAlcoholic,tvDrinkTag,tvDrinkCategory,tvToolbarTitle,tvInstruction;
+    TextView tvAlcoholic, tvDrinkTag, tvDrinkCategory, tvToolbarTitle, tvInstruction;
+    AppBarLayout appBarLayout;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cocktail_detail);
-        AndroidInjection.inject(this);
+        showNavigationBackArrow();
+    }
+
+    @Override
+    protected void initComponent() {
         rcIngredient = findViewById(R.id.rc_ingredient);
         imgCocktail = findViewById(R.id.img_cocktail);
         tvAlcoholic = findViewById(R.id.tv_alcoholic);
-        tvDrinkTag=findViewById(R.id.tv_tags);
-        tvDrinkCategory=findViewById(R.id.tv_str_Category);
-        tvToolbarTitle=findViewById(R.id.tv_toolbar_title);
-        tvInstruction=findViewById(R.id.tv_instruction);
+        tvDrinkTag = findViewById(R.id.tv_tags);
+        tvDrinkCategory = findViewById(R.id.tv_str_Category);
+        tvToolbarTitle = findViewById(R.id.tv_toolbar_title);
+        tvInstruction = findViewById(R.id.tv_instruction);
+        appBarLayout = findViewById(R.id.appbar);
+        toolbar = findViewById(R.id.toolbar_cocktail_detail);
         drinkIngredientListAdapter = new DrinkIngredientListAdapter(this, this);
         rcIngredient.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         rcIngredient.setAdapter(drinkIngredientListAdapter);
+        setUpListener();
+    }
+
+    private void setUpListener() {
+        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (Math.abs(verticalOffset) - appBarLayout.getTotalScrollRange() == 0) {
+                //  Collapsed
+                tvToolbarTitle.setTextColor(getResources().getColor(R.color.white));
+            } else {
+                //Expanded
+                tvToolbarTitle.setTextColor(getResources().getColor(R.color.black));
+            }
+        });
+    }
+
+    @Override
+    protected void initData() {
+        AndroidInjection.inject(this);
         cocktailDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(CocktailDetailViewModel.class);
         cocktailDetailViewModel.getDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
         cocktailDetailViewModel.getDrinkDetailLiveData().observe(this, this::getDrinkDetail);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_cocktail_detail;
+    }
+
+    private void showNavigationBackArrow() {
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mActivity.onBackPressed();
+                    }
+                }
+        );
     }
 
     private void getDrinkDetail(Resource<CocktailDetail> resource) {
@@ -80,9 +126,9 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
                 .into(imgCocktail);
 
 
-        if (cocktailDetail.getStrTag()!=null && !cocktailDetail.getStrTag().isEmpty()){
+        if (cocktailDetail.getStrTag() != null && !cocktailDetail.getStrTag().isEmpty()) {
             tvDrinkTag.setText(cocktailDetail.getStrTag());
-        }else{
+        } else {
             tvDrinkTag.setVisibility(View.GONE);
         }
         tvToolbarTitle.setText(cocktailDetail.getStrDrink());
@@ -150,7 +196,7 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
     }
 
     @Override
-    public void clickIngredientItem(CocktailDetail cocktailDetail) {
-        Toast.makeText(this, cocktailDetail.getStrInstructions(), Toast.LENGTH_SHORT).show();
+    public void clickIngredientItem(String ingredientName) {
+        startActivity(new Intent(this, IngredientDetailActivity.class).putExtra(Constants.EXTRA_NAME, ingredientName));
     }
 }

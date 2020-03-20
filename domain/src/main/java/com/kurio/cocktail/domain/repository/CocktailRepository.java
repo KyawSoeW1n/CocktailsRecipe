@@ -2,6 +2,7 @@ package com.kurio.cocktail.domain.repository;
 
 import com.kurio.cocktail.domain.model.Cocktail;
 import com.kurio.cocktail.domain.model.CocktailDetail;
+import com.kurio.cocktail.domain.model.IngredientDetail;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface CocktailRepository {
     Single<List<Cocktail>> getAlcoholicDrinks(String route);
 
     Single<CocktailDetail> getDrinkDetail(String id);
+
+    Single<IngredientDetail> getIngredientDetail(String name);
 }

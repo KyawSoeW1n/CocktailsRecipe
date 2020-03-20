@@ -22,8 +22,6 @@ public class RemoteModule {
         return cocktailServiceFactory.makeCurrencyExchangeService(BuildConfig.DEBUG);
     }
 
-    //
-//
     @Provides
     public CocktailServiceFactory provideServiceFactory() {
         //  TODO:Add base URL for production
