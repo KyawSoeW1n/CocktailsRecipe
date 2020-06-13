@@ -27,9 +27,9 @@
                 android:gravity="end"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_large"
-                android:text="@string/sample"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/textSizeLarge" />
+                tools:text="@string/sample"
+                tools:textColor="@color/colorPrimary"
+                tools:textSize="@dimen/textSizeLarge" />
 
             <TextView
                 android:id="@+id/tv_tags"
@@ -39,8 +39,8 @@
                 android:layout_marginLeft="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginRight="@dimen/margin_medium"
-                android:text="@string/tag"
-                android:textSize="@dimen/textSizeLarge" />
+                tools:text="@string/tag"
+                tools:textSize="@dimen/textSizeLarge" />
 
             <TextView
                 android:id="@+id/tv_category"
@@ -49,9 +49,9 @@
                 android:layout_below="@+id/tv_tags"
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:text="@string/cateogry"
-                android:textSize="@dimen/textSizeLarge"
-                android:textStyle="bold" />
+                tools:text="@string/cateogry"
+                tools:textSize="@dimen/textSizeLarge"
+                tools:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_str_Category"
@@ -60,8 +60,8 @@
                 android:layout_below="@+id/tv_category"
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:text="@string/cateogry"
-                android:textSize="@dimen/textSizeLarge" />
+                tools:text="@string/cateogry"
+                tools:textSize="@dimen/textSizeLarge" />
 
             <TextView
                 android:id="@+id/tv1"
@@ -70,9 +70,9 @@
                 android:layout_below="@+id/tv_str_Category"
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/textSizeNormal"
-                android:text="@string/instruction"
-                android:textSize="@dimen/textSizeLarge"
-                android:textStyle="bold" />
+                tools:text="@string/instruction"
+                tools:textSize="@dimen/textSizeLarge"
+                tools:textStyle="bold" />
 
 
             <TextView
@@ -83,8 +83,8 @@
                 android:layout_marginLeft="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginRight="@dimen/margin_medium"
-                android:text="@string/description"
-                android:textSize="@dimen/textSizeNormal" />
+                tools:text="@string/description"
+                tools:textSize="@dimen/textSizeNormal" />
 
 
             <LinearLayout
@@ -100,9 +100,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_medium"
                     android:layout_marginRight="@dimen/margin_medium"
-                    android:text="@string/ingredients"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold" />
+                    tools:text="@string/ingredients"
+                    tools:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    tools:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rc_ingredient"
