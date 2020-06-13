@@ -1,13 +1,13 @@
-package com.kurio.cocktail.main;
+package com.kurio.cocktail.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +30,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 
 
-public class CocktailDetailActivity extends AppCompatActivity implements ClickIngredientItem {
+public class CocktailDetailActivity extends BaseActivity implements ClickIngredientItem {
     @Inject
     ViewModelFactory viewModelFactory;
     ArrayList<String> ingredientList;
@@ -39,12 +39,19 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
     RecyclerView rcIngredient;
     ImageView imgCocktail;
     TextView tvAlcoholic, tvDrinkTag, tvDrinkCategory, tvToolbarTitle, tvInstruction;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cocktail_detail);
         AndroidInjection.inject(this);
+        cocktailDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(CocktailDetailViewModel.class);
+        cocktailDetailViewModel.getDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
+        cocktailDetailViewModel.getDrinkDetailLiveData().observe(this, this::getDrinkDetail);
+    }
+
+    @Override
+    protected void initComponent() {
         rcIngredient = findViewById(R.id.rc_ingredient);
         imgCocktail = findViewById(R.id.img_cocktail);
         tvAlcoholic = findViewById(R.id.tv_alcoholic);
@@ -52,19 +59,32 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
         tvDrinkCategory = findViewById(R.id.tv_str_Category);
         tvToolbarTitle = findViewById(R.id.tv_toolbar_title);
         tvInstruction = findViewById(R.id.tv_instruction);
+        toolbar = findViewById(R.id.toolbar_cocktail_detail);
         drinkIngredientListAdapter = new DrinkIngredientListAdapter(this, this);
         rcIngredient.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         rcIngredient.setAdapter(drinkIngredientListAdapter);
-        cocktailDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(CocktailDetailViewModel.class);
-        cocktailDetailViewModel.getDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
-        cocktailDetailViewModel.getDrinkDetailLiveData().observe(this, this::getDrinkDetail);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_cocktail_detail;
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return toolbar;
     }
 
     private void getDrinkDetail(Resource<CocktailDetail> resource) {
         if (resource.state == ResourceState.ERROR) {
             Log.i("ERROR", "error \t" + resource.errorMessage);
         } else if (resource.state == ResourceState.SUCCESS) {
-            Log.i("SUCCESS", "Success");
+            Log.i("Detail SUCCESS", "Success");
             if (resource.data != null) {
                 bindData(resource.data);
             }
@@ -149,7 +169,8 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
     }
 
     @Override
-    public void clickIngredientItem(CocktailDetail cocktailDetail) {
-        Toast.makeText(this, cocktailDetail.getStrInstructions(), Toast.LENGTH_SHORT).show();
+    public void clickIngredientItem(String ingredientName) {
+        startActivity(new Intent(CocktailDetailActivity.this, IngredientDetailActivity.class)
+                .putExtra(Constants.EXTRA_NAME, ingredientName));
     }
 }

@@ -36,9 +36,8 @@ public class DrinkDetailViewHolder extends BaseViewHolder<String> {
 
     @Override
     public void onClick(View v) {
-
-        //TODO setListener
-
+        if (clickIngredientItem != null)
+            clickIngredientItem.clickIngredientItem(mData);
     }
 
 }

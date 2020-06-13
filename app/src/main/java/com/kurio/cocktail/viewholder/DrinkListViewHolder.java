@@ -39,8 +39,6 @@ public class DrinkListViewHolder extends BaseViewHolder<Cocktail> {
     public void onClick(View v) {
         if (clickCocktailItem != null)
             clickCocktailItem.clickCocktailItem(mData);
-        else
-            Log.i("GGWP", "GG");
     }
 
 }
