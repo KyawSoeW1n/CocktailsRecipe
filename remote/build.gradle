@@ -6,6 +6,8 @@ dependencies {
     def remoteTestDependencies = rootProject.ext.remoteTestDependencies
 
     implementation project(':data')
+    implementation project(':mapper')
+
 
     implementation remoteDependencies.javaxAnnotation
     implementation remoteDependencies.javaxInject

@@ -7,22 +7,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kurio.cocktail.Constants;
+import com.kurio.cocktail.R;
 import com.kurio.cocktail.adapters.DrinkListAdapter;
 import com.kurio.cocktail.callback.ClickCocktailItem;
 import com.kurio.cocktail.data.presentation.CocktailViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;
 import com.kurio.cocktail.domain.model.Cocktail;
-import com.kurio.cocktail.R;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
 import java.util.List;

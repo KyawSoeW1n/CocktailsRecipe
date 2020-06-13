@@ -1,12 +1,10 @@
 package com.kurio.cocktail.data.remote.mapper;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.kurio.cocktail.data.model.CocktailEntity;
-import com.kurio.cocktail.data.remote.response.CocktailListResponse;
 import com.kurio.cocktail.data.remote.response.DrinkResponse;
+import com.kyawsoewin.mapper.MapperUtils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,15 +18,6 @@ public class CocktailListResponseMapper implements ResponseMapper<DrinkResponse,
 
     @Override
     public List<CocktailEntity> mapFromResponse(DrinkResponse response) {
-        List<CocktailEntity> actionHistoryList = new ArrayList<>();
-        List<CocktailListResponse> sectionlist = new Gson().fromJson(new Gson().toJson(response.data), new TypeToken<List<CocktailListResponse>>() {
-        }.getType());
-        for (CocktailListResponse alcoholicDrink : sectionlist) {
-            actionHistoryList.add(new CocktailEntity(alcoholicDrink.getStrDrink(),
-                    alcoholicDrink.getStrDrinkThumb(),
-                    alcoholicDrink.getIdDrink(),
-                    alcoholicDrink.getStrInstructions()));
-        }
-        return actionHistoryList;
+        return Arrays.asList(MapperUtils.transform(response.data, CocktailEntity[].class));
     }
 }

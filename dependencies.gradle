@@ -145,6 +145,10 @@ ext {
             archTesting: "androidx.arch.core:core-testing:${archCompVersion}"
     ]
 
+    mapperDependencies = [
+            gson               : "com.google.code.gson:gson:${gsonVersion}"
+    ]
+
     mobileUiDependencies = [
             flexBox            : "com.google.android:flexbox:${flexBox}",
             gson               : "com.google.code.gson:gson:${gsonVersion}",
