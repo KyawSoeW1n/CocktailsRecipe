@@ -20,7 +20,7 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, ApplicationModule.class, AndroidSupportInjectionModule.class, UiModule.class, PresentationModule.class, DataModule.class, RemoteModule.class,  RemoteBindsModule.class, FragmentModule.class, SharedPreferenceModule.class})
+@Component(modules = {AndroidInjectionModule.class, ApplicationModule.class, AndroidSupportInjectionModule.class, UiModule.class, PresentationModule.class, DataModule.class, RemoteModule.class, RemoteBindsModule.class, FragmentModule.class, SharedPreferenceModule.class})
 public interface ApplicationComponent {
     @Component.Builder
     interface Builder {

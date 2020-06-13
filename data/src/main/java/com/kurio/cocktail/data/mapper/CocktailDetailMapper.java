@@ -1,12 +1,7 @@
 package com.kurio.cocktail.data.mapper;
 
 import com.kurio.cocktail.data.model.CocktailDetailEntity;
-import com.kurio.cocktail.data.model.CocktailEntity;
-import com.kurio.cocktail.domain.model.Cocktail;
 import com.kurio.cocktail.domain.model.CocktailDetail;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 

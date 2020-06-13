@@ -1,7 +1,7 @@
 package com.kurio.cocktail.data.mapper;
 
 public interface EntityMapper<E, D> {
-    public D mapFromEntity(E entity);
+    D mapFromEntity(E entity);
 
-    public E mapToEntity(D domainModel);
+    E mapToEntity(D domainModel);
 }

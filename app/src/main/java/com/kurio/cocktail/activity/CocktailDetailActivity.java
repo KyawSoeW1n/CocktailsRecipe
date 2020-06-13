@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.appbar.AppBarLayout;
 import com.kurio.cocktail.Constants;
 import com.kurio.cocktail.R;
 import com.kurio.cocktail.adapters.DrinkIngredientListAdapter;
@@ -40,13 +39,15 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
     RecyclerView rcIngredient;
     ImageView imgCocktail;
     TextView tvAlcoholic, tvDrinkTag, tvDrinkCategory, tvToolbarTitle, tvInstruction;
-    AppBarLayout appBarLayout;
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showNavigationBackArrow();
+        AndroidInjection.inject(this);
+        cocktailDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(CocktailDetailViewModel.class);
+        cocktailDetailViewModel.getDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
+        cocktailDetailViewModel.getDrinkDetailLiveData().observe(this, this::getDrinkDetail);
     }
 
     @Override
@@ -58,32 +59,15 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
         tvDrinkCategory = findViewById(R.id.tv_str_Category);
         tvToolbarTitle = findViewById(R.id.tv_toolbar_title);
         tvInstruction = findViewById(R.id.tv_instruction);
-        appBarLayout = findViewById(R.id.appbar);
         toolbar = findViewById(R.id.toolbar_cocktail_detail);
         drinkIngredientListAdapter = new DrinkIngredientListAdapter(this, this);
         rcIngredient.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         rcIngredient.setAdapter(drinkIngredientListAdapter);
-        setUpListener();
-    }
-
-    private void setUpListener() {
-        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
-            if (Math.abs(verticalOffset) - appBarLayout.getTotalScrollRange() == 0) {
-                //  Collapsed
-                tvToolbarTitle.setTextColor(getResources().getColor(R.color.white));
-            } else {
-                //Expanded
-                tvToolbarTitle.setTextColor(getResources().getColor(R.color.black));
-            }
-        });
     }
 
     @Override
     protected void initData() {
-        AndroidInjection.inject(this);
-        cocktailDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(CocktailDetailViewModel.class);
-        cocktailDetailViewModel.getDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
-        cocktailDetailViewModel.getDrinkDetailLiveData().observe(this, this::getDrinkDetail);
+
     }
 
     @Override
@@ -91,27 +75,16 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
         return R.layout.activity_cocktail_detail;
     }
 
-    private void showNavigationBackArrow() {
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setNavigationOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mActivity.onBackPressed();
-                    }
-                }
-        );
+    @Override
+    protected Toolbar getToolbar() {
+        return toolbar;
     }
 
     private void getDrinkDetail(Resource<CocktailDetail> resource) {
         if (resource.state == ResourceState.ERROR) {
             Log.i("ERROR", "error \t" + resource.errorMessage);
         } else if (resource.state == ResourceState.SUCCESS) {
-            Log.i("SUCCESS", "Success");
+            Log.i("Detail SUCCESS", "Success");
             if (resource.data != null) {
                 bindData(resource.data);
             }
@@ -197,6 +170,7 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
 
     @Override
     public void clickIngredientItem(String ingredientName) {
-        startActivity(new Intent(this, IngredientDetailActivity.class).putExtra(Constants.EXTRA_NAME, ingredientName));
+        startActivity(new Intent(CocktailDetailActivity.this, IngredientDetailActivity.class)
+                .putExtra(Constants.EXTRA_NAME, ingredientName));
     }
 }

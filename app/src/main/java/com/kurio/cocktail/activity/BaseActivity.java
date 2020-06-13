@@ -3,9 +3,11 @@ package com.kurio.cocktail.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected Context mContext;
@@ -19,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContext = mActivity.getBaseContext();
         initComponent();
         initData();
+        showNavigationBackArrow(getToolbar());
     }
 
     /**
@@ -26,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private void renderScreen() {
         setContentView(getLayoutId());
+
     }
 
     /**
@@ -42,4 +46,31 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return the current layout resource
      */
     protected abstract int getLayoutId();
+
+
+    /**
+     * @return the toolbar
+     */
+    protected abstract Toolbar getToolbar();
+
+
+    /**
+     * all the common toolbar for all the activity screen
+     */
+    private void showNavigationBackArrow(Toolbar toolbar) {
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            toolbar.setNavigationOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mActivity.onBackPressed();
+                        }
+                    }
+            );
+        }
+    }
 }

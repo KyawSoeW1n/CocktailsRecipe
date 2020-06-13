@@ -11,7 +11,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class UiThread implements PostExecutionThread {
 
     @Inject
-    public UiThread() {}
+    public UiThread() {
+    }
 
     @Override
     public Scheduler getScheduler() {

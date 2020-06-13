@@ -29,6 +29,7 @@ public class IngredientDetailActivity extends BaseActivity {
     ViewModelFactory viewModelFactory;
     IngredientDetailViewModel ingredientDetailViewModel;
     ImageView imgIngredient;
+    Toolbar toolbar;
 
     @Override
     protected void initComponent() {
@@ -38,24 +39,8 @@ public class IngredientDetailActivity extends BaseActivity {
         tvToolbarTitle = findViewById(R.id.tv_toolbar_title);
         appBarLayout = findViewById(R.id.appbar);
         imgIngredient = findViewById(R.id.img_cocktail);
-        showNavigationBackArrow();
+        toolbar = findViewById(R.id.toolbar_ingredient_detail);
         setUpListener();
-    }
-
-    private void showNavigationBackArrow() {
-        Toolbar toolbar = findViewById(R.id.toolbar_ingredient_detail);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setNavigationOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mActivity.onBackPressed();
-                    }
-                }
-        );
     }
 
     private void setUpListener() {
@@ -82,7 +67,7 @@ public class IngredientDetailActivity extends BaseActivity {
         if (ingredientDetailResource.state == ResourceState.ERROR) {
             Log.i("ERROR", "error \t" + ingredientDetailResource.errorMessage);
         } else if (ingredientDetailResource.state == ResourceState.SUCCESS) {
-            Log.i("SUCCESS", "Success");
+            Log.i("IDetail success", "Success");
             if (ingredientDetailResource.data != null) {
                 bindData(ingredientDetailResource.data);
             }
@@ -115,5 +100,10 @@ public class IngredientDetailActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_ingredient_detail;
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return toolbar;
     }
 }
