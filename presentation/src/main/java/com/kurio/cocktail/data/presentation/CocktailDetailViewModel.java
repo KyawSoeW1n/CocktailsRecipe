@@ -28,10 +28,6 @@ public class CocktailDetailViewModel extends ViewModel {
         return drinkDetailLiveData;
     }
 
-//    public MutableLiveData<List<String>> getIngredientListLiveData() {
-//        return ingredientListLiveData;
-//    }
-
     public void getDrinkDetail(String id) {
         getDrinkDetail.execute(new GetDrinkDetailSubscriber(), getDrinkDetail.new Params(id));
     }

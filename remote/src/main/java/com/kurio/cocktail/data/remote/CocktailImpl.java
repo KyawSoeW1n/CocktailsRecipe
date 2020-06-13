@@ -102,7 +102,7 @@ public class CocktailImpl implements CocktailRemote {
                 })
                 .map(new Function<DrinkResponse, CocktailDetailEntity>() {
                     @Override
-                    public CocktailDetailEntity apply(DrinkResponse drinkResponse) throws Exception {
+                    public CocktailDetailEntity apply(DrinkResponse drinkResponse) {
                         return drinkDetailResponseMapper.mapFromResponse(drinkResponse);
                     }
                 });
