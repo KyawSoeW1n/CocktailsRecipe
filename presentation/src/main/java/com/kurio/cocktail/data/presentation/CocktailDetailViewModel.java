@@ -7,11 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.domain.interactor.getalcoholicdrink.GetDrinkDetail;
-import com.kurio.cocktail.domain.model.Cocktail;
 import com.kurio.cocktail.domain.model.CocktailDetail;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 

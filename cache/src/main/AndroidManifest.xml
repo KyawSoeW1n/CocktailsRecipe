@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kurio.cocktail.cache" />
+<manifest package="com.kurio.cocktail.cache" />

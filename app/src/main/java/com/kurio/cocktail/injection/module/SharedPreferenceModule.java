@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
 import com.kurio.cocktail.utils.Constants;
 
 import javax.inject.Singleton;
@@ -18,6 +17,6 @@ public class SharedPreferenceModule {
     @Provides
     @Singleton
     SharedPreferences provideSharedPreferences(Application application) {
-        return application.getApplicationContext().getSharedPreferences(Constants.PREF_NAME,Context.MODE_PRIVATE);
+        return application.getApplicationContext().getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
     }
 }

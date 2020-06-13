@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 
 import com.kurio.cocktail.R;
 import com.kurio.cocktail.callback.ClickCocktailItem;
+import com.kurio.cocktail.domain.model.Cocktail;
 import com.kurio.cocktail.viewholder.BaseViewHolder;
 import com.kurio.cocktail.viewholder.DrinkListViewHolder;
-import com.kurio.cocktail.domain.model.Cocktail;
 
 public class DrinkListAdapter extends BaseRecyclerAdapter<DrinkListViewHolder, Cocktail> {
     private ClickCocktailItem clickCocktailItem;

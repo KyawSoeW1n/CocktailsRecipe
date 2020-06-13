@@ -2,9 +2,9 @@ package com.kurio.cocktail.injection.module;
 
 import android.util.Log;
 
+import com.kurio.cocktail.BuildConfig;
 import com.kurio.cocktail.data.remote.service.CocktailService;
 import com.kurio.cocktail.data.remote.service.CocktailServiceFactory;
-import com.kurio.cocktail.BuildConfig;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

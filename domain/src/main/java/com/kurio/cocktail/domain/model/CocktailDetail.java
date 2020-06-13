@@ -24,7 +24,7 @@ public class CocktailDetail {
     private String strCategory;
     private String strTag;
 
-    public CocktailDetail(String strDrink, String strDrinkThumb, String drinkId, String getStrInstructions, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15,String strAlcoholic,String strCategory,String strTag) {
+    public CocktailDetail(String strDrink, String strDrinkThumb, String drinkId, String getStrInstructions, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strAlcoholic, String strCategory, String strTag) {
         this.strDrink = strDrink;
         this.strDrinkThumb = strDrinkThumb;
         this.drinkId = drinkId;
@@ -45,8 +45,8 @@ public class CocktailDetail {
         this.strIngredient14 = strIngredient14;
         this.strIngredient15 = strIngredient15;
         this.strAlcoholic = strAlcoholic;
-        this.strCategory=strCategory;
-        this.strTag=strTag;
+        this.strCategory = strCategory;
+        this.strTag = strTag;
     }
 
     public String getStrDrink() {

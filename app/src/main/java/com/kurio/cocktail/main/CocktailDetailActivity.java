@@ -24,7 +24,6 @@ import com.kurio.cocktail.domain.model.CocktailDetail;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -39,7 +38,7 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
     DrinkIngredientListAdapter drinkIngredientListAdapter;
     RecyclerView rcIngredient;
     ImageView imgCocktail;
-    TextView tvAlcoholic,tvDrinkTag,tvDrinkCategory,tvToolbarTitle,tvInstruction;
+    TextView tvAlcoholic, tvDrinkTag, tvDrinkCategory, tvToolbarTitle, tvInstruction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +48,10 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
         rcIngredient = findViewById(R.id.rc_ingredient);
         imgCocktail = findViewById(R.id.img_cocktail);
         tvAlcoholic = findViewById(R.id.tv_alcoholic);
-        tvDrinkTag=findViewById(R.id.tv_tags);
-        tvDrinkCategory=findViewById(R.id.tv_str_Category);
-        tvToolbarTitle=findViewById(R.id.tv_toolbar_title);
-        tvInstruction=findViewById(R.id.tv_instruction);
+        tvDrinkTag = findViewById(R.id.tv_tags);
+        tvDrinkCategory = findViewById(R.id.tv_str_Category);
+        tvToolbarTitle = findViewById(R.id.tv_toolbar_title);
+        tvInstruction = findViewById(R.id.tv_instruction);
         drinkIngredientListAdapter = new DrinkIngredientListAdapter(this, this);
         rcIngredient.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         rcIngredient.setAdapter(drinkIngredientListAdapter);
@@ -80,9 +79,9 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
                 .into(imgCocktail);
 
 
-        if (cocktailDetail.getStrTag()!=null && !cocktailDetail.getStrTag().isEmpty()){
+        if (cocktailDetail.getStrTag() != null && !cocktailDetail.getStrTag().isEmpty()) {
             tvDrinkTag.setText(cocktailDetail.getStrTag());
-        }else{
+        } else {
             tvDrinkTag.setVisibility(View.GONE);
         }
         tvToolbarTitle.setText(cocktailDetail.getStrDrink());

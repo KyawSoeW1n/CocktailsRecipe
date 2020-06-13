@@ -2,10 +2,7 @@ package com.kurio.cocktail.data.remote.mapper;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.kurio.cocktail.data.model.CocktailDetailEntity;
 import com.kurio.cocktail.data.model.IngredientDetailEntity;
-import com.kurio.cocktail.data.remote.response.CocktailDetailResponse;
-import com.kurio.cocktail.data.remote.response.DrinkResponse;
 import com.kurio.cocktail.data.remote.response.IngredientDetailResponse;
 import com.kurio.cocktail.data.remote.response.IngredientResponse;
 
