@@ -2,11 +2,14 @@ package com.kurio.cocktail.data;
 
 import com.kurio.cocktail.data.mapper.CocktailDetailMapper;
 import com.kurio.cocktail.data.mapper.CocktailListMapper;
+import com.kurio.cocktail.data.mapper.IngredientDetailMapper;
 import com.kurio.cocktail.data.model.CocktailDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
+import com.kurio.cocktail.data.model.IngredientDetailEntity;
 import com.kurio.cocktail.data.store.CocktailDataStoreFactory;
 import com.kurio.cocktail.domain.model.Cocktail;
 import com.kurio.cocktail.domain.model.CocktailDetail;
+import com.kurio.cocktail.domain.model.IngredientDetail;
 import com.kurio.cocktail.domain.repository.CocktailRepository;
 
 import java.util.List;
@@ -17,7 +20,7 @@ import io.reactivex.Single;
 import io.reactivex.functions.Function;
 
 public class CocktailDataRepository implements CocktailRepository {
-
+    private IngredientDetailMapper ingredientDetailMapper;
     private CocktailListMapper cocktailListMapper;
     private CocktailDetailMapper cocktailDetailMapper;
     private CocktailDataStoreFactory drinkListDataStoreFactory;
@@ -25,10 +28,12 @@ public class CocktailDataRepository implements CocktailRepository {
     @Inject
     public CocktailDataRepository(CocktailListMapper cocktailListMapper,
                                   CocktailDetailMapper cocktailDetailMapper,
+                                  IngredientDetailMapper ingredientDetailMapper,
                                   CocktailDataStoreFactory drinkListDataStoreFactory) {
         this.cocktailListMapper = cocktailListMapper;
         this.cocktailDetailMapper = cocktailDetailMapper;
         this.drinkListDataStoreFactory = drinkListDataStoreFactory;
+        this.ingredientDetailMapper = ingredientDetailMapper;
 
     }
 
@@ -48,6 +53,16 @@ public class CocktailDataRepository implements CocktailRepository {
             @Override
             public CocktailDetail apply(CocktailDetailEntity cocktailDetailEntity) throws Exception {
                 return cocktailDetailMapper.mapFromEntity(cocktailDetailEntity);
+            }
+        });
+    }
+
+    @Override
+    public Single<IngredientDetail> getIngredientDetail(String name) {
+        return drinkListDataStoreFactory.getRemoteDataStore().getIngredientDetail(name).map(new Function<IngredientDetailEntity, IngredientDetail>() {
+            @Override
+            public IngredientDetail apply(IngredientDetailEntity ingredientDetailEntity) throws Exception {
+                return ingredientDetailMapper.mapFromEntity(ingredientDetailEntity);
             }
         });
     }

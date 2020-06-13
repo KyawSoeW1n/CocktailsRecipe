@@ -1,4 +1,4 @@
-package com.kurio.cocktail.main;
+package com.kurio.cocktail.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

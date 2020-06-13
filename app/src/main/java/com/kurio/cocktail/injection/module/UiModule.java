@@ -20,4 +20,7 @@ public abstract class UiModule {
 
     @ContributesAndroidInjector
     public abstract CocktailDetailActivity contributesCocktailDetailActivity();
+
+    @ContributesAndroidInjector
+    public abstract IngredientDetailActivity contributesIngredientDetailActivity();
 }

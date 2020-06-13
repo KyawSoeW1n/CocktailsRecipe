@@ -7,4 +7,6 @@
     <string name="description">Description</string>
     <string name="tag">Tag</string>
     <string name="cocktail_title">Cocktail Title</string>
+    <string name="type">Type</string>
+    <string name="instruction">Instruction</string>
 </resources>

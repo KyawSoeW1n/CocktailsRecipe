@@ -35,7 +35,7 @@
             </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_cocktail_detail"
+                android:id="@+id/toolbar_ingredient_detail"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ToolbarTheme"
@@ -53,7 +53,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_cocktail_detail" />
+    <include layout="@layout/content_ingredient_detail" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

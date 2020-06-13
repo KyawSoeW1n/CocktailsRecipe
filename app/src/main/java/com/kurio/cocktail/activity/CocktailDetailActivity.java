@@ -24,6 +24,7 @@ import com.kurio.cocktail.domain.model.CocktailDetail;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -58,6 +59,27 @@ public class CocktailDetailActivity extends AppCompatActivity implements ClickIn
         cocktailDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(CocktailDetailViewModel.class);
         cocktailDetailViewModel.getDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
         cocktailDetailViewModel.getDrinkDetailLiveData().observe(this, this::getDrinkDetail);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_cocktail_detail;
+    }
+
+    private void showNavigationBackArrow() {
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mActivity.onBackPressed();
+                    }
+                }
+        );
     }
 
     private void getDrinkDetail(Resource<CocktailDetail> resource) {
