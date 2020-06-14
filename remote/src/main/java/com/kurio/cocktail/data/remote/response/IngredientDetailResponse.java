@@ -11,6 +11,8 @@ public class IngredientDetailResponse {
     private String strType;
     @SerializedName("strDescription")
     private String strDescription;
+    @SerializedName("idIngredient")
+    private String idIngredient;
 
     public String getStrIngredient() {
         return strIngredient;
@@ -26,5 +28,9 @@ public class IngredientDetailResponse {
 
     public String getStrDescription() {
         return strDescription;
+    }
+
+    public String getIdIngredient() {
+        return idIngredient;
     }
 }

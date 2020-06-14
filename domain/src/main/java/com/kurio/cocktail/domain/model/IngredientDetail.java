@@ -5,12 +5,18 @@ public class IngredientDetail {
     private String strAlcohol;
     private String strType;
     private String strDescription;
+    private String idIngredient;
 
-    public IngredientDetail(String strIngredient, String strAlcohol, String strType, String strDescription) {
+    public IngredientDetail(String strIngredient,
+                            String strAlcohol,
+                            String strType,
+                            String strDescription,
+                            String idIngredient) {
         this.strIngredient = strIngredient;
         this.strAlcohol = strAlcohol;
         this.strType = strType;
         this.strDescription = strDescription;
+        this.idIngredient = idIngredient;
     }
 
     public String getStrIngredient() {
@@ -27,5 +33,9 @@ public class IngredientDetail {
 
     public String getStrDescription() {
         return strDescription;
+    }
+
+    public String getIdIngredient() {
+        return idIngredient;
     }
 }

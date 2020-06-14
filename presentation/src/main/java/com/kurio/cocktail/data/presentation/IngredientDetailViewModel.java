@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kurio.cocktail.data.presentation.state.Resource;
-import com.kurio.cocktail.domain.interactor.getingredient.GetIngredientDetail;
-import com.kurio.cocktail.domain.model.CocktailDetail;
+import com.kurio.cocktail.domain.interactor.get_ingredient.FetchIngredientDetail;
 import com.kurio.cocktail.domain.model.IngredientDetail;
 
 import java.util.List;
@@ -18,12 +17,12 @@ import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
 public class IngredientDetailViewModel extends ViewModel {
-    private GetIngredientDetail getIngredientDetail;
+    private FetchIngredientDetail getIngredientDetail;
     private MutableLiveData<Resource<List<IngredientDetail>>> ingredientDetailLiveData = new MutableLiveData<>();
     private Resource<List<IngredientDetail>> ingredientDetailResource = new Resource<>();
 
     @Inject
-    IngredientDetailViewModel(GetIngredientDetail getIngredientDetail) {
+    IngredientDetailViewModel(FetchIngredientDetail getIngredientDetail) {
         this.getIngredientDetail = getIngredientDetail;
     }
 

@@ -1,12 +1,12 @@
 package com.kurio.cocktail.domain.model;
 
-public class Cocktail {
+public class Drink {
     private String strDrink;
     private String strDrinkThumb;
     private String idDrink;
     private String strInstructions;
 
-    public Cocktail(String strDrink, String strDrinkThumb, String drinkId, String strInstructions) {
+    public Drink(String strDrink, String strDrinkThumb, String drinkId, String strInstructions) {
         this.strDrink = strDrink;
         this.strDrinkThumb = strDrinkThumb;
         this.idDrink = drinkId;

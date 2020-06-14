@@ -8,12 +8,8 @@ import java.util.List;
 
 import io.reactivex.Single;
 
-public interface CocktailRemote {
+public interface DrinkRemote {
     Single<List<CocktailEntity>> getAlcoholicDrinks(String route);
 
     Single<List<CocktailDetailEntity>> getDrinkDetail(String id);
-
-    Single<List<IngredientDetailEntity>> getIngredientDetail(String name);
-
-
 }
