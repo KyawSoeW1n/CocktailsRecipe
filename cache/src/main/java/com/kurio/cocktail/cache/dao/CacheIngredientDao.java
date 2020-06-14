@@ -24,5 +24,5 @@ public abstract class CacheIngredientDao {
     public abstract void deleteAllIngredient();
 
     @Query(ConstantIngredient.QUERY_DELETE_INGREDIENT + ":ingredientId")
-    public abstract void deleteDrink(String ingredientId);
+    public abstract void deleteIngredient(String ingredientId);
 }

@@ -8,6 +8,7 @@ import com.kurio.cocktail.data.model.CacheDrinkEntity;
 import com.kurio.cocktail.data.repository.DrinkCache;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
@@ -24,8 +25,8 @@ public class CacheDrinkImpl implements DrinkCache {
 
     @Inject
     public CacheDrinkImpl(CocktailDatabase cocktailDatabase,
-                           CacheDrinkListMapper cacheDrinkListMapper,
-                           CacheDrinkMapper cacheDrinkMapper) {
+                          CacheDrinkListMapper cacheDrinkListMapper,
+                          CacheDrinkMapper cacheDrinkMapper) {
         this.cocktailDatabase = cocktailDatabase;
         this.cacheDrinkMapper = cacheDrinkMapper;
         this.cacheDrinkListMapper = cacheDrinkListMapper;
@@ -43,9 +44,25 @@ public class CacheDrinkImpl implements DrinkCache {
     }
 
     @Override
-    public Completable removeDrink(String drinkId) {
-        cocktailDatabase.cachedDrinkDao().deleteDrink(drinkId);
-        return Completable.complete();
+    public Completable removeDrink(final String drinkId) {
+        return Completable.fromCallable(new Callable<Completable>() {
+            @Override
+            public Completable call() throws Exception {
+                cocktailDatabase.cachedDrinkDao().deleteDrink(drinkId);
+                return Completable.complete();
+            }
+        });
+    }
+
+    @Override
+    public Single<CacheDrinkEntity> getDrink(String drinkId) {
+        return cocktailDatabase.cachedDrinkDao().getDrink(drinkId)
+                .map(new Function<CacheDrink, CacheDrinkEntity>() {
+                    @Override
+                    public CacheDrinkEntity apply(CacheDrink cacheDrink) throws Exception {
+                        return cacheDrinkMapper.mapFromCached(cacheDrink);
+                    }
+                });
     }
 
     @Override
@@ -55,8 +72,13 @@ public class CacheDrinkImpl implements DrinkCache {
     }
 
     @Override
-    public Completable saveDrink(CacheDrinkEntity cacheDrinkEntity) {
-        cocktailDatabase.cachedDrinkDao().saveDrink(cacheDrinkMapper.mapToCached(cacheDrinkEntity));
-        return Completable.complete();
+    public Completable saveDrink(final CacheDrinkEntity cacheDrinkEntity) {
+        return Completable.fromCallable(new Callable<Completable>() {
+            @Override
+            public Completable call() throws Exception {
+                cocktailDatabase.cachedDrinkDao().saveDrink(cacheDrinkMapper.mapToCached(cacheDrinkEntity));
+                return Completable.complete();
+            }
+        });
     }
 }

@@ -49,7 +49,7 @@ public class CacheIngredientImpl implements IngredientCache {
 
     @Override
     public Completable removeIngredient(String ingredientId) {
-        cocktailDatabase.cachedDrinkDao().deleteDrink(ingredientId);
+        cocktailDatabase.cachedIngredientDao().deleteIngredient(ingredientId);
         return Completable.complete();
     }
 

@@ -12,6 +12,8 @@ public interface DrinkCache {
 
     Completable removeDrink(String drinkId);
 
+    Single<CacheDrinkEntity> getDrink(String drinkId);
+
     Completable removeAllDrink();
 
     Completable saveDrink(CacheDrinkEntity cacheDrinkEntity);

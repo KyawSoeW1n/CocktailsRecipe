@@ -3,12 +3,13 @@ package com.kurio.cocktail.data;
 import com.kurio.cocktail.data.mapper.CacheDrinkDataMapper;
 import com.kurio.cocktail.data.mapper.CocktailDetailMapper;
 import com.kurio.cocktail.data.mapper.CocktailListMapper;
+import com.kurio.cocktail.data.model.CacheDrinkEntity;
 import com.kurio.cocktail.data.model.CocktailDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
 import com.kurio.cocktail.data.store.DrinkDataStoreFactory;
 import com.kurio.cocktail.domain.model.CacheDrink;
-import com.kurio.cocktail.domain.model.Cocktail;
-import com.kurio.cocktail.domain.model.CocktailDetail;
+import com.kurio.cocktail.domain.model.Drink;
+import com.kurio.cocktail.domain.model.DrinkDetail;
 import com.kurio.cocktail.domain.repository.DrinkRepository;
 
 import java.util.List;
@@ -37,21 +38,21 @@ public class DrinkDataRepository implements DrinkRepository {
     }
 
     @Override
-    public Single<List<Cocktail>> getAlcoholicDrinks(String route) {
-        return drinkDataStoreFactory.getDrinkRemoteDataStore().fetchDrink(route).map(new Function<List<CocktailEntity>, List<Cocktail>>() {
+    public Single<List<Drink>> getAlcoholicDrinks(String route) {
+        return drinkDataStoreFactory.getDrinkRemoteDataStore().fetchDrink(route).map(new Function<List<CocktailEntity>, List<Drink>>() {
             @Override
-            public List<Cocktail> apply(List<CocktailEntity> drinkEntities) throws Exception {
+            public List<Drink> apply(List<CocktailEntity> drinkEntities) throws Exception {
                 return cocktailListMapper.mapFromEntity(drinkEntities);
             }
         });
     }
 
     @Override
-    public Single<List<CocktailDetail>> fetchDrinkDetail(String id) {
+    public Single<List<DrinkDetail>> fetchDrinkDetail(String id) {
         return drinkDataStoreFactory.getDrinkRemoteDataStore().fetchDrinkDetail(id)
-                .map(new Function<List<CocktailDetailEntity>, List<CocktailDetail>>() {
+                .map(new Function<List<CocktailDetailEntity>, List<DrinkDetail>>() {
                     @Override
-                    public List<CocktailDetail> apply(List<CocktailDetailEntity> cocktailDetailEntity) throws Exception {
+                    public List<DrinkDetail> apply(List<CocktailDetailEntity> cocktailDetailEntity) throws Exception {
                         return cocktailDetailMapper.mapFromEntity(cocktailDetailEntity);
                     }
                 });
@@ -59,7 +60,18 @@ public class DrinkDataRepository implements DrinkRepository {
 
     @Override
     public Single<CacheDrink> getDrinkDetail(String id) {
-        return null;
+        return drinkDataStoreFactory.getDrinkCacheDataStore().getCacheDrink(id)
+                .map(new Function<CacheDrinkEntity, CacheDrink>() {
+                    @Override
+                    public CacheDrink apply(CacheDrinkEntity cacheDrinkEntity) throws Exception {
+                        return cacheDrinkDataMapper.mapFromEntity(cacheDrinkEntity);
+                    }
+                });
+    }
+
+    @Override
+    public Completable deleteDrinkDetail(String id) {
+        return drinkDataStoreFactory.getDrinkCacheDataStore().removeDrink(id);
     }
 
     @Override

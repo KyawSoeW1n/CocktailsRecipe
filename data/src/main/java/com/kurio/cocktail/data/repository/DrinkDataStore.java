@@ -3,7 +3,7 @@ package com.kurio.cocktail.data.repository;
 import com.kurio.cocktail.data.model.CacheDrinkEntity;
 import com.kurio.cocktail.data.model.CocktailDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
-import com.kurio.cocktail.data.model.IngredientDetailEntity;
+import com.kurio.cocktail.domain.model.CacheDrink;
 
 import java.util.List;
 
@@ -16,6 +16,8 @@ public interface DrinkDataStore {
     Single<List<CocktailDetailEntity>> fetchDrinkDetail(String id);
 
     Single<List<CacheDrinkEntity>> getCacheDrinkList();
+
+    Single<CacheDrinkEntity> getCacheDrink(String id);
 
     Completable removeDrink(String drinkId);
 

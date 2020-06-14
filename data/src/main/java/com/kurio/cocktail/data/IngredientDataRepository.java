@@ -25,22 +25,20 @@ public class IngredientDataRepository implements IngredientRepository {
 
     }
 
-    @Override
-    public Single<IngredientDetail> getIngredientDetail(String name) {
-//        return ingredientDataStoreFactory.getRemoteDataStore().getIngredientDetail(name)
-//                .map(new Function<List<IngredientDetailEntity>, IngredientDetail>() {
+//    @Override
+//    public Single<IngredientDetail> getIngredientDetail(String name) {
+//        return ingredientDataStoreFactory.getIngredientCacheDataStore().getCacheIngredientList(name)
+//                .map(new Function<List<IngredientDetailEntity>, List<IngredientDetail>>() {
 //                    @Override
-//                    public IngredientDetail apply(List<IngredientDetailEntity> ingredientDetailEntities) throws Exception {
-//                        return ingredientDetailMapper.mapFromEntity();
+//                    public List<IngredientDetail> apply(List<IngredientDetailEntity> ingredientDetailEntity) throws Exception {
+//                        return ingredientDetailMapper.mapFromEntity(ingredientDetailEntity);
 //                    }
 //                });
-
-        return null;
-    }
+//    }
 
     @Override
     public Single<List<IngredientDetail>> fetchIngredientDetail(String name) {
-        return ingredientDataStoreFactory.getRemoteDataStore().fetchIngredientDetail(name)
+        return ingredientDataStoreFactory.getIngredientRemoteDataStore().fetchIngredientDetail(name)
                 .map(new Function<List<IngredientDetailEntity>, List<IngredientDetail>>() {
                     @Override
                     public List<IngredientDetail> apply(List<IngredientDetailEntity> ingredientDetailEntity) throws Exception {

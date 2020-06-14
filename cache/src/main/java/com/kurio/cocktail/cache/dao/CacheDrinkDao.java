@@ -25,5 +25,8 @@ public abstract class CacheDrinkDao {
 
     @Query(ConstantDrink.QUERY_DELETE_DRINK + ":drinkId")
     public abstract void deleteDrink(String drinkId);
+
+    @Query(ConstantDrink.QUERY_GET_DRINK + ":drinkId")
+    public abstract Single<CacheDrink> getDrink(String drinkId);
 }
 

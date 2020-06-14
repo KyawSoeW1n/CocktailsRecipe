@@ -39,6 +39,11 @@ public class DrinkCacheDataStore implements DrinkDataStore {
     }
 
     @Override
+    public Single<CacheDrinkEntity> getCacheDrink(String id) {
+        return drinkCache.getDrink(id);
+    }
+
+    @Override
     public Completable removeDrink(String drinkId) {
         return drinkCache.removeDrink(drinkId);
     }

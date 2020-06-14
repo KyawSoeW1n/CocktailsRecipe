@@ -8,4 +8,5 @@ public class ConstantDrink {
     public static final String QUERY_ALL_FAV_DRINK = "SELECT * FROM " + TABLE_NAME;
     public static final String QUERY_DELETE_ALL_FAV_DRINK = "DELETE FROM " + TABLE_NAME;
     public static final String QUERY_DELETE_DRINK = "DELETE FROM " + TABLE_NAME + " WHERE " + DRINK_ID + " = ";
+    public static final String QUERY_GET_DRINK = "SELECT * FROM " + TABLE_NAME + " WHERE " + DRINK_ID + " = ";
 }

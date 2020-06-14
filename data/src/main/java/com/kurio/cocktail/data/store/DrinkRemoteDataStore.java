@@ -5,6 +5,7 @@ import com.kurio.cocktail.data.model.CocktailDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
 import com.kurio.cocktail.data.repository.DrinkDataStore;
 import com.kurio.cocktail.data.repository.DrinkRemote;
+import com.kurio.cocktail.domain.model.CacheDrink;
 
 import java.util.List;
 
@@ -34,6 +35,11 @@ public class DrinkRemoteDataStore implements DrinkDataStore {
 
     @Override
     public Single<List<CacheDrinkEntity>> getCacheDrinkList() {
+        throw new UnsupportedOperationException("Cache is not available in Remote");
+    }
+
+    @Override
+    public Single<CacheDrinkEntity> getCacheDrink(String id) {
         throw new UnsupportedOperationException("Cache is not available in Remote");
     }
 

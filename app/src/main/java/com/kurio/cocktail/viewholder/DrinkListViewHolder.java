@@ -1,6 +1,5 @@
 package com.kurio.cocktail.viewholder;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,9 +9,9 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.kurio.cocktail.R;
 import com.kurio.cocktail.callback.ClickCocktailItem;
-import com.kurio.cocktail.domain.model.Cocktail;
+import com.kurio.cocktail.domain.model.Drink;
 
-public class DrinkListViewHolder extends BaseViewHolder<Cocktail> {
+public class DrinkListViewHolder extends BaseViewHolder<Drink> {
     private ClickCocktailItem clickCocktailItem;
     private TextView tvCocktailName;
     private ImageView imgCocktail;
@@ -25,7 +24,7 @@ public class DrinkListViewHolder extends BaseViewHolder<Cocktail> {
     }
 
     @Override
-    public void setData(Cocktail data) {
+    public void setData(Drink data) {
         mData = data;
         if (mData != null) {
             tvCocktailName.setText(mData.getStrDrink());

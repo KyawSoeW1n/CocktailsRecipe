@@ -20,8 +20,7 @@ import com.kurio.cocktail.callback.ClickCocktailItem;
 import com.kurio.cocktail.data.presentation.CocktailViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;
-import com.kurio.cocktail.domain.model.CacheDrink;
-import com.kurio.cocktail.domain.model.Cocktail;
+import com.kurio.cocktail.domain.model.Drink;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
 import java.util.List;
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements ClickCocktailItem
         });
     }
 
-    private void getDrinkList(Resource<List<Cocktail>> resource) {
+    private void getDrinkList(Resource<List<Drink>> resource) {
         if (resource.state == ResourceState.ERROR) {
             Log.i("ERROR", "error \t" + resource.errorMessage);
         } else if (resource.state == ResourceState.SUCCESS) {
@@ -91,8 +90,7 @@ public class MainActivity extends AppCompatActivity implements ClickCocktailItem
     }
 
     @Override
-    public void clickCocktailItem(Cocktail drink) {
-        cocktailViewModel.saveDrink(new CacheDrink(drink.getDrinkId(), drink.getStrDrink(), drink.getStrDrinkThumb()));
+    public void clickCocktailItem(Drink drink) {
         startActivity(new Intent(this, CocktailDetailActivity.class)
                 .putExtra(Constants.EXTRA_ID, drink.getDrinkId()));
     }

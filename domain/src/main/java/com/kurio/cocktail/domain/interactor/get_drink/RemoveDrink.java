@@ -1,35 +1,32 @@
-package com.kurio.cocktail.domain.interactor.get_alcoholic_drink;
+package com.kurio.cocktail.domain.interactor.get_drink;
 
 import com.kurio.cocktail.domain.executor.PostExecutionThread;
 import com.kurio.cocktail.domain.interactor.CompletableUseCase;
-import com.kurio.cocktail.domain.model.CacheDrink;
-import com.kurio.cocktail.domain.model.Cocktail;
 import com.kurio.cocktail.domain.repository.DrinkRepository;
 
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
 
-public class SaveFavouriteDrink extends CompletableUseCase<SaveFavouriteDrink.Params> {
+public class RemoveDrink extends CompletableUseCase< RemoveDrink.Params> {
     private final DrinkRepository drinkRepository;
 
     @Inject
-    public SaveFavouriteDrink(PostExecutionThread postExecutionThread, DrinkRepository drinkRepository) {
+    RemoveDrink(DrinkRepository drinkRepository, PostExecutionThread postExecutionThread) {
         super(postExecutionThread);
         this.drinkRepository = drinkRepository;
     }
 
     @Override
     protected Completable buildUseCaseObservable(Params params) {
-        return this.drinkRepository.saveDrink(params.drink);
+        return drinkRepository.deleteDrinkDetail(params.id);
     }
 
-
     public class Params {
-        public CacheDrink drink;
+        String id;
 
-        public Params(CacheDrink drink) {
-            this.drink = drink;
+        public Params(String id) {
+            this.id = id;
         }
     }
 }
