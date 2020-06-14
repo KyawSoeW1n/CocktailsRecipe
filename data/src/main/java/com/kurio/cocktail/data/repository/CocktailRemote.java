@@ -11,9 +11,9 @@ import io.reactivex.Single;
 public interface CocktailRemote {
     Single<List<CocktailEntity>> getAlcoholicDrinks(String route);
 
-    Single<CocktailDetailEntity> getDrinkDetail(String id);
+    Single<List<CocktailDetailEntity>> getDrinkDetail(String id);
 
-    Single<IngredientDetailEntity> getIngredientDetail(String name);
+    Single<List<IngredientDetailEntity>> getIngredientDetail(String name);
 
 
 }

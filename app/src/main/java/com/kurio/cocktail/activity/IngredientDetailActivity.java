@@ -18,6 +18,8 @@ import com.kurio.cocktail.data.presentation.state.ResourceState;
 import com.kurio.cocktail.domain.model.IngredientDetail;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
@@ -63,7 +65,7 @@ public class IngredientDetailActivity extends BaseActivity {
         ingredientDetailViewModel.getIngredientDetailLiveData().observe(this, this::getIngredientDetail);
     }
 
-    private void getIngredientDetail(Resource<IngredientDetail> ingredientDetailResource) {
+    private void getIngredientDetail(Resource<List<IngredientDetail>> ingredientDetailResource) {
         if (ingredientDetailResource.state == ResourceState.ERROR) {
             Log.i("ERROR", "error \t" + ingredientDetailResource.errorMessage);
         } else if (ingredientDetailResource.state == ResourceState.SUCCESS) {
@@ -76,24 +78,24 @@ public class IngredientDetailActivity extends BaseActivity {
         }
     }
 
-    private void bindData(IngredientDetail ingredientDetail) {
-        if (ingredientDetail.getStrAlcohol() != null && !ingredientDetail.getStrAlcohol().isEmpty())
-            tvAlcohol.setText(ingredientDetail.getStrAlcohol());
+    private void bindData(List<IngredientDetail> ingredientDetail) {
+        if (ingredientDetail.get(0).getStrAlcohol() != null && !ingredientDetail.get(0).getStrAlcohol().isEmpty())
+            tvAlcohol.setText(ingredientDetail.get(0).getStrAlcohol());
         else
             tvAlcohol.setVisibility(View.GONE);
 
-        if (ingredientDetail.getStrDescription() != null && !ingredientDetail.getStrDescription().isEmpty())
-            tvDescription.setText(ingredientDetail.getStrDescription());
+        if (ingredientDetail.get(0).getStrDescription() != null && !ingredientDetail.get(0).getStrDescription().isEmpty())
+            tvDescription.setText(ingredientDetail.get(0).getStrDescription());
         else
             tvDescription.setVisibility(View.GONE);
-        if (ingredientDetail.getStrType() != null && !ingredientDetail.getStrType().isEmpty())
-            tvType.setText(ingredientDetail.getStrType());
+        if (ingredientDetail.get(0).getStrType() != null && !ingredientDetail.get(0).getStrType().isEmpty())
+            tvType.setText(ingredientDetail.get(0).getStrType());
         else
             tvType.setVisibility(View.GONE);
 
-        tvToolbarTitle.setText(ingredientDetail.getStrIngredient());
+        tvToolbarTitle.setText(ingredientDetail.get(0).getStrIngredient());
         Glide.with(this)
-                .load(Constants.IMAGE_PATH + ingredientDetail.getStrIngredient() + Constants.PHOTO_EXTENSION)
+                .load(Constants.IMAGE_PATH + ingredientDetail.get(0).getStrIngredient() + Constants.PHOTO_EXTENSION)
                 .into(imgIngredient);
     }
 

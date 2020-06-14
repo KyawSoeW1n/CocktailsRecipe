@@ -4,7 +4,7 @@ public class CocktailDetailEntity {
     private String strDrink;
     private String strDrinkThumb;
     private String drinkId;
-    private String getStrInstructions;
+    private String strInstructions;
     private String strIngredient1;
     private String strIngredient2;
     private String strIngredient3;
@@ -28,7 +28,7 @@ public class CocktailDetailEntity {
         this.strDrink = strDrink;
         this.strDrinkThumb = strDrinkThumb;
         this.drinkId = drinkId;
-        this.getStrInstructions = getStrInstructions;
+        this.strInstructions = getStrInstructions;
         this.strIngredient1 = strIngredient1;
         this.strIngredient2 = strIngredient2;
         this.strIngredient3 = strIngredient3;
@@ -62,7 +62,7 @@ public class CocktailDetailEntity {
     }
 
     public String getGetStrInstructions() {
-        return getStrInstructions;
+        return strInstructions;
     }
 
     public String getStrIngredient1() {

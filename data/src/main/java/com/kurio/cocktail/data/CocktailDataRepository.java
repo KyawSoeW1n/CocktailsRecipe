@@ -48,20 +48,29 @@ public class CocktailDataRepository implements CocktailRepository {
     }
 
     @Override
-    public Single<CocktailDetail> getDrinkDetail(String id) {
-        return drinkListDataStoreFactory.getRemoteDataStore().getDrinkDetail(id).map(new Function<CocktailDetailEntity, CocktailDetail>() {
-            @Override
-            public CocktailDetail apply(CocktailDetailEntity cocktailDetailEntity) throws Exception {
-                return cocktailDetailMapper.mapFromEntity(cocktailDetailEntity);
-            }
-        });
+    public Single<List<CocktailDetail>> getDrinkDetail(String id) {
+        return drinkListDataStoreFactory.getRemoteDataStore().getDrinkDetail(id)
+                .map(new Function<List<CocktailDetailEntity>, List<CocktailDetail>>() {
+                    @Override
+                    public List<CocktailDetail> apply(List<CocktailDetailEntity> cocktailDetailEntity) throws Exception {
+                        return cocktailDetailMapper.mapFromEntity(cocktailDetailEntity);
+                    }
+                });
+//        return drinkListDataStoreFactory.getRemoteDataStore().getDrinkDetail(id)
+//                .map(new Function<List<CocktailDetailEntity>, List<CocktailDetail>>() {
+//            @Override
+//            public List<CocktailDetail> apply(List<CocktailDetailEntity> cocktailDetailEntity) throws Exception {
+//                return cocktailDetailMapper.mapFromEntity(cocktailDetailEntity);
+//            }
+//        });
     }
 
     @Override
-    public Single<IngredientDetail> getIngredientDetail(String name) {
-        return drinkListDataStoreFactory.getRemoteDataStore().getIngredientDetail(name).map(new Function<IngredientDetailEntity, IngredientDetail>() {
+    public Single<List<IngredientDetail>> getIngredientDetail(String name) {
+        return drinkListDataStoreFactory.getRemoteDataStore().getIngredientDetail(name)
+                .map(new Function<List<IngredientDetailEntity>, List<IngredientDetail>>() {
             @Override
-            public IngredientDetail apply(IngredientDetailEntity ingredientDetailEntity) throws Exception {
+            public List<IngredientDetail> apply(List<IngredientDetailEntity> ingredientDetailEntity) throws Exception {
                 return ingredientDetailMapper.mapFromEntity(ingredientDetailEntity);
             }
         });

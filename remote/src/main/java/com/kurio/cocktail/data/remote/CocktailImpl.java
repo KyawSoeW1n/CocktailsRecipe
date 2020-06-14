@@ -75,7 +75,7 @@ public class CocktailImpl implements CocktailRemote {
     }
 
     @Override
-    public Single<CocktailDetailEntity> getDrinkDetail(String id) {
+    public Single<List<CocktailDetailEntity>> getDrinkDetail(String id) {
         return drinkService.getDrinkDetail(id)
                 .onErrorResumeNext(new Function<Throwable, SingleSource<? extends DrinkResponse>>() {
                     @Override
@@ -100,16 +100,16 @@ public class CocktailImpl implements CocktailRemote {
                         }
                     }
                 })
-                .map(new Function<DrinkResponse, CocktailDetailEntity>() {
+                .map(new Function<DrinkResponse, List<CocktailDetailEntity>>() {
                     @Override
-                    public CocktailDetailEntity apply(DrinkResponse drinkResponse) {
+                    public List<CocktailDetailEntity> apply(DrinkResponse drinkResponse) {
                         return drinkDetailResponseMapper.mapFromResponse(drinkResponse);
                     }
                 });
     }
 
     @Override
-    public Single<IngredientDetailEntity> getIngredientDetail(String name) {
+    public Single<List<IngredientDetailEntity>> getIngredientDetail(String name) {
         return drinkService.getIngredientByName(name)
                 .onErrorResumeNext(new Function<Throwable, SingleSource<? extends IngredientResponse>>() {
                     @Override
@@ -134,9 +134,9 @@ public class CocktailImpl implements CocktailRemote {
                         }
                     }
                 })
-                .map(new Function<IngredientResponse, IngredientDetailEntity>() {
+                .map(new Function<IngredientResponse, List<IngredientDetailEntity>>() {
                     @Override
-                    public IngredientDetailEntity apply(IngredientResponse ingredientResponse) throws Exception {
+                    public List<IngredientDetailEntity> apply(IngredientResponse ingredientResponse) throws Exception {
                         return ingredientDetailResponseMapper.mapFromResponse(ingredientResponse);
                     }
                 });
