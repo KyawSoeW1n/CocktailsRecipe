@@ -4,14 +4,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kurio.cocktail.data.model.CocktailDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
-import com.kurio.cocktail.data.model.IngredientDetailEntity;
 import com.kurio.cocktail.data.remote.mapper.CocktailDetailResponseMapper;
 import com.kurio.cocktail.data.remote.mapper.CocktailListResponseMapper;
 import com.kurio.cocktail.data.remote.mapper.IngredientDetailResponseMapper;
 import com.kurio.cocktail.data.remote.response.DrinkResponse;
-import com.kurio.cocktail.data.remote.response.IngredientResponse;
 import com.kurio.cocktail.data.remote.service.CocktailService;
-import com.kurio.cocktail.data.repository.CocktailRemote;
+import com.kurio.cocktail.data.repository.DrinkRemote;
 
 import java.util.List;
 
@@ -23,21 +21,18 @@ import io.reactivex.functions.Function;
 import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 
-public class CocktailImpl implements CocktailRemote {
+public class DrinkImpl implements DrinkRemote {
     private CocktailListResponseMapper drinkResponseMapper;
     private CocktailDetailResponseMapper drinkDetailResponseMapper;
     private CocktailService drinkService;
-    private IngredientDetailResponseMapper ingredientDetailResponseMapper;
 
     @Inject
-    CocktailImpl(CocktailService drinkService,
-                 CocktailDetailResponseMapper drinkDetailResponseMapper,
-                 IngredientDetailResponseMapper ingredientDetailResponseMapper,
-                 CocktailListResponseMapper drinkResponseMapper) {
+    DrinkImpl(CocktailService drinkService,
+              CocktailDetailResponseMapper drinkDetailResponseMapper,
+              CocktailListResponseMapper drinkResponseMapper) {
         this.drinkResponseMapper = drinkResponseMapper;
         this.drinkDetailResponseMapper = drinkDetailResponseMapper;
         this.drinkService = drinkService;
-        this.ingredientDetailResponseMapper = ingredientDetailResponseMapper;
     }
 
     @Override
@@ -106,40 +101,5 @@ public class CocktailImpl implements CocktailRemote {
                         return drinkDetailResponseMapper.mapFromResponse(drinkResponse);
                     }
                 });
-    }
-
-    @Override
-    public Single<List<IngredientDetailEntity>> getIngredientDetail(String name) {
-        return drinkService.getIngredientByName(name)
-                .onErrorResumeNext(new Function<Throwable, SingleSource<? extends IngredientResponse>>() {
-                    @Override
-                    public SingleSource<? extends IngredientResponse> apply(Throwable throwable) throws Exception {
-                        HttpException exception = (HttpException) throwable;
-                        ResponseBody responseBody = exception.response().errorBody();
-                        if (responseBody != null) {
-                            String errorBody = responseBody.string();
-
-                            JsonParser jsonParser = new JsonParser();
-                            JsonObject jsonObject = jsonParser.parse(errorBody).getAsJsonObject();
-
-                            if (jsonObject.get("ErrorID").getAsInt() == 401) {
-                                Exception eID = new Exception(jsonObject.get("ErrorID").getAsString());
-                                Exception e = new Exception(jsonObject.get("ErrorMsg").getAsString(), eID);
-                                return Single.error(e);
-                            }
-
-                            return Single.error(new Exception(jsonObject.get("ErrorMsg").getAsString()));
-                        } else {
-                            return Single.error(throwable);
-                        }
-                    }
-                })
-                .map(new Function<IngredientResponse, List<IngredientDetailEntity>>() {
-                    @Override
-                    public List<IngredientDetailEntity> apply(IngredientResponse ingredientResponse) throws Exception {
-                        return ingredientDetailResponseMapper.mapFromResponse(ingredientResponse);
-                    }
-                });
-
     }
 }

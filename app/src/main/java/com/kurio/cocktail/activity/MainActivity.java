@@ -20,6 +20,7 @@ import com.kurio.cocktail.callback.ClickCocktailItem;
 import com.kurio.cocktail.data.presentation.CocktailViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;
+import com.kurio.cocktail.domain.model.CacheDrink;
 import com.kurio.cocktail.domain.model.Cocktail;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
@@ -63,9 +64,9 @@ public class MainActivity extends AppCompatActivity implements ClickCocktailItem
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 drinkListAdapter.clearData();
                 if (position == 1) {
-                    cocktailViewModel.getDrink("Non_Alcoholic");
+                    cocktailViewModel.fetchDrink("Non_Alcoholic");
                 } else {
-                    cocktailViewModel.getDrink("Alcoholic");
+                    cocktailViewModel.fetchDrink("Alcoholic");
                 }
             }
 
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements ClickCocktailItem
 
     @Override
     public void clickCocktailItem(Cocktail drink) {
+        cocktailViewModel.saveDrink(new CacheDrink(drink.getDrinkId(), drink.getStrDrink(), drink.getStrDrinkThumb()));
         startActivity(new Intent(this, CocktailDetailActivity.class)
                 .putExtra(Constants.EXTRA_ID, drink.getDrinkId()));
     }

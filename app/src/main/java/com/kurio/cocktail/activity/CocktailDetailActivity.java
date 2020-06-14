@@ -47,7 +47,7 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
         super.onCreate(savedInstanceState);
         AndroidInjection.inject(this);
         cocktailDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(CocktailDetailViewModel.class);
-        cocktailDetailViewModel.getDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
+        cocktailDetailViewModel.fetchDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
         cocktailDetailViewModel.getDrinkDetailLiveData().observe(this, this::getDrinkDetail);
     }
 

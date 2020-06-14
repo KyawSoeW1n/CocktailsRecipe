@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kurio.cocktail.data.presentation.state.Resource;
-import com.kurio.cocktail.domain.interactor.getalcoholicdrink.GetDrinkDetail;
+import com.kurio.cocktail.domain.interactor.get_alcoholic_drink.FetchDrinkDetail;
 import com.kurio.cocktail.domain.model.CocktailDetail;
 
 import java.util.List;
@@ -17,21 +17,21 @@ import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
 public class CocktailDetailViewModel extends ViewModel {
-    private GetDrinkDetail getDrinkDetail;
+    private FetchDrinkDetail fetchDrinkDetail;
     private MutableLiveData<Resource<List<CocktailDetail>>> drinkDetailLiveData = new MutableLiveData<>();
     private Resource<List<CocktailDetail>> cocktailDetailResource = new Resource<>();
 
     @Inject
-    CocktailDetailViewModel(GetDrinkDetail getDrinkDetail) {
-        this.getDrinkDetail = getDrinkDetail;
+    CocktailDetailViewModel(FetchDrinkDetail fetchDrinkDetail) {
+        this.fetchDrinkDetail = fetchDrinkDetail;
     }
 
     public MutableLiveData<Resource<List<CocktailDetail>>> getDrinkDetailLiveData() {
         return drinkDetailLiveData;
     }
 
-    public void getDrinkDetail(String id) {
-        getDrinkDetail.execute(new GetDrinkDetailSubscriber(), getDrinkDetail.new Params(id));
+    public void fetchDrinkDetail(String id) {
+        fetchDrinkDetail.execute(new GetDrinkDetailSubscriber(), fetchDrinkDetail.new Params(id));
     }
 
     class GetDrinkDetailSubscriber implements SingleObserver<List<CocktailDetail>> {
