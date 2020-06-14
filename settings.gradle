@@ -1,2 +1,3 @@
-include ':app', ':presentation', ':remote', ':data', ':domain'
+include ':app', ':presentation', ':remote', ':data', ':domain' ,':cache'
 rootProject.name='Cocktail'
+include ':mapper'

@@ -9,6 +9,8 @@ import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.domain.interactor.getalcoholicdrink.GetDrinkDetail;
 import com.kurio.cocktail.domain.model.CocktailDetail;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.SingleObserver;
@@ -16,27 +18,23 @@ import io.reactivex.disposables.Disposable;
 
 public class CocktailDetailViewModel extends ViewModel {
     private GetDrinkDetail getDrinkDetail;
-    private MutableLiveData<Resource<CocktailDetail>> drinkDetailLiveData = new MutableLiveData<>();
-    private Resource<CocktailDetail> cocktailDetailResource = new Resource<>();
+    private MutableLiveData<Resource<List<CocktailDetail>>> drinkDetailLiveData = new MutableLiveData<>();
+    private Resource<List<CocktailDetail>> cocktailDetailResource = new Resource<>();
 
     @Inject
     CocktailDetailViewModel(GetDrinkDetail getDrinkDetail) {
         this.getDrinkDetail = getDrinkDetail;
     }
 
-    public MutableLiveData<Resource<CocktailDetail>> getDrinkDetailLiveData() {
+    public MutableLiveData<Resource<List<CocktailDetail>>> getDrinkDetailLiveData() {
         return drinkDetailLiveData;
     }
-
-//    public MutableLiveData<List<String>> getIngredientListLiveData() {
-//        return ingredientListLiveData;
-//    }
 
     public void getDrinkDetail(String id) {
         getDrinkDetail.execute(new GetDrinkDetailSubscriber(), getDrinkDetail.new Params(id));
     }
 
-    class GetDrinkDetailSubscriber implements SingleObserver<CocktailDetail> {
+    class GetDrinkDetailSubscriber implements SingleObserver<List<CocktailDetail>> {
 
         @Override
         public void onSubscribe(Disposable d) {
@@ -45,7 +43,7 @@ public class CocktailDetailViewModel extends ViewModel {
         }
 
         @Override
-        public void onSuccess(CocktailDetail cocktails) {
+        public void onSuccess(List<CocktailDetail> cocktails) {
             Log.i("SUCCESS", "SUCCESS");
             drinkDetailLiveData.postValue(cocktailDetailResource.success(cocktails));
         }

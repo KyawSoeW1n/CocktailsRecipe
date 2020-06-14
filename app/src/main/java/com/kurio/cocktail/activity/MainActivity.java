@@ -85,12 +85,13 @@ public class MainActivity extends AppCompatActivity implements ClickCocktailItem
                 drinkListAdapter.addNewData(resource.data);
             }
         } else if (resource.state == ResourceState.LOADING) {
-            Log.i("Currency Loading", "Loading");
+            Log.i("Drink Loading", "Loading");
         }
     }
 
     @Override
     public void clickCocktailItem(Cocktail drink) {
-        startActivity(new Intent(this, CocktailDetailActivity.class).putExtra(Constants.EXTRA_ID, drink.getDrinkId()));
+        startActivity(new Intent(this, CocktailDetailActivity.class)
+                .putExtra(Constants.EXTRA_ID, drink.getDrinkId()));
     }
 }

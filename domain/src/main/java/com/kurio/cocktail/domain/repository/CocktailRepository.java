@@ -11,7 +11,7 @@ import io.reactivex.Single;
 public interface CocktailRepository {
     Single<List<Cocktail>> getAlcoholicDrinks(String route);
 
-    Single<CocktailDetail> getDrinkDetail(String id);
+    Single<List<CocktailDetail>> getDrinkDetail(String id);
 
-    Single<IngredientDetail> getIngredientDetail(String name);
+    Single<List<IngredientDetail>> getIngredientDetail(String name);
 }

@@ -2,15 +2,16 @@ package com.kurio.cocktail.domain.interactor.getingredient;
 
 import com.kurio.cocktail.domain.executor.PostExecutionThread;
 import com.kurio.cocktail.domain.interactor.SingleUseCase;
-import com.kurio.cocktail.domain.model.CocktailDetail;
 import com.kurio.cocktail.domain.model.IngredientDetail;
 import com.kurio.cocktail.domain.repository.CocktailRepository;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.Single;
 
-public class GetIngredientDetail extends SingleUseCase<IngredientDetail, GetIngredientDetail.Params> {
+public class GetIngredientDetail extends SingleUseCase<List<IngredientDetail>, GetIngredientDetail.Params> {
     private final CocktailRepository alcoholicRepository;
 
     @Inject
@@ -20,7 +21,7 @@ public class GetIngredientDetail extends SingleUseCase<IngredientDetail, GetIngr
     }
 
     @Override
-    protected Single<IngredientDetail> buildUseCaseObservable(Params params) {
+    protected Single<List<IngredientDetail>> buildUseCaseObservable(Params params) {
         return alcoholicRepository.getIngredientDetail(params.name);
     }
 

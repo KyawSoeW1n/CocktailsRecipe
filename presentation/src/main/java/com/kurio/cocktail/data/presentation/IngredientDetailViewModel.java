@@ -10,6 +10,8 @@ import com.kurio.cocktail.domain.interactor.getingredient.GetIngredientDetail;
 import com.kurio.cocktail.domain.model.CocktailDetail;
 import com.kurio.cocktail.domain.model.IngredientDetail;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.SingleObserver;
@@ -17,27 +19,23 @@ import io.reactivex.disposables.Disposable;
 
 public class IngredientDetailViewModel extends ViewModel {
     private GetIngredientDetail getIngredientDetail;
-    private MutableLiveData<Resource<IngredientDetail>> ingredientDetailLiveData = new MutableLiveData<>();
-    private Resource<IngredientDetail> ingredientDetailResource = new Resource<>();
+    private MutableLiveData<Resource<List<IngredientDetail>>> ingredientDetailLiveData = new MutableLiveData<>();
+    private Resource<List<IngredientDetail>> ingredientDetailResource = new Resource<>();
 
     @Inject
     IngredientDetailViewModel(GetIngredientDetail getIngredientDetail) {
         this.getIngredientDetail = getIngredientDetail;
     }
 
-    public MutableLiveData<Resource<IngredientDetail>> getIngredientDetailLiveData() {
+    public MutableLiveData<Resource<List<IngredientDetail>>> getIngredientDetailLiveData() {
         return ingredientDetailLiveData;
     }
-
-//    public MutableLiveData<List<String>> getIngredientListLiveData() {
-//        return ingredientListLiveData;
-//    }
 
     public void getIngredientDetail(String name) {
         getIngredientDetail.execute(new GetIngredientDetailSubscriber(), getIngredientDetail.new Params(name));
     }
 
-    class GetIngredientDetailSubscriber implements SingleObserver<IngredientDetail> {
+    class GetIngredientDetailSubscriber implements SingleObserver<List<IngredientDetail>> {
 
         @Override
         public void onSubscribe(Disposable d) {
@@ -46,7 +44,7 @@ public class IngredientDetailViewModel extends ViewModel {
         }
 
         @Override
-        public void onSuccess(IngredientDetail cocktails) {
+        public void onSuccess(List<IngredientDetail> cocktails) {
             Log.i("SUCCESS", "SUCCESS");
             ingredientDetailLiveData.postValue(ingredientDetailResource.success(cocktails));
         }

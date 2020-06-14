@@ -24,6 +24,7 @@ import com.kurio.cocktail.domain.model.CocktailDetail;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -80,7 +81,7 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
         return toolbar;
     }
 
-    private void getDrinkDetail(Resource<CocktailDetail> resource) {
+    private void getDrinkDetail(Resource<List<CocktailDetail>> resource) {
         if (resource.state == ResourceState.ERROR) {
             Log.i("ERROR", "error \t" + resource.errorMessage);
         } else if (resource.state == ResourceState.SUCCESS) {
@@ -93,26 +94,26 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
         }
     }
 
-    private void bindData(CocktailDetail cocktailDetail) {
+    private void bindData(List<CocktailDetail> cocktailDetail) {
         Glide.with(this)
-                .load(cocktailDetail.getStrDrinkThumb())
+                .load(cocktailDetail.get(0).getStrDrinkThumb())
                 .into(imgCocktail);
 
 
-        if (cocktailDetail.getStrTag() != null && !cocktailDetail.getStrTag().isEmpty()) {
-            tvDrinkTag.setText(cocktailDetail.getStrTag());
+        if (cocktailDetail.get(0).getStrTag() != null && !cocktailDetail.get(0).getStrTag().isEmpty()) {
+            tvDrinkTag.setText(cocktailDetail.get(0).getStrTag());
         } else {
             tvDrinkTag.setVisibility(View.GONE);
         }
-        tvToolbarTitle.setText(cocktailDetail.getStrDrink());
-        tvAlcoholic.setText(cocktailDetail.getStrAlcoholic());
+        tvToolbarTitle.setText(cocktailDetail.get(0).getStrDrink());
+        tvAlcoholic.setText(cocktailDetail.get(0).getStrAlcoholic());
 
-        tvDrinkCategory.setText(cocktailDetail.getStrCategory());
-        tvInstruction.setText(cocktailDetail.getStrInstructions());
+        tvDrinkCategory.setText(cocktailDetail.get(0).getStrCategory());
+        tvInstruction.setText(cocktailDetail.get(0).getStrInstructions());
         addIngredient(cocktailDetail);
     }
 
-    private void addIngredient(CocktailDetail cocktailDetail) {
+    private void addIngredient(List<CocktailDetail> cocktailDetail) {
 
         if (ingredientList == null) {
             ingredientList = new ArrayList<>();
@@ -120,50 +121,50 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
             ingredientList.clear();
         }
 
-        if (cocktailDetail.getStrIngredient1() != null && !cocktailDetail.getStrIngredient1().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient1());
+        if (cocktailDetail.get(0).getStrIngredient1() != null && !cocktailDetail.get(0).getStrIngredient1().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient1());
         }
-        if (cocktailDetail.getStrIngredient2() != null && !cocktailDetail.getStrIngredient2().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient2());
+        if (cocktailDetail.get(0).getStrIngredient2() != null && !cocktailDetail.get(0).getStrIngredient2().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient2());
         }
-        if (cocktailDetail.getStrIngredient3() != null && !cocktailDetail.getStrIngredient3().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient3());
+        if (cocktailDetail.get(0).getStrIngredient3() != null && !cocktailDetail.get(0).getStrIngredient3().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient3());
         }
-        if (cocktailDetail.getStrIngredient4() != null && !cocktailDetail.getStrIngredient4().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient4());
+        if (cocktailDetail.get(0).getStrIngredient4() != null && !cocktailDetail.get(0).getStrIngredient4().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient4());
         }
-        if (cocktailDetail.getStrIngredient5() != null && !cocktailDetail.getStrIngredient5().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient5());
+        if (cocktailDetail.get(0).getStrIngredient5() != null && !cocktailDetail.get(0).getStrIngredient5().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient5());
         }
-        if (cocktailDetail.getStrIngredient6() != null && !cocktailDetail.getStrIngredient6().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient6());
+        if (cocktailDetail.get(0).getStrIngredient6() != null && !cocktailDetail.get(0).getStrIngredient6().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient6());
         }
-        if (cocktailDetail.getStrIngredient7() != null && !cocktailDetail.getStrIngredient7().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient7());
+        if (cocktailDetail.get(0).getStrIngredient7() != null && !cocktailDetail.get(0).getStrIngredient7().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient7());
         }
-        if (cocktailDetail.getStrIngredient8() != null && !cocktailDetail.getStrIngredient8().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient8());
+        if (cocktailDetail.get(0).getStrIngredient8() != null && !cocktailDetail.get(0).getStrIngredient8().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient8());
         }
-        if (cocktailDetail.getStrIngredient9() != null && !cocktailDetail.getStrIngredient9().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient9());
+        if (cocktailDetail.get(0).getStrIngredient9() != null && !cocktailDetail.get(0).getStrIngredient9().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient9());
         }
-        if (cocktailDetail.getStrIngredient10() != null && !cocktailDetail.getStrIngredient10().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient10());
+        if (cocktailDetail.get(0).getStrIngredient10() != null && !cocktailDetail.get(0).getStrIngredient10().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient10());
         }
-        if (cocktailDetail.getStrIngredient11() != null && !cocktailDetail.getStrIngredient11().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient11());
+        if (cocktailDetail.get(0).getStrIngredient11() != null && !cocktailDetail.get(0).getStrIngredient11().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient11());
         }
-        if (cocktailDetail.getStrIngredient12() != null && !cocktailDetail.getStrIngredient12().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient12());
+        if (cocktailDetail.get(0).getStrIngredient12() != null && !cocktailDetail.get(0).getStrIngredient12().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient12());
         }
-        if (cocktailDetail.getStrIngredient13() != null && !cocktailDetail.getStrIngredient13().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient13());
+        if (cocktailDetail.get(0).getStrIngredient13() != null && !cocktailDetail.get(0).getStrIngredient13().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient13());
         }
-        if (cocktailDetail.getStrIngredient14() != null && !cocktailDetail.getStrIngredient14().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient14());
+        if (cocktailDetail.get(0).getStrIngredient14() != null && !cocktailDetail.get(0).getStrIngredient14().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient14());
         }
-        if (cocktailDetail.getStrIngredient15() != null && !cocktailDetail.getStrIngredient15().isEmpty()) {
-            ingredientList.add(cocktailDetail.getStrIngredient15());
+        if (cocktailDetail.get(0).getStrIngredient15() != null && !cocktailDetail.get(0).getStrIngredient15().isEmpty()) {
+            ingredientList.add(cocktailDetail.get(0).getStrIngredient15());
         }
         drinkIngredientListAdapter.addNewData(ingredientList);
     }

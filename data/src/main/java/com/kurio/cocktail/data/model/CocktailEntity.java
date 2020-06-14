@@ -3,13 +3,13 @@ package com.kurio.cocktail.data.model;
 public class CocktailEntity {
     private String strDrink;
     private String strDrinkThumb;
-    private String drinkId;
+    private String idDrink;
     private String getStrInstructions;
 
     public CocktailEntity(String strDrink, String strDrinkThumb, String drinkId, String getStrInstructions) {
         this.strDrink = strDrink;
         this.strDrinkThumb = strDrinkThumb;
-        this.drinkId = drinkId;
+        this.idDrink = drinkId;
         this.getStrInstructions = getStrInstructions;
     }
 
@@ -22,7 +22,7 @@ public class CocktailEntity {
     }
 
     public String getDrinkId() {
-        return drinkId;
+        return idDrink;
     }
 
     public String getGetStrInstructions() {
