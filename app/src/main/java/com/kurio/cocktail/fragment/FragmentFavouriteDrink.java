@@ -9,10 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.kurio.cocktail.CocktailApplication;
 import com.kurio.cocktail.R;
 
 public class FragmentFavouriteDrink extends Fragment {
     View v;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getActivity() != null)
+            ((CocktailApplication) getActivity().getApplication()).supportFragmentInjector().inject(this);
+    }
 
     @Nullable
     @Override

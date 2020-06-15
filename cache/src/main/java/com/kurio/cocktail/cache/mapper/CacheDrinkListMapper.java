@@ -17,11 +17,11 @@ public class CacheDrinkListMapper implements CacheMapper<List<CacheDrink>, List<
 
     @Override
     public List<CacheDrinkEntity> mapFromCached(List<CacheDrink> cacheDrink) {
-        return Arrays.asList(MapperUtils.transform(cacheDrink, CacheDrinkEntity.class));
+        return Arrays.asList(MapperUtils.transform(cacheDrink, CacheDrinkEntity[].class));
     }
 
     @Override
     public List<CacheDrink> mapToCached(List<CacheDrinkEntity> cacheDrinkEntity) {
-        return Arrays.asList(MapperUtils.transform(cacheDrinkEntity, CacheDrink.class));
+        return Arrays.asList(MapperUtils.transform(cacheDrinkEntity, CacheDrink[].class));
     }
 }

@@ -206,7 +206,6 @@ public class DrinkDetailActivity extends BaseActivity implements ClickIngredient
 
     @Override
     public void clickIngredientItem(String ingredientName) {
-        Log.e("GGWP", "CLICK" + ingredientName);
         startActivity(new Intent(DrinkDetailActivity.this, IngredientDetailActivity.class)
                 .putExtra(Constants.EXTRA_NAME, ingredientName));
     }

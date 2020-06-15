@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kurio.cocktail.Constants;
 import com.kurio.cocktail.R;
 import com.kurio.cocktail.adapters.DrinkListAdapter;
-import com.kurio.cocktail.callback.ClickCocktailItem;
+import com.kurio.cocktail.callback.ClickDrinkItem;
 import com.kurio.cocktail.data.presentation.CocktailViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;
@@ -29,15 +29,15 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
-public class MainActivity extends AppCompatActivity implements ClickCocktailItem {
+public class MainActivity extends AppCompatActivity implements ClickDrinkItem {
     @Inject
     ViewModelFactory viewModelFactory;
     DrinkListAdapter drinkListAdapter;
     CocktailViewModel cocktailViewModel;
     RecyclerView recycler_view_rates;
     RecyclerView.LayoutManager layoutManager;
-    Spinner cocktailTypeSpinner;
     String[] cocktailType = {"Non Alcoholic", "Alcoholic"};
+    Spinner cocktailTypeSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,6 +16,8 @@ public interface DrinkRepository {
 
     Single<CacheDrink> getDrinkDetail(String id);
 
+    Single<List<CacheDrink>> getFavouriteDrink();
+
     Completable deleteDrinkDetail(String id);
 
     Completable saveDrink(CacheDrink drink);

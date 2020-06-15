@@ -1,11 +1,12 @@
 package com.kurio.cocktail.data;
 
 import com.kurio.cocktail.data.mapper.CacheDrinkDataMapper;
-import com.kurio.cocktail.data.mapper.CocktailDetailMapper;
+import com.kurio.cocktail.data.mapper.CacheFavouriteDrinkListDataMapper;
 import com.kurio.cocktail.data.mapper.CocktailListMapper;
+import com.kurio.cocktail.data.mapper.DrinkDetailMapper;
 import com.kurio.cocktail.data.model.CacheDrinkEntity;
-import com.kurio.cocktail.data.model.DrinkDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
+import com.kurio.cocktail.data.model.DrinkDetailEntity;
 import com.kurio.cocktail.data.store.DrinkDataStoreFactory;
 import com.kurio.cocktail.domain.model.CacheDrink;
 import com.kurio.cocktail.domain.model.Drink;
@@ -22,19 +23,22 @@ import io.reactivex.functions.Function;
 
 public class DrinkDataRepository implements DrinkRepository {
     private CocktailListMapper cocktailListMapper;
-    private CocktailDetailMapper cocktailDetailMapper;
+    private DrinkDetailMapper drinkDetailMapper;
     private DrinkDataStoreFactory drinkDataStoreFactory;
     private CacheDrinkDataMapper cacheDrinkDataMapper;
+    private CacheFavouriteDrinkListDataMapper cacheFavouriteDrinkListDataMapper;
 
     @Inject
     public DrinkDataRepository(CocktailListMapper cocktailListMapper,
-                               CocktailDetailMapper cocktailDetailMapper,
+                               DrinkDetailMapper drinkDetailMapper,
                                DrinkDataStoreFactory drinkDataStoreFactory,
-                               CacheDrinkDataMapper cacheDrinkDataMapper) {
+                               CacheDrinkDataMapper cacheDrinkDataMapper,
+                               CacheFavouriteDrinkListDataMapper cacheFavouriteDrinkListDataMapper) {
         this.cocktailListMapper = cocktailListMapper;
-        this.cocktailDetailMapper = cocktailDetailMapper;
+        this.drinkDetailMapper = drinkDetailMapper;
         this.drinkDataStoreFactory = drinkDataStoreFactory;
         this.cacheDrinkDataMapper = cacheDrinkDataMapper;
+        this.cacheFavouriteDrinkListDataMapper = cacheFavouriteDrinkListDataMapper;
     }
 
     @Override
@@ -53,7 +57,7 @@ public class DrinkDataRepository implements DrinkRepository {
                 .map(new Function<List<DrinkDetailEntity>, List<DrinkDetail>>() {
                     @Override
                     public List<DrinkDetail> apply(List<DrinkDetailEntity> cocktailDetailEntity) throws Exception {
-                        return cocktailDetailMapper.mapFromEntity(cocktailDetailEntity);
+                        return drinkDetailMapper.mapFromEntity(cocktailDetailEntity);
                     }
                 });
     }
@@ -65,6 +69,17 @@ public class DrinkDataRepository implements DrinkRepository {
                     @Override
                     public CacheDrink apply(CacheDrinkEntity cacheDrinkEntity) throws Exception {
                         return cacheDrinkDataMapper.mapFromEntity(cacheDrinkEntity);
+                    }
+                });
+    }
+
+    @Override
+    public Single<List<CacheDrink>> getFavouriteDrink() {
+        return drinkDataStoreFactory.getDrinkCacheDataStore().getCacheDrinkList()
+                .map(new Function<List<CacheDrinkEntity>, List<CacheDrink>>() {
+                    @Override
+                    public List<CacheDrink> apply(List<CacheDrinkEntity> cacheDrinkEntities) throws Exception {
+                        return cacheFavouriteDrinkListDataMapper.mapFromEntity(cacheDrinkEntities);
                     }
                 });
     }

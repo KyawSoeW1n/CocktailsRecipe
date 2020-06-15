@@ -30,7 +30,6 @@ public class DrinkDetailViewModel extends ViewModel {
     private MutableLiveData<Resource<CacheDrink>> cacheDrinkLiveData = new MutableLiveData<>();
     private Resource<List<DrinkDetail>> drinkDetailResource = new Resource<>();
     private Resource<CacheDrink> cacheDrinkResource = new Resource<>();
-    private String drinkId;
 
     @Inject
     DrinkDetailViewModel(FetchDrinkDetail fetchDrinkDetail,
@@ -52,8 +51,7 @@ public class DrinkDetailViewModel extends ViewModel {
     }
 
     public void fetchDrinkDetail(String id) {
-        this.drinkId = id;
-        fetchDrinkDetail.execute(new FetchDrinkDetailSubscriber(), fetchDrinkDetail.new Params(drinkId));
+        fetchDrinkDetail.execute(new FetchDrinkDetailSubscriber(), fetchDrinkDetail.new Params(id));
     }
 
     public void saveDrink(CacheDrink drink) {

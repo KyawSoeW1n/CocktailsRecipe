@@ -9,10 +9,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class CocktailDetailMapper implements EntityMapper<List<DrinkDetailEntity>, List<DrinkDetail>> {
+public class DrinkDetailMapper implements EntityMapper<List<DrinkDetailEntity>, List<DrinkDetail>> {
 
     @Inject
-    public CocktailDetailMapper() {
+    public DrinkDetailMapper() {
     }
 
     @Override

@@ -3,10 +3,23 @@
     <string name="sample">Sample</string>
     <string name="cocktail_detail">Cocktail Detail</string>
     <string name="ingredients">Ingredients</string>
-    <string name="cateogry">Category</string>
+    <string name="category">Category</string>
     <string name="description">Description</string>
     <string name="tag">Tag</string>
     <string name="cocktail_title">Cocktail Title</string>
     <string name="type">Type</string>
     <string name="instruction">Instruction</string>
+    <string name="home">Home</string>
+    <string name="favourite_drink">Favourite Drink</string>
+    <string name="favourite_ingredient">Favourite Ingredient</string>
+    <string name="about">About</string>
+    <string name="dev_name">Fuck You</string>
+    <string name="alcoholic">Alcoholic</string>
+    <string name="non_alcoholic">NonAlcoholic</string>
+
+    <string-array name="drinkList">
+        <item>Alcoholic</item>
+        <item>Non Alcoholic</item>
+    </string-array>
+
 </resources>

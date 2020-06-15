@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_home"
+            android:title="@string/home" />
+
+        <item
+            android:id="@+id/menu_drink"
+            android:title="@string/favourite_drink" />
+
+        <item
+            android:id="@+id/menu_ingredient"
+            android:title="@string/favourite_ingredient" />
+        <item
+            android:id="@+id/menu_about"
+            android:title="@string/about" />
+
+    </group>
+
+</menu>

@@ -12,9 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.kurio.cocktail.CocktailApplication;
 import com.kurio.cocktail.R;
 
-public class FragmentFavouriteIngredient extends Fragment {
-    View v;
-
+public class FragmentAbout extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,13 +24,7 @@ public class FragmentFavouriteIngredient extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_drink, container, false);
+        View v = inflater.inflate(R.layout.fragment_about, container, false);
         return v;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
     }
 }

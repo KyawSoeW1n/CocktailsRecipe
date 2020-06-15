@@ -8,17 +8,17 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.kurio.cocktail.R;
-import com.kurio.cocktail.callback.ClickCocktailItem;
+import com.kurio.cocktail.callback.ClickDrinkItem;
 import com.kurio.cocktail.domain.model.Drink;
 
 public class DrinkListViewHolder extends BaseViewHolder<Drink> {
-    private ClickCocktailItem clickCocktailItem;
+    private ClickDrinkItem clickDrinkITem;
     private TextView tvCocktailName;
     private ImageView imgCocktail;
 
-    public DrinkListViewHolder(@NonNull View itemView, ClickCocktailItem clickCocktailItem) {
+    public DrinkListViewHolder(@NonNull View itemView, ClickDrinkItem clickDrinkITem) {
         super(itemView);
-        this.clickCocktailItem = clickCocktailItem;
+        this.clickDrinkITem = clickDrinkITem;
         tvCocktailName = itemView.findViewById(R.id.tv_cocktail_name);
         imgCocktail = itemView.findViewById(R.id.img_cocktail);
     }
@@ -36,8 +36,8 @@ public class DrinkListViewHolder extends BaseViewHolder<Drink> {
 
     @Override
     public void onClick(View v) {
-        if (clickCocktailItem != null)
-            clickCocktailItem.clickCocktailItem(mData);
+        if (clickDrinkITem != null)
+            clickDrinkITem.clickCocktailItem(mData);
     }
 
 }
