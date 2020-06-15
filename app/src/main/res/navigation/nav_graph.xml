@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_fragment_dashboard">
+
+    <fragment
+        android:id="@+id/nav_fragment_dashboard"
+        android:name="com.kurio.cocktail.fragment.FragmentDashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/nav_fragment_drink"
+        android:name="com.kurio.cocktail.fragment.FragmentFavouriteDrink"
+        tools:layout="@layout/fragment_drink" />
+
+    <fragment
+        android:id="@+id/nav_fragment_ingredient"
+        android:name="com.kurio.cocktail.fragment.FragmentFavouriteIngredient"
+        tools:layout="@layout/fragment_drink" />
+</navigation>

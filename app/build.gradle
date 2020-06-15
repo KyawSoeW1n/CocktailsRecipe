@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'androidx.navigation.safeargs'
 android {
 
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -47,6 +47,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-ui:2.1.0'
     def mobileUiDependencies = rootProject.ext.mobileUiDependencies
     def mobileUiTestDependencies = rootProject.ext.mobileUiTestDependencies
 
@@ -88,6 +90,8 @@ dependencies {
     annotationProcessor mobileUiDependencies.archCompiler
     annotationProcessor mobileUiDependencies.daggerCompiler
     annotationProcessor mobileUiDependencies.daggerProcessor
+    annotationProcessor mobileUiDependencies.navigationfragment
+    annotationProcessor mobileUiDependencies.navigationUI
 
     // Instrumentation test dependencies
     androidTestImplementation mobileUiTestDependencies.junit

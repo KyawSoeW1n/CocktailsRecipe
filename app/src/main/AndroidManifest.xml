@@ -22,7 +22,7 @@
         <activity
             android:name=".activity.DrinkDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.HostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
