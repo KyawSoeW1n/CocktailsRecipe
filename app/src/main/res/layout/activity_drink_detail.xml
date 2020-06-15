@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CocktailDetailActivity">
+    tools:context=".activity.DrinkDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -51,18 +51,18 @@
 
                 <ImageButton
                     android:id="@+id/imb_favourite"
-                    android:background="@android:color/transparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginEnd="@dimen/margin_medium"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_favorite_border" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_cocktail_detail" />
+    <include layout="@layout/content_drink_detail" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

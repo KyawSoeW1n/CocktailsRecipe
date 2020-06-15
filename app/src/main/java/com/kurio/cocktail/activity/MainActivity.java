@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements ClickCocktailItem
 
     @Override
     public void clickCocktailItem(Drink drink) {
-        startActivity(new Intent(this, CocktailDetailActivity.class)
+        startActivity(new Intent(this, DrinkDetailActivity.class)
                 .putExtra(Constants.EXTRA_ID, drink.getDrinkId()));
     }
 }

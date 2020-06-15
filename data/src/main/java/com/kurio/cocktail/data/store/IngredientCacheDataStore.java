@@ -1,5 +1,6 @@
 package com.kurio.cocktail.data.store;
 
+import com.kurio.cocktail.data.model.CacheIngredientEntity;
 import com.kurio.cocktail.data.model.IngredientDetailEntity;
 import com.kurio.cocktail.data.repository.IngredientCache;
 import com.kurio.cocktail.data.repository.IngredientDataStore;
@@ -42,7 +43,13 @@ public class IngredientCacheDataStore implements IngredientDataStore {
     }
 
     @Override
-    public Completable saveIngredient(IngredientDetailEntity ingredientDetailEntity) {
-        return ingredientCache.saveIngredient(ingredientDetailEntity);
+    public Single<CacheIngredientEntity> getCacheIngredient(String id) {
+        return ingredientCache.getIngredient(id);
+
+    }
+
+    @Override
+    public Completable saveIngredient(CacheIngredientEntity cacheIngredientEntity) {
+        return ingredientCache.saveIngredient(cacheIngredientEntity);
     }
 }

@@ -4,7 +4,7 @@ import com.kurio.cocktail.data.mapper.CacheDrinkDataMapper;
 import com.kurio.cocktail.data.mapper.CocktailDetailMapper;
 import com.kurio.cocktail.data.mapper.CocktailListMapper;
 import com.kurio.cocktail.data.model.CacheDrinkEntity;
-import com.kurio.cocktail.data.model.CocktailDetailEntity;
+import com.kurio.cocktail.data.model.DrinkDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
 import com.kurio.cocktail.data.store.DrinkDataStoreFactory;
 import com.kurio.cocktail.domain.model.CacheDrink;
@@ -50,9 +50,9 @@ public class DrinkDataRepository implements DrinkRepository {
     @Override
     public Single<List<DrinkDetail>> fetchDrinkDetail(String id) {
         return drinkDataStoreFactory.getDrinkRemoteDataStore().fetchDrinkDetail(id)
-                .map(new Function<List<CocktailDetailEntity>, List<DrinkDetail>>() {
+                .map(new Function<List<DrinkDetailEntity>, List<DrinkDetail>>() {
                     @Override
-                    public List<DrinkDetail> apply(List<CocktailDetailEntity> cocktailDetailEntity) throws Exception {
+                    public List<DrinkDetail> apply(List<DrinkDetailEntity> cocktailDetailEntity) throws Exception {
                         return cocktailDetailMapper.mapFromEntity(cocktailDetailEntity);
                     }
                 });

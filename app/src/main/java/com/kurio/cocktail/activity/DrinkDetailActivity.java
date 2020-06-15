@@ -18,7 +18,8 @@ import com.kurio.cocktail.Constants;
 import com.kurio.cocktail.R;
 import com.kurio.cocktail.adapters.DrinkIngredientListAdapter;
 import com.kurio.cocktail.callback.ClickIngredientItem;
-import com.kurio.cocktail.data.presentation.CocktailDetailViewModel;
+import com.kurio.cocktail.compoment.CommonViewUtils;
+import com.kurio.cocktail.data.presentation.DrinkDetailViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;
 import com.kurio.cocktail.domain.model.CacheDrink;
@@ -33,28 +34,28 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 
 
-public class CocktailDetailActivity extends BaseActivity implements ClickIngredientItem, View.OnClickListener {
+public class DrinkDetailActivity extends BaseActivity implements ClickIngredientItem, View.OnClickListener {
     @Inject
     ViewModelFactory viewModelFactory;
     ArrayList<String> ingredientList;
-    CocktailDetailViewModel cocktailDetailViewModel;
+    DrinkDetailViewModel drinkDetailViewModel;
     DrinkIngredientListAdapter drinkIngredientListAdapter;
     RecyclerView rcIngredient;
     ImageView imgCocktail;
     TextView tvAlcoholic, tvDrinkTag, tvDrinkCategory, tvToolbarTitle, tvInstruction;
     Toolbar toolbar;
     ImageButton imbFavourite;
-    List<DrinkDetail> cocktailDetail;
+    List<DrinkDetail> drinkDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidInjection.inject(this);
-        cocktailDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(CocktailDetailViewModel.class);
-        cocktailDetailViewModel.getCacheDrink(getIntent().getStringExtra(Constants.EXTRA_ID));
-        cocktailDetailViewModel.fetchDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
-        cocktailDetailViewModel.getDrinkDetailLiveData().observe(this, this::getDrinkDetail);
-        cocktailDetailViewModel.getCacheDrinkLiveData().observe(this, this::cacheDrinkDetail);
+        drinkDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(DrinkDetailViewModel.class);
+        drinkDetailViewModel.getCacheDrink(getIntent().getStringExtra(Constants.EXTRA_ID));
+        drinkDetailViewModel.fetchDrinkDetail(getIntent().getStringExtra(Constants.EXTRA_ID));
+        drinkDetailViewModel.getDrinkDetailLiveData().observe(this, this::getDrinkDetail);
+        drinkDetailViewModel.getCacheDrinkLiveData().observe(this, this::cacheDrinkDetail);
     }
 
     @Override
@@ -81,7 +82,7 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_cocktail_detail;
+        return R.layout.activity_drink_detail;
     }
 
     @Override
@@ -105,16 +106,16 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
     private void cacheDrinkDetail(Resource<CacheDrink> resource) {
         if (resource.state == ResourceState.ERROR) {
             Log.i("ERROR", "error \t" + resource.errorMessage);
-            changeFavouriteBorderIcon();
+            CommonViewUtils.changeFavouriteBorderIcon(this, imbFavourite);
         } else if (resource.state == ResourceState.SUCCESS) {
-            changeFullFavouriteIcon();
+            CommonViewUtils.changeFullFavouriteIcon(this, imbFavourite);
         } else if (resource.state == ResourceState.LOADING) {
             Log.i("Currency Loading", "Loading");
         }
     }
 
     private void bindData(List<DrinkDetail> cocktailDetail) {
-        this.cocktailDetail = cocktailDetail;
+        this.drinkDetail = cocktailDetail;
         Glide.with(this)
                 .load(cocktailDetail.get(0).getStrDrinkThumb())
                 .into(imgCocktail);
@@ -190,32 +191,23 @@ public class CocktailDetailActivity extends BaseActivity implements ClickIngredi
     }
 
     @Override
-    public void clickIngredientItem(String ingredientName) {
-        startActivity(new Intent(CocktailDetailActivity.this, IngredientDetailActivity.class)
-                .putExtra(Constants.EXTRA_NAME, ingredientName));
-    }
-
-    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.imb_favourite) {
             if (String.valueOf(imbFavourite.getTag()).equals(String.valueOf(R.drawable.ic_favorite_border))) {
-                changeFullFavouriteIcon();
-                cocktailDetailViewModel.saveDrink(new CacheDrink(cocktailDetail.get(0).getDrinkId(),
-                        cocktailDetail.get(0).getStrDrink(), cocktailDetail.get(0).getStrDrinkThumb()));
+                CommonViewUtils.changeFullFavouriteIcon(this, imbFavourite);
+                drinkDetailViewModel.saveDrink(new CacheDrink(drinkDetail.get(0).getDrinkId(),
+                        drinkDetail.get(0).getStrDrink(), drinkDetail.get(0).getStrDrinkThumb()));
             } else {
-                changeFavouriteBorderIcon();
-                cocktailDetailViewModel.removeDrink(cocktailDetail.get(0).getDrinkId());
+                CommonViewUtils.changeFavouriteBorderIcon(this, imbFavourite);
+                drinkDetailViewModel.removeDrink(drinkDetail.get(0).getDrinkId());
             }
         }
     }
 
-    private void changeFavouriteBorderIcon() {
-        imbFavourite.setTag(R.drawable.ic_favorite_border);
-        imbFavourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border));
-    }
-
-    private void changeFullFavouriteIcon() {
-        imbFavourite.setTag(R.drawable.ic_favorite_black);
-        imbFavourite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_black));
+    @Override
+    public void clickIngredientItem(String ingredientName) {
+        Log.e("GGWP", "CLICK" + ingredientName);
+        startActivity(new Intent(DrinkDetailActivity.this, IngredientDetailActivity.class)
+                .putExtra(Constants.EXTRA_NAME, ingredientName));
     }
 }

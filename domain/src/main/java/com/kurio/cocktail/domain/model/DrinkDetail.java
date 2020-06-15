@@ -3,7 +3,7 @@ package com.kurio.cocktail.domain.model;
 public class DrinkDetail {
     private String strDrink;
     private String strDrinkThumb;
-    private String drinkId;
+    private String idDrink;
     private String strInstructions;
     private String strIngredient1;
     private String strIngredient2;
@@ -27,7 +27,7 @@ public class DrinkDetail {
     public DrinkDetail(String strDrink, String strDrinkThumb, String drinkId, String getStrInstructions, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strAlcoholic, String strCategory, String strTag) {
         this.strDrink = strDrink;
         this.strDrinkThumb = strDrinkThumb;
-        this.drinkId = drinkId;
+        this.idDrink = drinkId;
         this.strInstructions = getStrInstructions;
         this.strIngredient1 = strIngredient1;
         this.strIngredient2 = strIngredient2;
@@ -58,7 +58,7 @@ public class DrinkDetail {
     }
 
     public String getDrinkId() {
-        return drinkId;
+        return idDrink;
     }
 
     public String getStrInstructions() {

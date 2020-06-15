@@ -21,7 +21,7 @@ import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
-public class CocktailDetailViewModel extends ViewModel {
+public class DrinkDetailViewModel extends ViewModel {
     private FetchDrinkDetail fetchDrinkDetail;
     private SaveFavouriteDrink saveFavouriteDrink;
     private RemoveDrink removeDrink;
@@ -33,10 +33,10 @@ public class CocktailDetailViewModel extends ViewModel {
     private String drinkId;
 
     @Inject
-    CocktailDetailViewModel(FetchDrinkDetail fetchDrinkDetail,
-                            SaveFavouriteDrink saveFavouriteDrink,
-                            GetDrinkDetail getDrinkDetail,
-                            RemoveDrink removeDrink) {
+    DrinkDetailViewModel(FetchDrinkDetail fetchDrinkDetail,
+                         SaveFavouriteDrink saveFavouriteDrink,
+                         GetDrinkDetail getDrinkDetail,
+                         RemoveDrink removeDrink) {
         this.fetchDrinkDetail = fetchDrinkDetail;
         this.saveFavouriteDrink = saveFavouriteDrink;
         this.removeDrink = removeDrink;

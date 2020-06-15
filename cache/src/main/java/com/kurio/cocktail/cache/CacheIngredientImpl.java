@@ -1,18 +1,15 @@
 package com.kurio.cocktail.cache;
 
 import com.kurio.cocktail.cache.db.CocktailDatabase;
-import com.kurio.cocktail.cache.mapper.CacheDrinkListMapper;
-import com.kurio.cocktail.cache.mapper.CacheDrinkMapper;
 import com.kurio.cocktail.cache.mapper.CacheIngredientListMapper;
 import com.kurio.cocktail.cache.mapper.CacheIngredientMapper;
-import com.kurio.cocktail.cache.model.CacheDrink;
 import com.kurio.cocktail.cache.model.CacheIngredient;
-import com.kurio.cocktail.data.model.CacheDrinkEntity;
+import com.kurio.cocktail.data.model.CacheIngredientEntity;
 import com.kurio.cocktail.data.model.IngredientDetailEntity;
-import com.kurio.cocktail.data.repository.DrinkCache;
 import com.kurio.cocktail.data.repository.IngredientCache;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
@@ -25,7 +22,6 @@ public class CacheIngredientImpl implements IngredientCache {
     private CocktailDatabase cocktailDatabase;
     private CacheIngredientListMapper cacheIngredientListMapper;
     private CacheIngredientMapper cacheIngredientMapper;
-
 
     @Inject
     public CacheIngredientImpl(CocktailDatabase cocktailDatabase,
@@ -48,9 +44,26 @@ public class CacheIngredientImpl implements IngredientCache {
     }
 
     @Override
-    public Completable removeIngredient(String ingredientId) {
-        cocktailDatabase.cachedIngredientDao().deleteIngredient(ingredientId);
-        return Completable.complete();
+    public Single<CacheIngredientEntity> getIngredient(String ingredientId) {
+        return cocktailDatabase.cachedIngredientDao().getIngredient(ingredientId)
+                .map(new Function<CacheIngredient, CacheIngredientEntity>() {
+                    @Override
+                    public CacheIngredientEntity apply(CacheIngredient cacheIngredient) throws Exception {
+                        return cacheIngredientMapper.mapFromCached(cacheIngredient);
+                    }
+                });
+    }
+
+    @Override
+    public Completable removeIngredient(final String ingredientId) {
+        return Completable.fromCallable(new Callable<Completable>() {
+            @Override
+            public Completable call() throws Exception {
+                cocktailDatabase.cachedIngredientDao().deleteIngredient(ingredientId);
+                return Completable.complete();
+            }
+        });
+
     }
 
     @Override
@@ -60,8 +73,13 @@ public class CacheIngredientImpl implements IngredientCache {
     }
 
     @Override
-    public Completable saveIngredient(IngredientDetailEntity ingredientDetailEntity) {
-        cocktailDatabase.cachedIngredientDao().saveIngredient(cacheIngredientMapper.mapToCached(ingredientDetailEntity));
-        return Completable.complete();
+    public Completable saveIngredient(final CacheIngredientEntity cacheIngredientEntity) {
+        return Completable.fromCallable(new Callable<Completable>() {
+            @Override
+            public Completable call() throws Exception {
+                cocktailDatabase.cachedIngredientDao().saveIngredient(cacheIngredientMapper.mapToCached(cacheIngredientEntity));
+                return Completable.complete();
+            }
+        });
     }
 }

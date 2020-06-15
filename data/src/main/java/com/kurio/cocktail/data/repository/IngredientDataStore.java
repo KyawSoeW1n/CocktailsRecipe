@@ -1,6 +1,9 @@
 package com.kurio.cocktail.data.repository;
 
+import com.kurio.cocktail.data.model.CacheDrinkEntity;
+import com.kurio.cocktail.data.model.CacheIngredientEntity;
 import com.kurio.cocktail.data.model.IngredientDetailEntity;
+import com.kurio.cocktail.domain.model.IngredientDetail;
 
 import java.util.List;
 
@@ -16,6 +19,8 @@ public interface IngredientDataStore {
 
     Completable removeAllIngredient();
 
-    Completable saveIngredient(IngredientDetailEntity ingredientDetailEntity);
+    Single<CacheIngredientEntity> getCacheIngredient(String id);
+
+    Completable saveIngredient(CacheIngredientEntity ingredientDetailEntity);
 
 }

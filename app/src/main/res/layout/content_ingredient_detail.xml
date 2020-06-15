@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.CocktailDetailActivity"
+    tools:context=".activity.DrinkDetailActivity"
     tools:showIn="@layout/activity_ingredient_detail">
 
     <androidx.core.widget.NestedScrollView
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_type"
                 android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/textSizeNormal"
+                android:layout_marginTop="@dimen/margin_medium"
                 tools:text="@string/description"
                 tools:textSize="@dimen/textSizeLarge"
                 tools:textStyle="bold" />

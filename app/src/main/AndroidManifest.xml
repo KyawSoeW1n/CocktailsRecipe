@@ -20,7 +20,7 @@
             android:name=".activity.IngredientDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".activity.CocktailDetailActivity"
+            android:name=".activity.DrinkDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
