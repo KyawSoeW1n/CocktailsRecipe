@@ -6,27 +6,31 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kurio.cocktail.data.presentation.state.Resource;
-import com.kurio.cocktail.domain.interactor.get_drink.GetFavouriteDrink;
 import com.kurio.cocktail.domain.interactor.get_ingredient.GetFavouriteIngredient;
+import com.kurio.cocktail.domain.interactor.get_ingredient.RemoveIngredient;
 import com.kurio.cocktail.domain.model.CacheIngredient;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
 public class FavouriteIngredientViewModel extends ViewModel {
     private GetFavouriteIngredient getFavouriteIngredient;
+    private RemoveIngredient removeIngredient;
     private MutableLiveData<Resource<List<CacheIngredient>>> favouriteIngredientLiveData = new MutableLiveData<>();
     private Resource<List<CacheIngredient>> favouriteIngredientResource = new Resource<>();
 
     @Inject
 
 
-    public FavouriteIngredientViewModel(GetFavouriteIngredient getFavouriteIngredient) {
+    public FavouriteIngredientViewModel(GetFavouriteIngredient getFavouriteIngredient,
+                                        RemoveIngredient removeIngredient) {
         this.getFavouriteIngredient = getFavouriteIngredient;
+        this.removeIngredient = removeIngredient;
     }
 
     public MutableLiveData<Resource<List<CacheIngredient>>> getFavouriteIngredientLiveData() {
@@ -35,6 +39,27 @@ public class FavouriteIngredientViewModel extends ViewModel {
 
     public void getFavouriteIngredient() {
         getFavouriteIngredient.execute(new GetFavouriteIngredientSubscriber(), null);
+    }
+
+    public void removeIngredient(String ingredientId) {
+        removeIngredient.execute(new RemoveIngredientSubscriber(), removeIngredient.new Params(ingredientId));
+    }
+    class RemoveIngredientSubscriber implements CompletableObserver {
+
+        @Override
+        public void onSubscribe(Disposable d) {
+            Log.e("Ingredient", "loading");
+        }
+
+        @Override
+        public void onComplete() {
+            Log.e("Ingredient", "remove");
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            Log.e("Ingredient", "error");
+        }
     }
 
     private class GetFavouriteIngredientSubscriber implements SingleObserver<List<CacheIngredient>> {

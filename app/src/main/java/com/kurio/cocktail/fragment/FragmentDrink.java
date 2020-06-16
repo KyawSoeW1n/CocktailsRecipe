@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +27,7 @@ import com.kurio.cocktail.data.presentation.state.ResourceState;
 import com.kurio.cocktail.domain.model.CacheDrink;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,10 +35,11 @@ import javax.inject.Inject;
 public class FragmentDrink extends Fragment implements ClickFavouriteDrinkItem {
     @Inject
     ViewModelFactory viewModelFactory;
-    FavouriteDrinkViewModel favouriteDrinkViewModel;
-    View v;
-    RecyclerView recyclerView;
-    FavouriteDrinkListAdapter favouriteDrinkListAdapter;
+    private FavouriteDrinkViewModel favouriteDrinkViewModel;
+    private View v;
+    private RecyclerView recyclerView;
+    private FavouriteDrinkListAdapter favouriteDrinkListAdapter;
+    private List<CacheDrink> cacheDrinks = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +69,7 @@ public class FragmentDrink extends Fragment implements ClickFavouriteDrinkItem {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         favouriteDrinkViewModel.getFavouriteDrink();
+        setUpRecyclerHelper();
     }
 
     private void getFavouriteDrinkList(Resource<List<CacheDrink>> resource) {
@@ -74,7 +78,9 @@ public class FragmentDrink extends Fragment implements ClickFavouriteDrinkItem {
         } else if (resource.state == ResourceState.SUCCESS) {
             Log.i("SUCCESS", "Success");
             if (resource.data != null) {
-                favouriteDrinkListAdapter.addNewData(resource.data);
+                cacheDrinks.clear();
+                cacheDrinks.addAll(resource.data);
+                favouriteDrinkListAdapter.addNewData(cacheDrinks);
             }
         } else if (resource.state == ResourceState.LOADING) {
             Log.i("Drink Loading", "Loading");
@@ -85,5 +91,21 @@ public class FragmentDrink extends Fragment implements ClickFavouriteDrinkItem {
     public void clickDrinkItem(CacheDrink cacheDrink) {
         startActivity(new Intent(getContext(), DrinkDetailActivity.class)
                 .putExtra(Constants.EXTRA_ID, cacheDrink.getDrinkId()));
+    }
+
+    private void setUpRecyclerHelper() {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                CacheDrink cacheDrink = cacheDrinks.get(viewHolder.getAdapterPosition());
+                favouriteDrinkListAdapter.removeSingleData(cacheDrink);
+                favouriteDrinkViewModel.removeDrink(cacheDrink.getDrinkId());
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 }

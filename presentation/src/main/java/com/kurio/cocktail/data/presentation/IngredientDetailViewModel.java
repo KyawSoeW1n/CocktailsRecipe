@@ -58,7 +58,7 @@ public class IngredientDetailViewModel extends ViewModel {
         saveFavouriteIngredient.execute(new SaveFavouriteIngredientSubscriber(), saveFavouriteIngredient.new Params(cacheIngredient));
     }
 
-    public void removeDrink(String ingredientId) {
+    public void removeIngredient(String ingredientId) {
         removeIngredient.execute(new RemoveIngredientSubscriber(), removeIngredient.new Params(ingredientId));
     }
 

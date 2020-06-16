@@ -143,7 +143,7 @@ public class IngredientDetailActivity extends BaseActivity implements View.OnCli
                         ingredientDetail.get(0).getStrType()));
             } else {
                 CommonViewUtils.changeFavouriteBorderIcon(this, imbFavourite);
-                ingredientDetailViewModel.removeDrink(ingredientDetail.get(0).getIdIngredient());
+                ingredientDetailViewModel.removeIngredient(ingredientDetail.get(0).getIdIngredient());
             }
         }
     }
