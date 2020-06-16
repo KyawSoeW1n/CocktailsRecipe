@@ -1,12 +1,12 @@
 package com.kurio.cocktail.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -29,6 +29,7 @@ public class HostActivity extends AppCompatActivity implements NavigationView.On
 
     private NavigationView navigationView;
     private AppBarConfiguration appBarConfiguration;
+    private int navTempId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,35 +68,26 @@ public class HostActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        menuItem.setChecked(true);
-        switch (menuItem.getItemId()) {
-
-            case R.id.menu_home:
-                navController.navigate(R.id.nav_fragment_dashboard);
-                break;
-
-            case R.id.menu_drink:
-//                navController.setGraph(R.navigation.nav_graph, setBundle(Constants.FAVOURITE_DRINK));
-                navController.navigate(R.id.nav_fragment_drink);
-                break;
-
-            case R.id.menu_ingredient:
-                navController.navigate(R.id.nav_fragment_ingredient);
-                break;
-
-            case R.id.menu_about:
-                navController.navigate(R.id.nav_about);
-                break;
-
+        if (navTempId != menuItem.getItemId()) {
+            navTempId = menuItem.getItemId();
+            menuItem.setChecked(true);
+            switch (menuItem.getItemId()) {
+                case R.id.menu_home:
+                    navController.navigate(R.id.nav_fragment_dashboard);
+                    break;
+                case R.id.menu_drink:
+                    navController.navigate(R.id.nav_fragment_drink);
+                    break;
+                case R.id.menu_ingredient:
+                    navController.navigate(R.id.nav_fragment_ingredient);
+                    break;
+                case R.id.menu_about:
+                    navController.navigate(R.id.nav_about);
+                    break;
+            }
         }
         drawerLayout.closeDrawers();
         return true;
-    }
-
-    private Bundle setBundle(String data) {
-        Bundle bundle = new Bundle();
-        bundle.putString("Test", data);
-        return bundle;
     }
 
     @Override

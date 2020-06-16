@@ -36,7 +36,6 @@ public class FragmentDrink extends Fragment implements ClickFavouriteDrinkItem {
     FavouriteDrinkViewModel favouriteDrinkViewModel;
     View v;
     RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
     FavouriteDrinkListAdapter favouriteDrinkListAdapter;
 
     @Override
@@ -51,27 +50,23 @@ public class FragmentDrink extends Fragment implements ClickFavouriteDrinkItem {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_drink, container, false);
         favouriteDrinkViewModel = ViewModelProviders.of(this, viewModelFactory).get(FavouriteDrinkViewModel.class);
-        favouriteDrinkListAdapter = new FavouriteDrinkListAdapter(getContext(), this);
-        layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        recyclerView = v.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(favouriteDrinkListAdapter);
+        setUpRecyclerView();
         favouriteDrinkViewModel.getFavouriteDrinkLiveData().observe(getViewLifecycleOwner(), this::getFavouriteDrinkList);
         return v;
+    }
+
+    private void setUpRecyclerView() {
+        favouriteDrinkListAdapter = new FavouriteDrinkListAdapter(getContext(), this);
+        recyclerView = v.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        recyclerView.setAdapter(favouriteDrinkListAdapter);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getRoute();
-    }
-
-
-    private void getRoute() {
-        Log.e("GGWP", "GG" + FragmentDrinkArgs.fromBundle(getArguments()));
         favouriteDrinkViewModel.getFavouriteDrink();
     }
-
 
     private void getFavouriteDrinkList(Resource<List<CacheDrink>> resource) {
         if (resource.state == ResourceState.ERROR) {

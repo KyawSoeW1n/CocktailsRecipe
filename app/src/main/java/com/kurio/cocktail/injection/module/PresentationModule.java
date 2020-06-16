@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.kurio.cocktail.data.presentation.CocktailViewModel;
 import com.kurio.cocktail.data.presentation.DrinkDetailViewModel;
 import com.kurio.cocktail.data.presentation.FavouriteDrinkViewModel;
+import com.kurio.cocktail.data.presentation.FavouriteIngredientViewModel;
 import com.kurio.cocktail.data.presentation.IngredientDetailViewModel;
 import com.kurio.cocktail.injection.ViewModelFactory;
 
@@ -39,10 +40,10 @@ public abstract class PresentationModule {
     @ViewModelKey(FavouriteDrinkViewModel.class)
     public abstract ViewModel bindFavouriteDrinkViewModel(FavouriteDrinkViewModel favouriteDrinkViewModel);
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(DrinkDetailViewModel.class)
-//    public abstract ViewModel bindCocktailDetailViewModel(DrinkDetailViewModel drinkDetailViewModel);
+    @Binds
+    @IntoMap
+    @ViewModelKey(FavouriteIngredientViewModel.class)
+    public abstract ViewModel bindFavouriteIngredientViewModel(FavouriteIngredientViewModel favouriteIngredientViewModel);
 
     @Binds
     @IntoMap

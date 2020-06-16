@@ -13,24 +13,12 @@
     <fragment
         android:id="@+id/nav_fragment_drink"
         android:name="com.kurio.cocktail.fragment.FragmentDrink"
-        tools:layout="@layout/fragment_drink">
-        <argument
-            android:name="argName"
-            android:defaultValue=""
-            app:argType="string"
-            app:nullable="false" />
-    </fragment>
+        tools:layout="@layout/fragment_drink" />
 
     <fragment
         android:id="@+id/nav_fragment_ingredient"
-        android:name="com.kurio.cocktail.fragment.FragmentDrink"
-        tools:layout="@layout/fragment_drink">
-<!--        <argument-->
-<!--            android:name="argName"-->
-<!--            android:defaultValue=""-->
-<!--            app:argType="string"-->
-<!--            app:nullable="false" />-->
-    </fragment>
+        android:name="com.kurio.cocktail.fragment.FragmentFavouriteIngredient"
+        tools:layout="@layout/fragment_drink" />
     <fragment
         android:id="@+id/nav_about"
         android:name="com.kurio.cocktail.fragment.FragmentAbout"

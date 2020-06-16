@@ -42,7 +42,7 @@ public class DrinkDataRepository implements DrinkRepository {
     }
 
     @Override
-    public Single<List<Drink>> getAlcoholicDrinks(String route) {
+    public Single<List<Drink>> fetchDrink(String route) {
         return drinkDataStoreFactory.getDrinkRemoteDataStore().fetchDrink(route).map(new Function<List<CocktailEntity>, List<Drink>>() {
             @Override
             public List<Drink> apply(List<CocktailEntity> drinkEntities) throws Exception {

@@ -63,7 +63,7 @@ public class FragmentDashboard extends Fragment implements ClickDrinkItem {
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(requireContext(),
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.drinkList));
         drinkTypeSpinner.setAdapter(arrayAdapter);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         cocktailViewModel.getDrinkListLiveData().observe(getViewLifecycleOwner(), this::getDrinkList);
         return v;
     }

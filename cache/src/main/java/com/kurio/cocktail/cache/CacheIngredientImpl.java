@@ -5,7 +5,6 @@ import com.kurio.cocktail.cache.mapper.CacheIngredientListMapper;
 import com.kurio.cocktail.cache.mapper.CacheIngredientMapper;
 import com.kurio.cocktail.cache.model.CacheIngredient;
 import com.kurio.cocktail.data.model.CacheIngredientEntity;
-import com.kurio.cocktail.data.model.IngredientDetailEntity;
 import com.kurio.cocktail.data.repository.IngredientCache;
 
 import java.util.List;
@@ -33,12 +32,12 @@ public class CacheIngredientImpl implements IngredientCache {
     }
 
     @Override
-    public Single<List<IngredientDetailEntity>> getCacheIngredientList() {
+    public Single<List<CacheIngredientEntity>> getCacheIngredientList() {
         return cocktailDatabase.cachedIngredientDao().getCachedIngredientList()
-                .map(new Function<List<CacheIngredient>, List<IngredientDetailEntity>>() {
+                .map(new Function<List<CacheIngredient>, List<CacheIngredientEntity>>() {
                     @Override
-                    public List<IngredientDetailEntity> apply(List<CacheIngredient> cacheDrinks) throws Exception {
-                        return cacheIngredientListMapper.mapFromCached(cacheDrinks);
+                    public List<CacheIngredientEntity> apply(List<CacheIngredient> cacheIngredients) throws Exception {
+                        return cacheIngredientListMapper.mapFromCached(cacheIngredients);
                     }
                 });
     }

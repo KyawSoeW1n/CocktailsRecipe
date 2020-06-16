@@ -13,10 +13,11 @@
     <string name="favourite_drink">Favourite Drink</string>
     <string name="favourite_ingredient">Favourite Ingredient</string>
     <string name="about">About</string>
-    <string name="dev_name">Fuck You</string>
+    <string name="dev_name">Developer Name :Kurio</string>
+    <string name="dev_email">Developer Email :kuriotetsuya123@gmail.com</string>
     <string name="alcoholic">Alcoholic</string>
     <string name="non_alcoholic">NonAlcoholic</string>
-
+    <string name="app_version">Version : %1$s (%2$s)</string>
     <string-array name="drinkList">
         <item>Alcoholic</item>
         <item>Non Alcoholic</item>
