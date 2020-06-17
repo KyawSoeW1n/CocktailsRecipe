@@ -5,9 +5,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.kurio.cocktail.R;
 import com.kurio.cocktail.callback.ClickDrinkItem;
 import com.kurio.cocktail.domain.model.Drink;
@@ -31,6 +31,7 @@ public class DrinkListViewHolder extends BaseViewHolder<Drink> {
             tvCocktailName.setText(mData.getStrDrink());
             Glide.with(itemView.getContext())
                     .load(mData.getStrDrinkThumb())
+                    .apply(new RequestOptions().placeholder(R.mipmap.ic_launcher))
                     .into(imgCocktail);
         }
     }
