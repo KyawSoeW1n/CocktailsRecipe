@@ -1,4 +1,4 @@
-package com.kurio.cocktail.compoment;
+package com.kurio.cocktail.component;
 
 import android.app.Activity;
 import android.content.Context;

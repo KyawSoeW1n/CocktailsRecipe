@@ -18,7 +18,7 @@ import com.kurio.cocktail.Constants;
 import com.kurio.cocktail.R;
 import com.kurio.cocktail.adapters.DrinkIngredientListAdapter;
 import com.kurio.cocktail.callback.ClickIngredientItem;
-import com.kurio.cocktail.compoment.CommonViewUtils;
+import com.kurio.cocktail.component.CommonViewUtils;
 import com.kurio.cocktail.data.presentation.DrinkDetailViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.kurio.cocktail.Constants;
 import com.kurio.cocktail.R;
-import com.kurio.cocktail.compoment.CommonViewUtils;
+import com.kurio.cocktail.component.CommonViewUtils;
 import com.kurio.cocktail.data.presentation.IngredientDetailViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;

@@ -22,7 +22,7 @@ import com.kurio.cocktail.R;
 import com.kurio.cocktail.activity.DrinkDetailActivity;
 import com.kurio.cocktail.adapters.FavouriteDrinkListAdapter;
 import com.kurio.cocktail.callback.ClickFavouriteDrinkItem;
-import com.kurio.cocktail.compoment.CommonViewUtils;
+import com.kurio.cocktail.component.CommonViewUtils;
 import com.kurio.cocktail.data.presentation.FavouriteDrinkViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;
