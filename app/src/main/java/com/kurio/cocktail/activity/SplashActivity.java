@@ -17,15 +17,10 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         motionLayout = findViewById(R.id.motionLayout);
-        startAnimation();
         new Handler().postDelayed(() -> {
             Intent i = new Intent(SplashActivity.this, HostActivity.class);
             startActivity(i);
             finish();
         }, 2000);
-    }
-
-    private void startAnimation(){
-        motionLayout.transitionToEnd();
     }
 }
