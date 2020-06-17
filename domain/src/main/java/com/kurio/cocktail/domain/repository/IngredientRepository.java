@@ -17,6 +17,8 @@ public interface IngredientRepository {
 
     Completable saveIngredient(CacheIngredient cacheIngredient);
 
+    Completable deleteAllIngredient();
+
     Single<List<IngredientDetail>> fetchIngredientDetail(String name);
 }
 

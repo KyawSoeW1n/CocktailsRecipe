@@ -57,17 +57,17 @@ public class FavouriteIngredientViewModel extends ViewModel {
 
         @Override
         public void onSubscribe(Disposable d) {
-            Log.e("drink", "loading");
+            Log.e("Ingredient", "loading");
         }
 
         @Override
         public void onComplete() {
-            Log.e("drink", "remove");
+            Log.e("All Ingredient", "remove");
         }
 
         @Override
         public void onError(Throwable e) {
-            Log.e("drink", "error");
+            Log.e("Ingredient", "error");
         }
     }
 

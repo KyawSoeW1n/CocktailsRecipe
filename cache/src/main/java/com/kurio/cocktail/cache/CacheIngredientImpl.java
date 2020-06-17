@@ -67,8 +67,13 @@ public class CacheIngredientImpl implements IngredientCache {
 
     @Override
     public Completable removeAllIngredient() {
-        cocktailDatabase.cachedIngredientDao().deleteAllIngredient();
-        return Completable.complete();
+        return Completable.fromCallable(new Callable<Completable>() {
+            @Override
+            public Completable call() throws Exception {
+                cocktailDatabase.cachedIngredientDao().deleteAllIngredient();
+                return Completable.complete();
+            }
+        });
     }
 
     @Override

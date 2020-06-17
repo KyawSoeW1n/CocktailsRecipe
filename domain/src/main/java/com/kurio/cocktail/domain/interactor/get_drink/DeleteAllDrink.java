@@ -19,6 +19,6 @@ public class DeleteAllDrink extends CompletableUseCase<Void> {
 
     @Override
     protected Completable buildUseCaseObservable(Void aVoid) {
-       return drinkRepository.deleteDrinkAll();
+       return drinkRepository.deleteAllDrink();
     }
 }

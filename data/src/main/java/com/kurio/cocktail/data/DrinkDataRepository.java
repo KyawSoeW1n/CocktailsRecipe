@@ -90,7 +90,7 @@ public class DrinkDataRepository implements DrinkRepository {
     }
 
     @Override
-    public Completable deleteDrinkAll() {
+    public Completable deleteAllDrink() {
         return drinkDataStoreFactory.getDrinkCacheDataStore().removeAllDrink();
     }
 
