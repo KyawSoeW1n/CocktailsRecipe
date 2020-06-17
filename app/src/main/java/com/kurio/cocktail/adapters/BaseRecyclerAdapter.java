@@ -31,7 +31,13 @@ public abstract class BaseRecyclerAdapter<T, W> extends RecyclerView.Adapter<Bas
     }
 
     public void addNewData(List<W> data) {
+        mData.clear();
         mData.addAll(data);
+        notifyDataSetChanged();
+    }
+
+    public void removeSingleData(W data) {
+        mData.remove(data);
         notifyDataSetChanged();
     }
 

@@ -1,5 +1,6 @@
 package com.kurio.cocktail.data.store;
 
+import com.kurio.cocktail.data.model.CacheIngredientEntity;
 import com.kurio.cocktail.data.model.IngredientDetailEntity;
 import com.kurio.cocktail.data.repository.IngredientDataStore;
 import com.kurio.cocktail.data.repository.IngredientRemote;
@@ -26,22 +27,27 @@ public class IngredientRemoteDataStore implements IngredientDataStore {
     }
 
     @Override
-    public Single<List<IngredientDetailEntity>> getCacheIngredientList() {
-        return null;
+    public Single<List<CacheIngredientEntity>> getCacheIngredientList() {
+        throw new UnsupportedOperationException("Cache Ingredient Detail is not available in Remote");
     }
 
     @Override
     public Completable removeIngredient(String ingredientId) {
-        return null;
+        throw new UnsupportedOperationException("Cache Ingredient Detail is not available in Remote");
     }
 
     @Override
     public Completable removeAllIngredient() {
-        return null;
+        throw new UnsupportedOperationException("Cache Ingredient Detail is not available in Remote");
     }
 
     @Override
-    public Completable saveIngredient(IngredientDetailEntity ingredientDetailEntity) {
-        return null;
+    public Single<CacheIngredientEntity> getCacheIngredient(String id) {
+        throw new UnsupportedOperationException("Cache Ingredient Detail is not available in Remote");
+    }
+
+    @Override
+    public Completable saveIngredient(CacheIngredientEntity ingredientDetailEntity) {
+        throw new UnsupportedOperationException("Cache Ingredient Detail is not available in Remote");
     }
 }

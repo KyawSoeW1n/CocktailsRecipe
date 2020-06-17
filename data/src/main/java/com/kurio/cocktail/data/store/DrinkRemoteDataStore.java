@@ -1,11 +1,10 @@
 package com.kurio.cocktail.data.store;
 
 import com.kurio.cocktail.data.model.CacheDrinkEntity;
-import com.kurio.cocktail.data.model.CocktailDetailEntity;
+import com.kurio.cocktail.data.model.DrinkDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
 import com.kurio.cocktail.data.repository.DrinkDataStore;
 import com.kurio.cocktail.data.repository.DrinkRemote;
-import com.kurio.cocktail.domain.model.CacheDrink;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class DrinkRemoteDataStore implements DrinkDataStore {
     }
 
     @Override
-    public Single<List<CocktailDetailEntity>> fetchDrinkDetail(String id) {
+    public Single<List<DrinkDetailEntity>> fetchDrinkDetail(String id) {
         return cocktailRemote.getDrinkDetail(id);
     }
 

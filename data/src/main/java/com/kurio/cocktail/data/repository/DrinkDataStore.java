@@ -1,9 +1,8 @@
 package com.kurio.cocktail.data.repository;
 
 import com.kurio.cocktail.data.model.CacheDrinkEntity;
-import com.kurio.cocktail.data.model.CocktailDetailEntity;
+import com.kurio.cocktail.data.model.DrinkDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
-import com.kurio.cocktail.domain.model.CacheDrink;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import io.reactivex.Single;
 public interface DrinkDataStore {
     Single<List<CocktailEntity>> fetchDrink(String route);
 
-    Single<List<CocktailDetailEntity>> fetchDrinkDetail(String id);
+    Single<List<DrinkDetailEntity>> fetchDrinkDetail(String id);
 
     Single<List<CacheDrinkEntity>> getCacheDrinkList();
 

@@ -2,11 +2,10 @@ package com.kurio.cocktail.data.remote;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.kurio.cocktail.data.model.CocktailDetailEntity;
+import com.kurio.cocktail.data.model.DrinkDetailEntity;
 import com.kurio.cocktail.data.model.CocktailEntity;
 import com.kurio.cocktail.data.remote.mapper.CocktailDetailResponseMapper;
 import com.kurio.cocktail.data.remote.mapper.CocktailListResponseMapper;
-import com.kurio.cocktail.data.remote.mapper.IngredientDetailResponseMapper;
 import com.kurio.cocktail.data.remote.response.DrinkResponse;
 import com.kurio.cocktail.data.remote.service.CocktailService;
 import com.kurio.cocktail.data.repository.DrinkRemote;
@@ -70,7 +69,7 @@ public class DrinkImpl implements DrinkRemote {
     }
 
     @Override
-    public Single<List<CocktailDetailEntity>> getDrinkDetail(String id) {
+    public Single<List<DrinkDetailEntity>> getDrinkDetail(String id) {
         return drinkService.getDrinkDetail(id)
                 .onErrorResumeNext(new Function<Throwable, SingleSource<? extends DrinkResponse>>() {
                     @Override
@@ -95,9 +94,9 @@ public class DrinkImpl implements DrinkRemote {
                         }
                     }
                 })
-                .map(new Function<DrinkResponse, List<CocktailDetailEntity>>() {
+                .map(new Function<DrinkResponse, List<DrinkDetailEntity>>() {
                     @Override
-                    public List<CocktailDetailEntity> apply(DrinkResponse drinkResponse) {
+                    public List<DrinkDetailEntity> apply(DrinkResponse drinkResponse) {
                         return drinkDetailResponseMapper.mapFromResponse(drinkResponse);
                     }
                 });

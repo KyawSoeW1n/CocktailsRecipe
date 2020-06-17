@@ -5,7 +5,9 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.kurio.cocktail.cache.db.ConstantDrink;
 import com.kurio.cocktail.cache.db.ConstantIngredient;
+import com.kurio.cocktail.cache.model.CacheDrink;
 import com.kurio.cocktail.cache.model.CacheIngredient;
 
 import java.util.List;
@@ -25,4 +27,7 @@ public abstract class CacheIngredientDao {
 
     @Query(ConstantIngredient.QUERY_DELETE_INGREDIENT + ":ingredientId")
     public abstract void deleteIngredient(String ingredientId);
+
+    @Query(ConstantIngredient.QUERY_GET_INGREDIENT + ":ingredientId")
+    public abstract Single<CacheIngredient> getIngredient(String ingredientId);
 }

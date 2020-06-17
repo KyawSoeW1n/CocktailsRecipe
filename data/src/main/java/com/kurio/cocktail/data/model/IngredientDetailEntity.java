@@ -34,4 +34,8 @@ public class IngredientDetailEntity {
     public String getStrDescription() {
         return strDescription;
     }
+
+    public String getIdIngredient() {
+        return idIngredient;
+    }
 }

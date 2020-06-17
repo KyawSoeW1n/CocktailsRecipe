@@ -67,8 +67,13 @@ public class CacheDrinkImpl implements DrinkCache {
 
     @Override
     public Completable removeAllDrink() {
-        cocktailDatabase.cachedDrinkDao().deleteAllDrink();
-        return Completable.complete();
+        return Completable.fromCallable(new Callable<Completable>() {
+            @Override
+            public Completable call() throws Exception {
+                cocktailDatabase.cachedDrinkDao().deleteAllDrink();
+                return Completable.complete();
+            }
+        });
     }
 
     @Override

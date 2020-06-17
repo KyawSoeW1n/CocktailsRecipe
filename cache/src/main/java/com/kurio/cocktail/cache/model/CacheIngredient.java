@@ -16,42 +16,44 @@ public class CacheIngredient {
     private String idIngredient = "";
 
     @ColumnInfo(name = ConstantIngredient.INGREDIENT_NAME)
-    private String drinkName = "";
+    private String strIngredient = "";
 
     @ColumnInfo(name = ConstantIngredient.INGREDIENT_URL)
     private String ingredientUrl = "";
 
     @ColumnInfo(name = ConstantIngredient.INGREDIENT_DESCRIPTION)
-    private String ingredientDescription = "";
+    private String strDescription = "";
 
     @ColumnInfo(name = ConstantIngredient.IS_ALCOHOL)
-    private String isAlcohol = "";
+    private String strAlcohol = "";
 
-    public CacheIngredient(@NonNull String idIngredient, String drinkName, String ingredientUrl, String ingredientDescription, String isAlcohol) {
+
+    public CacheIngredient(@NonNull String idIngredient, String strIngredient, String ingredientUrl, String strDescription, String strAlcohol) {
         this.idIngredient = idIngredient;
-        this.drinkName = drinkName;
+        this.strIngredient = strIngredient;
         this.ingredientUrl = ingredientUrl;
-        this.ingredientDescription = ingredientDescription;
-        this.isAlcohol = isAlcohol;
+        this.strDescription = strDescription;
+        this.strAlcohol = strAlcohol;
     }
 
-    public String getDrinkName() {
-        return drinkName;
+    @NonNull
+    public String getIdIngredient() {
+        return idIngredient;
+    }
+
+    public String getStrIngredient() {
+        return strIngredient;
     }
 
     public String getIngredientUrl() {
         return ingredientUrl;
     }
 
-    public String getIngredientDescription() {
-        return ingredientDescription;
+    public String getStrDescription() {
+        return strDescription;
     }
 
-    public String getIsAlcohol() {
-        return isAlcohol;
-    }
-
-    public String getIdIngredient() {
-        return idIngredient;
+    public String getStrAlcohol() {
+        return strAlcohol;
     }
 }

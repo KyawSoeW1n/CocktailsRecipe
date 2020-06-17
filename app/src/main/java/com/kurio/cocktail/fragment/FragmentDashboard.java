@@ -1,22 +1,28 @@
-package com.kurio.cocktail.activity;
+package com.kurio.cocktail.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kurio.cocktail.CocktailApplication;
 import com.kurio.cocktail.Constants;
 import com.kurio.cocktail.R;
+import com.kurio.cocktail.activity.DrinkDetailActivity;
 import com.kurio.cocktail.adapters.DrinkListAdapter;
-import com.kurio.cocktail.callback.ClickCocktailItem;
+import com.kurio.cocktail.callback.ClickDrinkItem;
 import com.kurio.cocktail.data.presentation.CocktailViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;
@@ -27,38 +33,55 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
-
-public class MainActivity extends AppCompatActivity implements ClickCocktailItem {
+public class FragmentDashboard extends Fragment implements ClickDrinkItem {
+    View v;
     @Inject
     ViewModelFactory viewModelFactory;
-    DrinkListAdapter drinkListAdapter;
     CocktailViewModel cocktailViewModel;
-    RecyclerView recycler_view_rates;
+
+    private DrinkListAdapter drinkListAdapter;
+    Spinner drinkTypeSpinner;
+    RecyclerView recyclerDrink;
     RecyclerView.LayoutManager layoutManager;
-    Spinner cocktailTypeSpinner;
-    String[] cocktailType = {"Non Alcoholic", "Alcoholic"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        AndroidInjection.inject(this);
+        if (getActivity() != null)
+            ((CocktailApplication) getActivity().getApplication()).supportFragmentInjector().inject(this);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        drinkTypeSpinner = v.findViewById(R.id.drink_types_spinner);
+        recyclerDrink = v.findViewById(R.id.recycler_drink);
         cocktailViewModel = ViewModelProviders.of(this, viewModelFactory).get(CocktailViewModel.class);
-        recycler_view_rates = findViewById(R.id.recycler_view_rates);
-        cocktailTypeSpinner = findViewById(R.id.cocktail_types_spinner);
-//        layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        layoutManager = new GridLayoutManager(this, 2);
-        drinkListAdapter = new DrinkListAdapter(this, this);
-        recycler_view_rates.setAdapter(drinkListAdapter);
+        drinkListAdapter = new DrinkListAdapter(getContext(), this);
+        setUpRecyclerAdapter();
+        ArrayAdapter arrayAdapter = new ArrayAdapter<>(requireContext(),
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.drinkList));
+        drinkTypeSpinner.setAdapter(arrayAdapter);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        cocktailViewModel.getDrinkListLiveData().observe(getViewLifecycleOwner(), this::getDrinkList);
+        return v;
+    }
+
+    private void setUpRecyclerAdapter() {
+        layoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerDrink.setLayoutManager(layoutManager);
+        recyclerDrink.setAdapter(drinkListAdapter);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         initListener();
-        recycler_view_rates.setLayoutManager(layoutManager);
-        cocktailTypeSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cocktailType));
-        cocktailViewModel.getDrinkListLiveData().observe(this, this::getDrinkList);
     }
 
     private void initListener() {
-        cocktailTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        drinkTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 drinkListAdapter.clearData();
@@ -91,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements ClickCocktailItem
 
     @Override
     public void clickCocktailItem(Drink drink) {
-        startActivity(new Intent(this, CocktailDetailActivity.class)
+        startActivity(new Intent(getContext(), DrinkDetailActivity.class)
                 .putExtra(Constants.EXTRA_ID, drink.getDrinkId()));
     }
 }
