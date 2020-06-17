@@ -10,7 +10,7 @@ import io.reactivex.Single;
 
 public interface IngredientCache {
 
-    Single<List<IngredientDetailEntity>> getCacheIngredientList();
+    Single<List<CacheIngredientEntity>> getCacheIngredientList();
 
     Single<CacheIngredientEntity> getIngredient(String ingredientId);
 

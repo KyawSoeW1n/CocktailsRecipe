@@ -58,7 +58,7 @@ public class IngredientDetailViewModel extends ViewModel {
         saveFavouriteIngredient.execute(new SaveFavouriteIngredientSubscriber(), saveFavouriteIngredient.new Params(cacheIngredient));
     }
 
-    public void removeDrink(String ingredientId) {
+    public void removeIngredient(String ingredientId) {
         removeIngredient.execute(new RemoveIngredientSubscriber(), removeIngredient.new Params(ingredientId));
     }
 
@@ -92,17 +92,17 @@ public class IngredientDetailViewModel extends ViewModel {
 
         @Override
         public void onSubscribe(Disposable d) {
-            Log.e("favourite drink", "loading");
+            Log.e("favourite Ingredient", "loading");
         }
 
         @Override
         public void onComplete() {
-            Log.e("favourite drink", "save");
+            Log.e("favourite Ingredient", "save");
         }
 
         @Override
         public void onError(Throwable e) {
-            Log.e("favourite drink", "error");
+            Log.e("favourite Ingredient", "error");
         }
     }
 
@@ -110,17 +110,17 @@ public class IngredientDetailViewModel extends ViewModel {
 
         @Override
         public void onSubscribe(Disposable d) {
-            Log.e("drink", "loading");
+            Log.e("Ingredient", "loading");
         }
 
         @Override
         public void onComplete() {
-            Log.e("drink", "remove");
+            Log.e("Ingredient", "remove");
         }
 
         @Override
         public void onError(Throwable e) {
-            Log.e("drink", "error");
+            Log.e("Ingredient", "error");
         }
     }
 

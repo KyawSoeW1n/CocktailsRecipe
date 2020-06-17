@@ -10,13 +10,17 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public interface DrinkRepository {
-    Single<List<Drink>> getAlcoholicDrinks(String route);
+    Single<List<Drink>> fetchDrink(String route);
 
     Single<List<DrinkDetail>> fetchDrinkDetail(String id);
 
     Single<CacheDrink> getDrinkDetail(String id);
 
+    Single<List<CacheDrink>> getFavouriteDrink();
+
     Completable deleteDrinkDetail(String id);
+
+    Completable deleteDrinkAll();
 
     Completable saveDrink(CacheDrink drink);
 }

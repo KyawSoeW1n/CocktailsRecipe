@@ -28,7 +28,7 @@ public class IngredientCacheDataStore implements IngredientDataStore {
     }
 
     @Override
-    public Single<List<IngredientDetailEntity>> getCacheIngredientList() {
+    public Single<List<CacheIngredientEntity>> getCacheIngredientList() {
         return ingredientCache.getCacheIngredientList();
     }
 

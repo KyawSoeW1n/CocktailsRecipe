@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kurio.cocktail.data.presentation.state.Resource;
+import com.kurio.cocktail.domain.interactor.get_drink.DeleteDrink;
 import com.kurio.cocktail.domain.interactor.get_drink.FetchDrinkDetail;
 import com.kurio.cocktail.domain.interactor.get_drink.GetDrinkDetail;
-import com.kurio.cocktail.domain.interactor.get_drink.RemoveDrink;
 import com.kurio.cocktail.domain.interactor.get_drink.SaveFavouriteDrink;
 import com.kurio.cocktail.domain.model.CacheDrink;
 import com.kurio.cocktail.domain.model.DrinkDetail;
@@ -24,22 +24,21 @@ import io.reactivex.disposables.Disposable;
 public class DrinkDetailViewModel extends ViewModel {
     private FetchDrinkDetail fetchDrinkDetail;
     private SaveFavouriteDrink saveFavouriteDrink;
-    private RemoveDrink removeDrink;
+    private DeleteDrink deleteDrink;
     private GetDrinkDetail getDrinkDetail;
     private MutableLiveData<Resource<List<DrinkDetail>>> drinkDetailLiveData = new MutableLiveData<>();
     private MutableLiveData<Resource<CacheDrink>> cacheDrinkLiveData = new MutableLiveData<>();
     private Resource<List<DrinkDetail>> drinkDetailResource = new Resource<>();
     private Resource<CacheDrink> cacheDrinkResource = new Resource<>();
-    private String drinkId;
 
     @Inject
     DrinkDetailViewModel(FetchDrinkDetail fetchDrinkDetail,
                          SaveFavouriteDrink saveFavouriteDrink,
                          GetDrinkDetail getDrinkDetail,
-                         RemoveDrink removeDrink) {
+                         DeleteDrink deleteDrink) {
         this.fetchDrinkDetail = fetchDrinkDetail;
         this.saveFavouriteDrink = saveFavouriteDrink;
-        this.removeDrink = removeDrink;
+        this.deleteDrink = deleteDrink;
         this.getDrinkDetail = getDrinkDetail;
     }
 
@@ -52,8 +51,7 @@ public class DrinkDetailViewModel extends ViewModel {
     }
 
     public void fetchDrinkDetail(String id) {
-        this.drinkId = id;
-        fetchDrinkDetail.execute(new FetchDrinkDetailSubscriber(), fetchDrinkDetail.new Params(drinkId));
+        fetchDrinkDetail.execute(new FetchDrinkDetailSubscriber(), fetchDrinkDetail.new Params(id));
     }
 
     public void saveDrink(CacheDrink drink) {
@@ -65,7 +63,7 @@ public class DrinkDetailViewModel extends ViewModel {
     }
 
     public void removeDrink(String id) {
-        removeDrink.execute(new RemoveDrinkSubscriber(), removeDrink.new Params(id));
+        deleteDrink.execute(new RemoveDrinkSubscriber(), deleteDrink.new Params(id));
     }
 
     class FetchDrinkDetailSubscriber implements SingleObserver<List<DrinkDetail>> {

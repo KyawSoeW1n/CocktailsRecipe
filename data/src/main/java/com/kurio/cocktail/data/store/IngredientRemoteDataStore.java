@@ -27,7 +27,7 @@ public class IngredientRemoteDataStore implements IngredientDataStore {
     }
 
     @Override
-    public Single<List<IngredientDetailEntity>> getCacheIngredientList() {
+    public Single<List<CacheIngredientEntity>> getCacheIngredientList() {
         throw new UnsupportedOperationException("Cache Ingredient Detail is not available in Remote");
     }
 
@@ -38,7 +38,7 @@ public class IngredientRemoteDataStore implements IngredientDataStore {
 
     @Override
     public Completable removeAllIngredient() {
-        return null;
+        throw new UnsupportedOperationException("Cache Ingredient Detail is not available in Remote");
     }
 
     @Override

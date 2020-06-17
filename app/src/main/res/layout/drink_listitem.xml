@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/img_cocktail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/img_drink"
+            android:layout_height="@dimen/img_drink"
             app:layout_constraintBottom_toTopOf="@+id/tv_cocktail_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

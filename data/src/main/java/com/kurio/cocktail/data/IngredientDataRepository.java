@@ -1,5 +1,6 @@
 package com.kurio.cocktail.data;
 
+import com.kurio.cocktail.data.mapper.CacheFavouriteIngredientListDataMapper;
 import com.kurio.cocktail.data.mapper.CacheIngredientDetailMapper;
 import com.kurio.cocktail.data.mapper.IngredientDetailMapper;
 import com.kurio.cocktail.data.model.CacheIngredientEntity;
@@ -21,20 +22,29 @@ public class IngredientDataRepository implements IngredientRepository {
     private IngredientDetailMapper ingredientDetailMapper;
     private CacheIngredientDetailMapper cacheIngredientDetailMapper;
     private IngredientDataStoreFactory ingredientDataStoreFactory;
+    private CacheFavouriteIngredientListDataMapper cacheFavouriteIngredientListDataMapper;
 
     @Inject
     public IngredientDataRepository(IngredientDetailMapper ingredientDetailMapper,
                                     CacheIngredientDetailMapper cacheIngredientDetailMapper,
-                                    IngredientDataStoreFactory ingredientDataStoreFactory) {
+                                    IngredientDataStoreFactory ingredientDataStoreFactory,
+                                    CacheFavouriteIngredientListDataMapper cacheFavouriteIngredientListDataMapper) {
         this.ingredientDataStoreFactory = ingredientDataStoreFactory;
         this.ingredientDetailMapper = ingredientDetailMapper;
         this.cacheIngredientDetailMapper = cacheIngredientDetailMapper;
+        this.cacheFavouriteIngredientListDataMapper = cacheFavouriteIngredientListDataMapper;
     }
 
 
     @Override
     public Single<List<CacheIngredient>> getFavouriteIngredientList() {
-        return null;
+        return ingredientDataStoreFactory.getIngredientCacheDataStore().getCacheIngredientList()
+                .map(new Function<List<CacheIngredientEntity>, List<CacheIngredient>>() {
+                    @Override
+                    public List<CacheIngredient> apply(List<CacheIngredientEntity> cacheIngredientEntities) throws Exception {
+                        return cacheFavouriteIngredientListDataMapper.mapFromEntity(cacheIngredientEntities);
+                    }
+                });
     }
 
     @Override

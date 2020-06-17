@@ -13,7 +13,7 @@ import io.reactivex.Single;
 public interface IngredientDataStore {
     Single<List<IngredientDetailEntity>> fetchIngredientDetail(String name);
 
-    Single<List<IngredientDetailEntity>> getCacheIngredientList();
+    Single<List<CacheIngredientEntity>> getCacheIngredientList();
 
     Completable removeIngredient(String ingredientId);
 

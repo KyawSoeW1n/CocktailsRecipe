@@ -22,7 +22,7 @@ public class FetchAllDrink extends SingleUseCase<List<Drink>, FetchAllDrink.Para
 
     @Override
     protected Single<List<Drink>> buildUseCaseObservable(Params params) {
-        return drinkRepository.getAlcoholicDrinks(params.route);
+        return drinkRepository.fetchDrink(params.route);
     }
 
     public class Params {
