@@ -8,25 +8,17 @@ import javax.inject.Inject;
 
 import io.reactivex.Completable;
 
-public class RemoveDrink extends CompletableUseCase< RemoveDrink.Params> {
+public class DeleteAllDrink extends CompletableUseCase<Void> {
     private final DrinkRepository drinkRepository;
 
     @Inject
-    RemoveDrink(DrinkRepository drinkRepository, PostExecutionThread postExecutionThread) {
+    DeleteAllDrink(DrinkRepository drinkRepository, PostExecutionThread postExecutionThread) {
         super(postExecutionThread);
         this.drinkRepository = drinkRepository;
     }
 
     @Override
-    protected Completable buildUseCaseObservable(Params params) {
-        return drinkRepository.deleteDrinkDetail(params.id);
-    }
-
-    public class Params {
-        String id;
-
-        public Params(String id) {
-            this.id = id;
-        }
+    protected Completable buildUseCaseObservable(Void aVoid) {
+       return drinkRepository.deleteDrinkAll();
     }
 }

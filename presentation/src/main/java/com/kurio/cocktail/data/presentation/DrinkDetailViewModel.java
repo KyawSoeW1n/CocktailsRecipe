@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kurio.cocktail.data.presentation.state.Resource;
+import com.kurio.cocktail.domain.interactor.get_drink.DeleteDrink;
 import com.kurio.cocktail.domain.interactor.get_drink.FetchDrinkDetail;
 import com.kurio.cocktail.domain.interactor.get_drink.GetDrinkDetail;
-import com.kurio.cocktail.domain.interactor.get_drink.RemoveDrink;
 import com.kurio.cocktail.domain.interactor.get_drink.SaveFavouriteDrink;
 import com.kurio.cocktail.domain.model.CacheDrink;
 import com.kurio.cocktail.domain.model.DrinkDetail;
@@ -24,7 +24,7 @@ import io.reactivex.disposables.Disposable;
 public class DrinkDetailViewModel extends ViewModel {
     private FetchDrinkDetail fetchDrinkDetail;
     private SaveFavouriteDrink saveFavouriteDrink;
-    private RemoveDrink removeDrink;
+    private DeleteDrink deleteDrink;
     private GetDrinkDetail getDrinkDetail;
     private MutableLiveData<Resource<List<DrinkDetail>>> drinkDetailLiveData = new MutableLiveData<>();
     private MutableLiveData<Resource<CacheDrink>> cacheDrinkLiveData = new MutableLiveData<>();
@@ -35,10 +35,10 @@ public class DrinkDetailViewModel extends ViewModel {
     DrinkDetailViewModel(FetchDrinkDetail fetchDrinkDetail,
                          SaveFavouriteDrink saveFavouriteDrink,
                          GetDrinkDetail getDrinkDetail,
-                         RemoveDrink removeDrink) {
+                         DeleteDrink deleteDrink) {
         this.fetchDrinkDetail = fetchDrinkDetail;
         this.saveFavouriteDrink = saveFavouriteDrink;
-        this.removeDrink = removeDrink;
+        this.deleteDrink = deleteDrink;
         this.getDrinkDetail = getDrinkDetail;
     }
 
@@ -63,7 +63,7 @@ public class DrinkDetailViewModel extends ViewModel {
     }
 
     public void removeDrink(String id) {
-        removeDrink.execute(new RemoveDrinkSubscriber(), removeDrink.new Params(id));
+        deleteDrink.execute(new RemoveDrinkSubscriber(), deleteDrink.new Params(id));
     }
 
     class FetchDrinkDetailSubscriber implements SingleObserver<List<DrinkDetail>> {

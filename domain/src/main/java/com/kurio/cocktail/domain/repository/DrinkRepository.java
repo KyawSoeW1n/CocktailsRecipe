@@ -20,5 +20,7 @@ public interface DrinkRepository {
 
     Completable deleteDrinkDetail(String id);
 
+    Completable deleteDrinkAll();
+
     Completable saveDrink(CacheDrink drink);
 }

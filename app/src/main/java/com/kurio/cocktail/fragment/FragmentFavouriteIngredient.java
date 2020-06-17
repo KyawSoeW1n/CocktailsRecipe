@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.kurio.cocktail.R;
 import com.kurio.cocktail.activity.IngredientDetailActivity;
 import com.kurio.cocktail.adapters.FavouriteIngredientListAdapter;
 import com.kurio.cocktail.callback.ClickFavouriteIngredientItem;
+import com.kurio.cocktail.compoment.CommonViewUtils;
 import com.kurio.cocktail.data.presentation.FavouriteIngredientViewModel;
 import com.kurio.cocktail.data.presentation.state.Resource;
 import com.kurio.cocktail.data.presentation.state.ResourceState;
@@ -32,9 +34,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class FragmentFavouriteIngredient extends Fragment implements ClickFavouriteIngredientItem {
-    View v;
-
+public class FragmentFavouriteIngredient extends Fragment implements ClickFavouriteIngredientItem, View.OnClickListener {
+    private View v;
+    private TextView tvDeleteAll;
     @Inject
     ViewModelFactory viewModelFactory;
     private FavouriteIngredientViewModel favouriteIngredientViewModel;
@@ -54,6 +56,7 @@ public class FragmentFavouriteIngredient extends Fragment implements ClickFavour
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_drink, container, false);
         favouriteIngredientViewModel = ViewModelProviders.of(this, viewModelFactory).get(FavouriteIngredientViewModel.class);
+        tvDeleteAll = v.findViewById(R.id.tv_delete_all);
         setUpRecyclerView();
         favouriteIngredientViewModel.getFavouriteIngredientLiveData().observe(getViewLifecycleOwner(), this::getFavouriteIngredientList);
         return v;
@@ -72,9 +75,15 @@ public class FragmentFavouriteIngredient extends Fragment implements ClickFavour
         } else if (resource.state == ResourceState.SUCCESS) {
             Log.i("SUCCESS", "Success");
             if (resource.data != null) {
-                cacheIngredients.clear();
-                cacheIngredients.addAll(resource.data);
-                favouriteIngredientListAdapter.addNewData(cacheIngredients);
+                if (resource.data.isEmpty()){
+                    tvDeleteAll.setVisibility(View.GONE);
+                }else{
+                    cacheIngredients.clear();
+                    cacheIngredients.addAll(resource.data);
+                    favouriteIngredientListAdapter.addNewData(cacheIngredients);
+                }
+            } else {
+                tvDeleteAll.setVisibility(View.GONE);
             }
         } else if (resource.state == ResourceState.LOADING) {
             Log.i("Drink Loading", "Loading");
@@ -85,6 +94,7 @@ public class FragmentFavouriteIngredient extends Fragment implements ClickFavour
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         favouriteIngredientViewModel.getFavouriteIngredient();
+        tvDeleteAll.setOnClickListener(this);
         setUpRecyclerHelper();
     }
 
@@ -105,9 +115,21 @@ public class FragmentFavouriteIngredient extends Fragment implements ClickFavour
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 CacheIngredient cacheIngredient = cacheIngredients.get(viewHolder.getAdapterPosition());
                 favouriteIngredientListAdapter.removeSingleData(cacheIngredient);
-                favouriteIngredientViewModel.removeIngredient(cacheIngredient.getIdIngredient());
+                favouriteIngredientViewModel.deleteIngredient(cacheIngredient.getIdIngredient());
 
             }
         }).attachToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.tv_delete_all) {
+            CommonViewUtils.showAlertDialog(getActivity(), getString(R.string.do_you_want_to_delete_all_favourite_drink), getString(R.string.yes), getString(R.string.no), event -> {
+                if (event == Constants.EVENT_CONFIRM) {
+                    favouriteIngredientViewModel.deleteAllIngredient();
+                    favouriteIngredientListAdapter.clearData();
+                }
+            });
+        }
     }
 }

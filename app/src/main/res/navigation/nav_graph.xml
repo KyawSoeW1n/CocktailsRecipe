@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_drink"
-        android:name="com.kurio.cocktail.fragment.FragmentDrink"
+        android:name="com.kurio.cocktail.fragment.FragmentFavouriteDrink"
         tools:layout="@layout/fragment_drink" />
 
     <fragment

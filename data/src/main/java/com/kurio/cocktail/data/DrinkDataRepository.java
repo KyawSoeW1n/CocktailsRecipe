@@ -90,6 +90,11 @@ public class DrinkDataRepository implements DrinkRepository {
     }
 
     @Override
+    public Completable deleteDrinkAll() {
+        return drinkDataStoreFactory.getDrinkCacheDataStore().removeAllDrink();
+    }
+
+    @Override
     public Completable saveDrink(CacheDrink drink) {
         return drinkDataStoreFactory.getDrinkCacheDataStore().saveDrink(cacheDrinkDataMapper.mapToEntity(drink));
     }

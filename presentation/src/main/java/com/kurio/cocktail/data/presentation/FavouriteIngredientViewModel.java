@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kurio.cocktail.data.presentation.state.Resource;
+import com.kurio.cocktail.domain.interactor.get_ingredient.DeleteAllIngredient;
 import com.kurio.cocktail.domain.interactor.get_ingredient.GetFavouriteIngredient;
 import com.kurio.cocktail.domain.interactor.get_ingredient.RemoveIngredient;
 import com.kurio.cocktail.domain.model.CacheIngredient;
@@ -21,6 +22,7 @@ import io.reactivex.disposables.Disposable;
 public class FavouriteIngredientViewModel extends ViewModel {
     private GetFavouriteIngredient getFavouriteIngredient;
     private RemoveIngredient removeIngredient;
+    private DeleteAllIngredient deleteAllIngredient;
     private MutableLiveData<Resource<List<CacheIngredient>>> favouriteIngredientLiveData = new MutableLiveData<>();
     private Resource<List<CacheIngredient>> favouriteIngredientResource = new Resource<>();
 
@@ -28,9 +30,11 @@ public class FavouriteIngredientViewModel extends ViewModel {
 
 
     public FavouriteIngredientViewModel(GetFavouriteIngredient getFavouriteIngredient,
-                                        RemoveIngredient removeIngredient) {
+                                        RemoveIngredient removeIngredient,
+                                        DeleteAllIngredient deleteAllIngredient) {
         this.getFavouriteIngredient = getFavouriteIngredient;
         this.removeIngredient = removeIngredient;
+        this.deleteAllIngredient = deleteAllIngredient;
     }
 
     public MutableLiveData<Resource<List<CacheIngredient>>> getFavouriteIngredientLiveData() {
@@ -41,9 +45,32 @@ public class FavouriteIngredientViewModel extends ViewModel {
         getFavouriteIngredient.execute(new GetFavouriteIngredientSubscriber(), null);
     }
 
-    public void removeIngredient(String ingredientId) {
+    public void deleteAllIngredient() {
+        deleteAllIngredient.execute(new RemoveAllIngredientSubscriber(), null);
+    }
+
+    public void deleteIngredient(String ingredientId) {
         removeIngredient.execute(new RemoveIngredientSubscriber(), removeIngredient.new Params(ingredientId));
     }
+
+    class RemoveAllIngredientSubscriber implements CompletableObserver {
+
+        @Override
+        public void onSubscribe(Disposable d) {
+            Log.e("drink", "loading");
+        }
+
+        @Override
+        public void onComplete() {
+            Log.e("drink", "remove");
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            Log.e("drink", "error");
+        }
+    }
+
     class RemoveIngredientSubscriber implements CompletableObserver {
 
         @Override

@@ -3,7 +3,7 @@ package com.kurio.cocktail.injection.module;
 
 import com.kurio.cocktail.fragment.FragmentAbout;
 import com.kurio.cocktail.fragment.FragmentDashboard;
-import com.kurio.cocktail.fragment.FragmentDrink;
+import com.kurio.cocktail.fragment.FragmentFavouriteDrink;
 import com.kurio.cocktail.fragment.FragmentFavouriteIngredient;
 
 import dagger.Module;
@@ -19,7 +19,7 @@ public abstract class FragmentModule {
     public abstract FragmentAbout contributeFragmentAbout();
 
     @ContributesAndroidInjector
-    public abstract FragmentDrink contributeFragmentFavouriteDrinkAndIngredient();
+    public abstract FragmentFavouriteDrink contributeFragmentFavouriteDrinkAndIngredient();
 
     @ContributesAndroidInjector
     public abstract FragmentFavouriteIngredient contributeFragmentFavouriteIngredient();
