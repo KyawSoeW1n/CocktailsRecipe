@@ -70,6 +70,11 @@ public class IngredientDataRepository implements IngredientRepository {
     }
 
     @Override
+    public Completable deleteAllIngredient() {
+        return ingredientDataStoreFactory.getIngredientCacheDataStore().removeAllIngredient();
+    }
+
+    @Override
     public Single<List<IngredientDetail>> fetchIngredientDetail(String name) {
         return ingredientDataStoreFactory.getIngredientRemoteDataStore().fetchIngredientDetail(name)
                 .map(new Function<List<IngredientDetailEntity>, List<IngredientDetail>>() {

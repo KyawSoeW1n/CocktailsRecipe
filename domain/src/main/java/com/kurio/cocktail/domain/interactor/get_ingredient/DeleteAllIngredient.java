@@ -2,23 +2,23 @@ package com.kurio.cocktail.domain.interactor.get_ingredient;
 
 import com.kurio.cocktail.domain.executor.PostExecutionThread;
 import com.kurio.cocktail.domain.interactor.CompletableUseCase;
-import com.kurio.cocktail.domain.repository.DrinkRepository;
+import com.kurio.cocktail.domain.repository.IngredientRepository;
 
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
 
 public class DeleteAllIngredient extends CompletableUseCase<Void> {
-    private final DrinkRepository drinkRepository;
+    private final IngredientRepository ingredientRepository;
 
     @Inject
-    DeleteAllIngredient(DrinkRepository drinkRepository, PostExecutionThread postExecutionThread) {
+    DeleteAllIngredient(IngredientRepository ingredientRepository, PostExecutionThread postExecutionThread) {
         super(postExecutionThread);
-        this.drinkRepository = drinkRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     @Override
     protected Completable buildUseCaseObservable(Void aVoid) {
-       return drinkRepository.deleteDrinkAll();
+        return ingredientRepository.deleteAllIngredient();
     }
 }
