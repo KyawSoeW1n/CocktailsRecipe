@@ -18,5 +18,6 @@
     <dimen name="textSizeLarge">16sp</dimen>
 
     <dimen name="img_icon">50sp</dimen>
+    <dimen name="img_drink">150sp</dimen>
 
 </resources>

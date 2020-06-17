@@ -4,7 +4,6 @@ import com.kurio.cocktail.UiThread;
 import com.kurio.cocktail.activity.DrinkDetailActivity;
 import com.kurio.cocktail.activity.HostActivity;
 import com.kurio.cocktail.activity.IngredientDetailActivity;
-import com.kurio.cocktail.activity.MainActivity;
 import com.kurio.cocktail.domain.executor.PostExecutionThread;
 
 import dagger.Binds;
@@ -16,9 +15,6 @@ public abstract class UiModule {
 
     @Binds
     public abstract PostExecutionThread bindPostExecutionThread(UiThread uiThread);
-
-    @ContributesAndroidInjector
-    public abstract MainActivity contributesMainActivity();
 
     @ContributesAndroidInjector
     public abstract DrinkDetailActivity contributesCocktailDetailActivity();
