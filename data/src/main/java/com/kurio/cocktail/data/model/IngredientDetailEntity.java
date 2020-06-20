@@ -5,12 +5,18 @@ public class IngredientDetailEntity {
     private String strAlcohol;
     private String strType;
     private String strDescription;
+    private String idIngredient;
 
-    public IngredientDetailEntity(String strIngredient, String strAlcohol, String strType, String strDescription) {
+    public IngredientDetailEntity(String strIngredient,
+                                  String strAlcohol,
+                                  String strType,
+                                  String strDescription,
+                                  String idIngredient) {
         this.strIngredient = strIngredient;
         this.strAlcohol = strAlcohol;
         this.strType = strType;
         this.strDescription = strDescription;
+        this.idIngredient = idIngredient;
     }
 
     public String getStrIngredient() {
@@ -27,5 +33,9 @@ public class IngredientDetailEntity {
 
     public String getStrDescription() {
         return strDescription;
+    }
+
+    public String getIdIngredient() {
+        return idIngredient;
     }
 }

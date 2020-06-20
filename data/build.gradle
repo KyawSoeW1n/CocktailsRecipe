@@ -3,8 +3,10 @@ apply plugin: 'java-library'
 dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
     def dataTestDependencies = rootProject.ext.dataTestDependencies
+    def mapperDependencies = rootProject.ext.mapperDependencies
 
     implementation project(':domain')
+    implementation project(':mapper')
 
     implementation dataDependencies.javaxAnnotation
     implementation dataDependencies.javaxInject
@@ -12,6 +14,8 @@ dependencies {
     implementation dataDependencies.gson
     implementation dataDependencies.okHttp
     implementation dataDependencies.retrofit
+
+    api mapperDependencies.gson
 
     testImplementation dataTestDependencies.junit
     testImplementation dataTestDependencies.mockito

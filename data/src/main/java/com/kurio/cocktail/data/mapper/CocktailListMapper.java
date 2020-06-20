@@ -1,42 +1,28 @@
 package com.kurio.cocktail.data.mapper;
 
 import com.kurio.cocktail.data.model.CocktailEntity;
-import com.kurio.cocktail.domain.model.Cocktail;
+import com.kurio.cocktail.domain.model.Drink;
+import com.kyawsoewin.mapper.MapperUtils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class CocktailListMapper implements EntityMapper<List<CocktailEntity>, List<Cocktail>> {
+public class CocktailListMapper implements EntityMapper<List<CocktailEntity>, List<Drink>> {
 
     @Inject
     public CocktailListMapper() {
     }
 
     @Override
-    public List<Cocktail> mapFromEntity(List<CocktailEntity> entity) {
-        List<Cocktail> drinksList = new ArrayList<>();
-        for (CocktailEntity cocktailEntity : entity) {
-            drinksList.add(new Cocktail(cocktailEntity.getStrDrink(),
-                    cocktailEntity.getStrDrinkThumb(),
-                    cocktailEntity.getDrinkId(),
-                    cocktailEntity.getGetStrInstructions()));
-        }
-        return drinksList;
+    public List<Drink> mapFromEntity(List<CocktailEntity> entity) {
+        return Arrays.asList(MapperUtils.transform(entity, Drink[].class));
     }
 
     @Override
-    public List<CocktailEntity> mapToEntity(List<Cocktail> cocktails) {
-        List<CocktailEntity> cocktailEntityList = new ArrayList<>();
-        for (Cocktail cocktail : cocktails) {
-            cocktailEntityList.add(new CocktailEntity(
-                    cocktail.getStrDrink(),
-                    cocktail.getStrDrinkThumb(),
-                    cocktail.getDrinkId(),
-                    cocktail.getStrInstructions()));
-        }
-        return cocktailEntityList;
+    public List<CocktailEntity> mapToEntity(List<Drink> cocktails) {
+        return Arrays.asList(MapperUtils.transform(cocktails, CocktailEntity[].class));
     }
 
 }

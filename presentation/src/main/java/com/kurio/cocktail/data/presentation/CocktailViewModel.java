@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kurio.cocktail.data.presentation.state.Resource;
-import com.kurio.cocktail.domain.interactor.getalcoholicdrink.GetDrink;
-import com.kurio.cocktail.domain.model.Cocktail;
+import com.kurio.cocktail.domain.interactor.get_drink.FetchAllDrink;
+import com.kurio.cocktail.domain.model.Drink;
 
 import java.util.List;
 
@@ -15,25 +15,27 @@ import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
 public class CocktailViewModel extends ViewModel {
-    private GetDrink getDrink;
-    private MutableLiveData<Resource<List<Cocktail>>> drinkListLiveData = new MutableLiveData<>();
-    private Resource<List<Cocktail>> currencyResource = new Resource<>();
+    private FetchAllDrink getDrink;
+    private MutableLiveData<Resource<List<Drink>>> drinkListLiveData = new MutableLiveData<>();
+    private Resource<List<Drink>> currencyResource = new Resource<>();
 
     @Inject
-    CocktailViewModel(GetDrink getDrink) {
+    CocktailViewModel(FetchAllDrink getDrink) {
         this.getDrink = getDrink;
     }
 
 
-    public MutableLiveData<Resource<List<Cocktail>>> getDrinkListLiveData() {
+    public MutableLiveData<Resource<List<Drink>>> getDrinkListLiveData() {
         return drinkListLiveData;
     }
 
-    public void getDrink(String route) {
+    public void fetchDrink(String route) {
         getDrink.execute(new GetDrinkSubscriber(), getDrink.new Params(route));
     }
 
-    class GetDrinkSubscriber implements SingleObserver<List<Cocktail>> {
+
+
+    class GetDrinkSubscriber implements SingleObserver<List<Drink>> {
 
         @Override
         public void onSubscribe(Disposable d) {
@@ -41,7 +43,7 @@ public class CocktailViewModel extends ViewModel {
         }
 
         @Override
-        public void onSuccess(List<Cocktail> currencies) {
+        public void onSuccess(List<Drink> currencies) {
             drinkListLiveData.postValue(currencyResource.success(currencies));
         }
 

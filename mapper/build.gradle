@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+dependencies {
+    def mapperDependencies = rootProject.ext.mapperDependencies
+
+    implementation mapperDependencies.gson
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

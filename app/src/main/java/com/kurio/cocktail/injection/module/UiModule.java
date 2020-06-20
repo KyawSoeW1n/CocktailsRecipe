@@ -1,9 +1,9 @@
 package com.kurio.cocktail.injection.module;
 
 import com.kurio.cocktail.UiThread;
-import com.kurio.cocktail.activity.CocktailDetailActivity;
+import com.kurio.cocktail.activity.DrinkDetailActivity;
+import com.kurio.cocktail.activity.HostActivity;
 import com.kurio.cocktail.activity.IngredientDetailActivity;
-import com.kurio.cocktail.activity.MainActivity;
 import com.kurio.cocktail.domain.executor.PostExecutionThread;
 
 import dagger.Binds;
@@ -17,11 +17,11 @@ public abstract class UiModule {
     public abstract PostExecutionThread bindPostExecutionThread(UiThread uiThread);
 
     @ContributesAndroidInjector
-    public abstract MainActivity contributesMainActivity();
-
-    @ContributesAndroidInjector
-    public abstract CocktailDetailActivity contributesCocktailDetailActivity();
+    public abstract DrinkDetailActivity contributesCocktailDetailActivity();
 
     @ContributesAndroidInjector
     public abstract IngredientDetailActivity contributesIngredientDetailActivity();
+
+    @ContributesAndroidInjector
+    public abstract HostActivity contributesHostActivity();
 }

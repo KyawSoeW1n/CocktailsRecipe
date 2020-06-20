@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.kurio.cocktail.CocktailApplication;
 import com.kurio.cocktail.injection.module.ApplicationModule;
+import com.kurio.cocktail.injection.module.CacheBindsModule;
+import com.kurio.cocktail.injection.module.CacheModule;
 import com.kurio.cocktail.injection.module.DataModule;
 import com.kurio.cocktail.injection.module.FragmentModule;
 import com.kurio.cocktail.injection.module.PresentationModule;
@@ -20,7 +22,7 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, ApplicationModule.class, AndroidSupportInjectionModule.class, UiModule.class, PresentationModule.class, DataModule.class, RemoteModule.class, RemoteBindsModule.class, FragmentModule.class, SharedPreferenceModule.class})
+@Component(modules = {AndroidInjectionModule.class, ApplicationModule.class, AndroidSupportInjectionModule.class, UiModule.class, PresentationModule.class, DataModule.class, CacheModule.class, RemoteModule.class, CacheBindsModule.class, RemoteBindsModule.class, FragmentModule.class, SharedPreferenceModule.class})
 public interface ApplicationComponent {
     @Component.Builder
     interface Builder {

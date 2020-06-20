@@ -2,30 +2,27 @@ package com.kurio.cocktail.data.mapper;
 
 import com.kurio.cocktail.data.model.IngredientDetailEntity;
 import com.kurio.cocktail.domain.model.IngredientDetail;
+import com.kyawsoewin.mapper.MapperUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
-public class IngredientDetailMapper implements EntityMapper<IngredientDetailEntity, IngredientDetail> {
+public class IngredientDetailMapper implements EntityMapper<List<IngredientDetailEntity>, List<IngredientDetail>> {
 
     @Inject
     public IngredientDetailMapper() {
     }
 
     @Override
-    public IngredientDetail mapFromEntity(IngredientDetailEntity ingredientDetailEntity) {
-        return new IngredientDetail(ingredientDetailEntity.getStrIngredient(),
-                ingredientDetailEntity.getStrAlcohol(),
-                ingredientDetailEntity.getStrType(),
-                ingredientDetailEntity.getStrDescription());
+    public List<IngredientDetail> mapFromEntity(List<IngredientDetailEntity> ingredientDetailEntity) {
+        return Arrays.asList(MapperUtils.transform(ingredientDetailEntity, IngredientDetail[].class));
     }
 
     @Override
-    public IngredientDetailEntity mapToEntity(IngredientDetail ingredientDetail) {
-        return new IngredientDetailEntity(ingredientDetail.getStrIngredient(),
-                ingredientDetail.getStrAlcohol(),
-                ingredientDetail.getStrType(),
-                ingredientDetail.getStrDescription()
-        );
+    public List<IngredientDetailEntity> mapToEntity(List<IngredientDetail> ingredientDetail) {
+        return Arrays.asList(MapperUtils.transform(ingredientDetail, IngredientDetailEntity[].class));
     }
 
 }

@@ -30,6 +30,7 @@ dependencies {
     def cacheTestDependencies = rootProject.ext.cacheTestDependencies
 
     implementation project(':data')
+    implementation project(':mapper')
 
     compileOnly cacheDependencies.javaxAnnotation
 
