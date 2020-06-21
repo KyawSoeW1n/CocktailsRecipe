@@ -19,13 +19,13 @@ public class RemoteModule {
     @Provides
     @Inject
     public CocktailService provideConfigurationService(CocktailServiceFactory cocktailServiceFactory) {
-        return cocktailServiceFactory.makeCurrencyExchangeService(BuildConfig.DEBUG);
+        return cocktailServiceFactory.makeCocktailService(BuildConfig.DEBUG);
     }
 
     @Provides
     public CocktailServiceFactory provideServiceFactory() {
         //  TODO:Add base URL for production
-        String baseUrl = "https://www.thecocktaildb.com";
+        String baseUrl = BuildConfig.BASE_URL;
         Log.i("CreateFactory", baseUrl);
         return new CocktailServiceFactory(baseUrl);
     }

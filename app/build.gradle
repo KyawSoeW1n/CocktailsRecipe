@@ -33,9 +33,13 @@ android {
             manifestPlaceholders = [enableReporting: "true"]
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'BASE_URL', '"https://www.thecocktaildb.com"'
+            signingConfig signingConfigs.config
         }
         debug {
             manifestPlaceholders = [enableReporting: "false"]
+            buildConfigField 'String', 'BASE_URL', '"https://www.thecocktaildb_dev.com"'
+            applicationIdSuffix ".debug"
         }
     }
 
@@ -43,7 +47,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
 }
 
 dependencies {
