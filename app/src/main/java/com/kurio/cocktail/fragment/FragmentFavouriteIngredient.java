@@ -75,9 +75,9 @@ public class FragmentFavouriteIngredient extends Fragment implements ClickFavour
         } else if (resource.state == ResourceState.SUCCESS) {
             Log.i("SUCCESS", "Success");
             if (resource.data != null) {
-                if (resource.data.isEmpty()){
+                if (resource.data.isEmpty()) {
                     tvDeleteAll.setVisibility(View.GONE);
-                }else{
+                } else {
                     cacheIngredients.clear();
                     cacheIngredients.addAll(resource.data);
                     favouriteIngredientListAdapter.addNewData(cacheIngredients);
@@ -114,7 +114,6 @@ public class FragmentFavouriteIngredient extends Fragment implements ClickFavour
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 CacheIngredient cacheIngredient = cacheIngredients.get(viewHolder.getAdapterPosition());
-                favouriteIngredientListAdapter.removeSingleData(cacheIngredient);
                 favouriteIngredientViewModel.deleteIngredient(cacheIngredient.getIdIngredient());
 
             }

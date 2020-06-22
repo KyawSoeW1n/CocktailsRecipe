@@ -61,7 +61,7 @@ public class FavouriteDrinkViewModel extends ViewModel {
 
         @Override
         public void onComplete() {
-            Log.e("drink", "remove");
+            getFavouriteDrink();
         }
 
         @Override
@@ -79,7 +79,7 @@ public class FavouriteDrinkViewModel extends ViewModel {
 
         @Override
         public void onComplete() {
-            Log.e("drink", "remove");
+            Log.e("All Drink", "remove");
         }
 
         @Override
