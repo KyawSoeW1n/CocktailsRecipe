@@ -114,7 +114,6 @@ public class FragmentFavouriteDrink extends Fragment implements ClickFavouriteDr
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 CacheDrink cacheDrink = cacheDrinks.get(viewHolder.getAdapterPosition());
-                favouriteDrinkListAdapter.removeSingleData(cacheDrink);
                 favouriteDrinkViewModel.deleteDrink(cacheDrink.getDrinkId());
             }
         }).attachToRecyclerView(recyclerView);

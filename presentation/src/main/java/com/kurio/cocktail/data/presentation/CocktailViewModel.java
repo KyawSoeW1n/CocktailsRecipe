@@ -33,8 +33,6 @@ public class CocktailViewModel extends ViewModel {
         getDrink.execute(new GetDrinkSubscriber(), getDrink.new Params(route));
     }
 
-
-
     class GetDrinkSubscriber implements SingleObserver<List<Drink>> {
 
         @Override

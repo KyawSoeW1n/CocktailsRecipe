@@ -80,6 +80,7 @@ public class FavouriteIngredientViewModel extends ViewModel {
 
         @Override
         public void onComplete() {
+            getFavouriteIngredient();
             Log.e("Ingredient", "remove");
         }
 
