@@ -16,8 +16,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.CompletableObserver;
-import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 public class FavouriteDrinkViewModel extends ViewModel {
     private GetFavouriteDrink getFavouriteDrink;
@@ -61,7 +61,7 @@ public class FavouriteDrinkViewModel extends ViewModel {
 
         @Override
         public void onComplete() {
-            getFavouriteDrink();
+//            getFavouriteDrink();
         }
 
         @Override
@@ -88,23 +88,19 @@ public class FavouriteDrinkViewModel extends ViewModel {
         }
     }
 
-    private class GetFavouriteDrinkSubscriber implements SingleObserver<List<CacheDrink>> {
+    private class GetFavouriteDrinkSubscriber extends DisposableSubscriber<List<CacheDrink>> {
         @Override
-        public void onSubscribe(Disposable d) {
-            Log.i("LOADING", "LOADING");
-            favouriteDrinkLiveData.postValue(favouriteDrinkResource.loading());
+        public void onNext(List<CacheDrink> cacheDrinks) {
+            favouriteDrinkLiveData.postValue(favouriteDrinkResource.success(cacheDrinks));
         }
 
         @Override
-        public void onSuccess(List<CacheDrink> cocktails) {
-            Log.i("SUCCESS", "SUCCESS");
-            favouriteDrinkLiveData.postValue(favouriteDrinkResource.success(cocktails));
+        public void onError(Throwable t) {
+
         }
 
         @Override
-        public void onError(Throwable e) {
-            Log.e("ERROR", "ERROR" + e.getMessage());
-            favouriteDrinkLiveData.postValue(favouriteDrinkResource.error(e));
+        public void onComplete() {
         }
     }
 }

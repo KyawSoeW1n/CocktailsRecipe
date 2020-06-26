@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 
@@ -33,7 +34,7 @@ public class CacheDrinkImpl implements DrinkCache {
     }
 
     @Override
-    public Single<List<CacheDrinkEntity>> getCacheDrinkList() {
+    public Flowable<List<CacheDrinkEntity>> getCacheDrinkList() {
         return cocktailDatabase.cachedDrinkDao().getCachedDrinkList()
                 .map(new Function<List<CacheDrink>, List<CacheDrinkEntity>>() {
                     @Override

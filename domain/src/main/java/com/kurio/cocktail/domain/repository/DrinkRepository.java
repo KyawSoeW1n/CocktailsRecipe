@@ -7,6 +7,7 @@ import com.kurio.cocktail.domain.model.DrinkDetail;
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 public interface DrinkRepository {
@@ -16,7 +17,7 @@ public interface DrinkRepository {
 
     Single<CacheDrink> getDrinkDetail(String id);
 
-    Single<List<CacheDrink>> getFavouriteDrink();
+    Flowable<List<CacheDrink>> getFavouriteDrink();
 
     Completable deleteDrinkDetail(String id);
 

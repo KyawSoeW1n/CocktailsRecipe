@@ -7,6 +7,7 @@ import com.kurio.cocktail.data.model.CocktailEntity;
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 public interface DrinkDataStore {
@@ -14,7 +15,7 @@ public interface DrinkDataStore {
 
     Single<List<DrinkDetailEntity>> fetchDrinkDetail(String id);
 
-    Single<List<CacheDrinkEntity>> getCacheDrinkList();
+    Flowable<List<CacheDrinkEntity>> getCacheDrinkList();
 
     Single<CacheDrinkEntity> getCacheDrink(String id);
 

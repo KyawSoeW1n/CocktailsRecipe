@@ -1,7 +1,7 @@
 package com.kurio.cocktail.domain.interactor.get_drink;
 
 import com.kurio.cocktail.domain.executor.PostExecutionThread;
-import com.kurio.cocktail.domain.interactor.SingleUseCase;
+import com.kurio.cocktail.domain.interactor.FlowableUseCase;
 import com.kurio.cocktail.domain.model.CacheDrink;
 import com.kurio.cocktail.domain.repository.DrinkRepository;
 
@@ -9,9 +9,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Single;
+import io.reactivex.Flowable;
 
-public class GetFavouriteDrink extends SingleUseCase<List<CacheDrink>, Void> {
+public class GetFavouriteDrink extends FlowableUseCase<List<CacheDrink>, Void> {
     private final DrinkRepository drinkRepository;
 
     @Inject
@@ -21,8 +21,7 @@ public class GetFavouriteDrink extends SingleUseCase<List<CacheDrink>, Void> {
     }
 
     @Override
-    protected Single<List<CacheDrink>> buildUseCaseObservable(Void params) {
+    protected Flowable<List<CacheDrink>> buildUseCaseObservable(Void aVoid) {
         return drinkRepository.getFavouriteDrink();
     }
-
 }

@@ -18,6 +18,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 
@@ -74,7 +75,7 @@ public class DrinkDataRepository implements DrinkRepository {
     }
 
     @Override
-    public Single<List<CacheDrink>> getFavouriteDrink() {
+    public Flowable<List<CacheDrink>> getFavouriteDrink() {
         return drinkDataStoreFactory.getDrinkCacheDataStore().getCacheDrinkList()
                 .map(new Function<List<CacheDrinkEntity>, List<CacheDrink>>() {
                     @Override

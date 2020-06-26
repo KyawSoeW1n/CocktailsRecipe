@@ -11,6 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 
@@ -34,7 +35,7 @@ public class DrinkCacheDataStore implements DrinkDataStore {
     }
 
     @Override
-    public Single<List<CacheDrinkEntity>> getCacheDrinkList() {
+    public Flowable<List<CacheDrinkEntity>> getCacheDrinkList() {
         return drinkCache.getCacheDrinkList();
     }
 
