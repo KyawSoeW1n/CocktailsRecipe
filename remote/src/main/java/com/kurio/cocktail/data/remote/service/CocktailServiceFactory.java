@@ -21,7 +21,7 @@ public class CocktailServiceFactory {
 
     }
 
-    public CocktailService makeCurrencyExchangeService(boolean isDebug) {
+    public CocktailService makeCocktailApiService(boolean isDebug) {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .client(makeOkHttpClient(makeLoggingInterceptor(isDebug)))
                 .addConverterFactory(GsonConverterFactory.create())

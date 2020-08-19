@@ -19,7 +19,7 @@ public class RemoteModule {
     @Provides
     @Inject
     public CocktailService provideConfigurationService(CocktailServiceFactory cocktailServiceFactory) {
-        return cocktailServiceFactory.makeCurrencyExchangeService(BuildConfig.DEBUG);
+        return cocktailServiceFactory.makeCocktailApiService(BuildConfig.DEBUG);
     }
 
     @Provides
