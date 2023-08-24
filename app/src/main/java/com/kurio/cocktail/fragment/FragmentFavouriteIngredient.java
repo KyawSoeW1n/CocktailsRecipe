@@ -75,9 +75,9 @@ public class FragmentFavouriteIngredient extends Fragment implements ClickFavour
         } else if (resource.state == ResourceState.SUCCESS) {
             Log.i("SUCCESS", "Success");
             if (resource.data != null) {
-                if (resource.data.isEmpty()){
+                if (resource.data.isEmpty()) {
                     tvDeleteAll.setVisibility(View.GONE);
-                }else{
+                } else {
                     cacheIngredients.clear();
                     cacheIngredients.addAll(resource.data);
                     favouriteIngredientListAdapter.addNewData(cacheIngredients);
